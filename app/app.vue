@@ -8,7 +8,7 @@ useHead({
     { rel: 'icon', href: '/favicon.ico' },
     { rel: 'canonical', href: new URL(route.path, config.public.siteUrl).toString() }
   ]),
-  htmlAttrs: { lang: 'en', class: 'dark' }
+  htmlAttrs: { lang: 'en' }
 })
 
 const title = 'Name Placeholder — Product Designer'
@@ -21,7 +21,7 @@ useSeoMeta({ title, description, ogTitle: title, ogDescription: description, ogT
   <UApp>
     <SiteHeader />
     <UMain id="main-content">
-      <NuxtPage />
+      <NuxtPage :transition="{ name: 'page', mode: 'out-in' }" />
     </UMain>
     <SiteFooter />
   </UApp>
