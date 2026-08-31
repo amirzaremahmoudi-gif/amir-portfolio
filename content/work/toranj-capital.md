@@ -1,21 +1,21 @@
 ---
 title: Toranj Capital Website Redesign
-description: Placeholder case study for a capital and investment website redesign.
-year: "TODO"
-role: Product Designer — placeholder
+description: Corporate website work within end-to-end design ownership across Toranj Capital's investment platforms.
+year: "2024 — Present"
+role: Lead UI/UX & Product Designer
 category: Fintech · Web
 order: 1
 featured: true
 coverTone: clay
-timeline: TODO
-team: TODO
-industry: Investment · placeholder
-responsibilities: [Research, Product Design, Prototyping]
+timeline: 2024 — Present
+team: Sole designer across four platforms
+industry: Investment & Asset Management
+responsibilities: [End-to-End Design, Interaction Design, Design Systems, Conversion Optimization]
 ---
 
 ## Context
 
-TODO: Add the verified product context, business setting and audience after source material is provided.
+Toranj Capital operates in investment and asset management. Since 2024, Amir has served as Lead UI/UX & Product Designer and sole designer across four platforms: the corporate website, mobile app, pension fund, and Toranj Crowd.
 
 ## Challenge
 

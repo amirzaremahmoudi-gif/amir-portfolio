@@ -1,6 +1,8 @@
 <script setup lang="ts">
+import { expertise, profile } from '~/data/profile'
+
 const { data: projects } = await useAsyncData('home-work', () => queryCollection('work').order('order', 'ASC').all())
-useSeoMeta({ title: 'Name Placeholder — Product Designer', description: 'Selected product design work across fintech, investment products, research, CRO and design systems.' })
+useSeoMeta({ title: 'Amir Zare — Senior Product Designer', description: 'Senior Product Designer specialising in fintech, investment and crypto platforms.' })
 </script>
 
 <template>
@@ -8,15 +10,15 @@ useSeoMeta({ title: 'Name Placeholder — Product Designer', description: 'Selec
     <section class="portfolio-container hero-shell grid grid-cols-1 gap-10 pb-14 pt-32 md:pb-20 md:pt-40 lg:grid-cols-12 lg:gap-y-16">
       <div class="motion-rise lg:col-span-9">
         <p class="eyebrow mb-7 md:mb-9">
-          Product Designer · Portfolio foundation
+          {{ profile.title }} · {{ profile.location }}
         </p>
         <h1 class="editorial-display max-w-6xl text-[clamp(3.9rem,9.2vw,9rem)]">
-          Designing clarity <span class="text-accent italic">into</span> complex products.
+          Designing clarity <span class="text-accent italic">into</span> complex financial products.
         </h1>
       </div>
       <div class="motion-rise motion-rise-delay-1 flex flex-col justify-end gap-7 lg:col-span-3 lg:pb-3">
         <p class="max-w-md text-[1.05rem] leading-[1.75] text-muted">
-          Name Placeholder is a Product Designer focused on fintech, digital investment experiences, research and measurable product improvement.
+          {{ profile.positioning }}
         </p>
         <div class="flex flex-wrap gap-3">
           <UButton
@@ -40,28 +42,28 @@ useSeoMeta({ title: 'Name Placeholder — Product Designer', description: 'Selec
           <dt class="eyebrow">
             Focus
           </dt><dd class="mt-2">
-            Fintech products
+            Fintech · Investment · Crypto
           </dd>
         </div>
         <div>
           <dt class="eyebrow">
             Practice
           </dt><dd class="mt-2">
-            Research to systems
+            End-to-end product design
           </dd>
         </div>
         <div>
           <dt class="eyebrow">
             Approach
           </dt><dd class="mt-2">
-            Evidence with judgment
+            AI-native workflow
           </dd>
         </div>
         <div>
           <dt class="eyebrow">
             Status
-          </dt><dd class="mt-2 text-muted">
-            Placeholder
+          </dt><dd class="mt-2 text-accent">
+            {{ profile.availability }}
           </dd>
         </div>
       </dl>
@@ -76,7 +78,7 @@ useSeoMeta({ title: 'Name Placeholder — Product Designer', description: 'Selec
           id="selected-work"
           index="01"
           title="Selected work"
-          description="Placeholder projects awaiting final case-study content and imagery."
+          description="Selected product work across financial platforms, conversion, interaction design and systems. Full case studies are currently being documented."
         />
         <div class="mt-14 grid grid-cols-1 gap-x-7 gap-y-16 md:mt-20 md:grid-cols-12 md:gap-y-24">
           <ProjectCard
@@ -113,7 +115,7 @@ useSeoMeta({ title: 'Name Placeholder — Product Designer', description: 'Selec
         />
         <ul class="divide-y divide-default border-y border-default lg:col-span-8">
           <li
-            v-for="(item, index) in ['Product Design', 'UX Research', 'Fintech', 'CRO', 'Product Analytics', 'Design Systems']"
+            v-for="(item, index) in expertise"
             :key="item"
             class="group flex items-center justify-between py-5 text-xl transition-[padding] duration-[var(--motion-control)] hover:px-2 md:text-2xl"
           >
@@ -136,10 +138,10 @@ useSeoMeta({ title: 'Name Placeholder — Product Designer', description: 'Selec
             id="about-preview"
             class="editorial-display text-[clamp(3rem,6vw,6rem)]"
           >
-            A systems-minded designer for consequential digital products.
+            Turning complex financial systems into clear product experiences.
           </h2>
           <p class="mt-8 max-w-2xl text-lg leading-relaxed text-muted">
-            TODO: Replace this preview with a short personal introduction after the CV, experience and working philosophy are provided.
+            {{ profile.summary }}
           </p>
           <UButton
             to="/about"

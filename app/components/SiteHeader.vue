@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { profile } from '~/data/profile'
+
 const route = useRoute()
 const mobileOpen = ref(false)
 const scrolled = ref(false)
@@ -18,11 +20,18 @@ watch(() => route.path, () => {
   mobileOpen.value = false
 })
 
-const links = [
+interface NavigationLink {
+  label: string
+  to: string
+  external?: boolean
+  download?: string
+}
+
+const links: NavigationLink[] = [
   { label: 'Work', to: '/work' },
   { label: 'About', to: '/about' },
-  { label: 'LinkedIn', to: '#', placeholder: true },
-  { label: 'CV', to: '#', placeholder: true }
+  { label: 'LinkedIn', to: profile.linkedin, external: true },
+  { label: 'CV', to: profile.cv, download: 'Amir_Zare_CV_2026.pdf' }
 ]
 
 function isActive(to: string) {
@@ -45,8 +54,8 @@ function isActive(to: string) {
         class="group flex min-h-11 items-center gap-3"
         aria-label="Portfolio home"
       >
-        <span class="grid size-9 place-items-center rounded-full bg-[color:var(--portfolio-text)] text-[.66rem] font-bold tracking-[.08em] text-[color:var(--portfolio-bg)] transition-transform duration-200 group-hover:-rotate-3">NP</span>
-        <span class="hidden text-sm font-semibold tracking-[-.02em] sm:block">Name Placeholder</span>
+        <span class="grid size-9 place-items-center rounded-full bg-[color:var(--portfolio-text)] text-[.66rem] font-bold tracking-[.08em] text-[color:var(--portfolio-bg)] transition-transform duration-200 group-hover:-rotate-3">{{ profile.initials }}</span>
+        <span class="hidden text-sm font-semibold tracking-[-.02em] sm:block">{{ profile.name }}</span>
       </NuxtLink>
 
       <nav
@@ -58,15 +67,16 @@ function isActive(to: string) {
           :key="link.label"
           :to="link.to"
           class="nav-link relative flex min-h-11 items-center px-3 text-sm text-muted transition-colors hover:text-highlighted"
-          :class="{ 'is-active text-highlighted': !link.placeholder && isActive(link.to) }"
-          :aria-disabled="link.placeholder ? 'true' : undefined"
-          :aria-current="!link.placeholder && isActive(link.to) ? 'page' : undefined"
-          @click="link.placeholder && $event.preventDefault()"
+          :target="link.external ? '_blank' : undefined"
+          :rel="link.external ? 'noopener noreferrer' : undefined"
+          :download="link.download"
+          :class="{ 'is-active text-highlighted': !link.external && !link.download && isActive(link.to) }"
+          :aria-current="!link.external && !link.download && isActive(link.to) ? 'page' : undefined"
         >
           {{ link.label }}<span
-            v-if="link.placeholder"
+            v-if="link.external || link.download"
             class="sr-only"
-          > (placeholder)</span>
+          >{{ link.download ? ' (downloads PDF)' : ' (opens in a new tab)' }}</span>
         </NuxtLink>
         <ThemeToggle />
       </nav>
@@ -107,13 +117,14 @@ function isActive(to: string) {
               :key="link.label"
               :to="link.to"
               class="mobile-nav-link flex min-h-16 items-center justify-between border-b border-default py-4 text-3xl font-semibold tracking-[-.04em]"
-              :class="{ 'text-muted': link.placeholder }"
-              :aria-disabled="link.placeholder ? 'true' : undefined"
-              :aria-current="!link.placeholder && isActive(link.to) ? 'page' : undefined"
-              @click="link.placeholder ? $event.preventDefault() : mobileOpen = false"
+              :target="link.external ? '_blank' : undefined"
+              :rel="link.external ? 'noopener noreferrer' : undefined"
+              :download="link.download"
+              :aria-current="!link.external && !link.download && isActive(link.to) ? 'page' : undefined"
+              @click="mobileOpen = false"
             >
               <span>{{ link.label }}</span>
-              <span class="eyebrow">{{ link.placeholder ? 'Placeholder' : `0${index + 1}` }}</span>
+              <span class="eyebrow">{{ link.external ? '↗' : link.download ? '↓' : `0${index + 1}` }}</span>
             </NuxtLink>
           </div>
           <div class="mt-auto flex items-center justify-between pt-12">

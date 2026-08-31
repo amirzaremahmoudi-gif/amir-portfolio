@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const { data: projects } = await useAsyncData('all-work', () => queryCollection('work').order('order', 'ASC').all())
-useSeoMeta({ title: 'Selected Work — Name Placeholder', description: 'Product design case studies spanning fintech, investment experiences, campaigns, risk and conversion optimization.' })
+useSeoMeta({ title: 'Selected Work — Amir Zare', description: 'Product design work across fintech, investment, crypto, conversion and design systems.' })
 </script>
 
 <template>

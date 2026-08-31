@@ -11,8 +11,8 @@ useHead({
   htmlAttrs: { lang: 'en' }
 })
 
-const title = 'Name Placeholder — Product Designer'
-const description = 'Portfolio foundation for a Product Designer working across fintech, digital investment products, research, conversion and design systems.'
+const title = 'Amir Zare — Senior Product Designer'
+const description = 'Portfolio of Amir Zare, a Senior Product Designer specialising in fintech, investment and crypto platforms.'
 
 useSeoMeta({ title, description, ogTitle: title, ogDescription: description, ogType: 'website', twitterCard: 'summary' })
 </script>

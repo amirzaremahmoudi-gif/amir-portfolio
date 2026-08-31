@@ -1,6 +1,6 @@
 # Product Designer Portfolio
 
-A production-ready foundation for a premium, editorial Product Designer portfolio. All personal details, project claims, metrics and external links are intentionally marked as placeholders until verified source material is supplied.
+A production-ready foundation for a premium, editorial Product Designer portfolio. Personal profile, experience, metrics and professional links are sourced from Amir Zare's 2026 CV. Case-study details and imagery remain explicitly marked as placeholders where project source material has not yet been supplied.
 
 ## Technology stack
 

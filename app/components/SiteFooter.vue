@@ -1,3 +1,7 @@
+<script setup lang="ts">
+import { profile } from '~/data/profile'
+</script>
+
 <template>
   <footer class="footer-shell">
     <div class="portfolio-container py-16 md:py-24 lg:py-28">
@@ -12,28 +16,31 @@
         </div>
         <div class="flex flex-col justify-end text-sm lg:col-span-3 lg:col-start-10">
           <a
-            href="#"
-            aria-disabled="true"
+            :href="`mailto:${profile.email}`"
             class="footer-link border-b py-4"
-            @click.prevent
-          >Email <span>Placeholder</span></a>
+          >Email <span>{{ profile.email }}</span></a>
           <a
-            href="#"
-            aria-disabled="true"
+            :href="profile.linkedin"
+            target="_blank"
+            rel="noopener noreferrer"
             class="footer-link border-b py-4"
-            @click.prevent
-          >LinkedIn <span>Placeholder</span></a>
+          >LinkedIn <span>amir-zare ↗</span></a>
           <a
-            href="#"
-            aria-disabled="true"
+            :href="profile.behance"
+            target="_blank"
+            rel="noopener noreferrer"
             class="footer-link border-b py-4"
-            @click.prevent
-          >Download CV <span>Placeholder</span></a>
+          >Behance <span>azuiux ↗</span></a>
+          <a
+            :href="profile.cv"
+            download="Amir_Zare_CV_2026.pdf"
+            class="footer-link border-b py-4"
+          >Download CV <span>PDF ↓</span></a>
         </div>
       </div>
       <div class="footer-meta mt-20 flex flex-col gap-3 border-t pt-6 text-xs sm:flex-row sm:items-center sm:justify-between">
-        <p>© {{ new Date().getFullYear() }} Name Placeholder</p>
-        <p>Product design · Fintech · Research · Systems</p>
+        <p>© {{ new Date().getFullYear() }} {{ profile.name }}</p>
+        <p>{{ profile.title }} · {{ profile.location }}</p>
       </div>
     </div>
   </footer>
