@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { profile } from '~/data/profile'
+const { t } = useI18n()
+const { profile } = usePortfolioContent()
 </script>
 
 <template>
@@ -8,34 +9,34 @@ import { profile } from '~/data/profile'
       <div class="grid gap-12 lg:grid-cols-12">
         <div class="lg:col-span-8">
           <p class="footer-eyebrow eyebrow mb-6">
-            Let’s make complex products feel clear.
+            {{ t('footer.eyebrow') }}
           </p>
           <p class="editorial-display max-w-4xl text-[clamp(3.15rem,7vw,7.25rem)]">
-            Available for the right conversation.
+            {{ t('footer.headline') }}
           </p>
         </div>
         <div class="flex flex-col justify-end text-sm lg:col-span-3 lg:col-start-10">
           <a
             :href="`mailto:${profile.email}`"
             class="footer-link border-b py-4"
-          >Email <span>{{ profile.email }}</span></a>
+          >{{ t('common.email') }} <span dir="ltr">{{ profile.email }}</span></a>
           <a
             :href="profile.linkedin"
             target="_blank"
             rel="noopener noreferrer"
             class="footer-link border-b py-4"
-          >LinkedIn <span>amir-zare ↗</span></a>
+          >{{ t('common.linkedin') }} <span dir="ltr">amir-zare ↗</span></a>
           <a
             :href="profile.behance"
             target="_blank"
             rel="noopener noreferrer"
             class="footer-link border-b py-4"
-          >Behance <span>azuiux ↗</span></a>
+          >{{ t('common.behance') }} <span dir="ltr">azuiux ↗</span></a>
           <a
             :href="profile.cv"
             download="Amir_Zare_CV_2026.pdf"
             class="footer-link border-b py-4"
-          >Download CV <span>PDF ↓</span></a>
+          >{{ t('common.downloadCv') }} <span dir="ltr">PDF ↓</span></a>
         </div>
       </div>
       <div class="footer-meta mt-20 flex flex-col gap-3 border-t pt-6 text-xs sm:flex-row sm:items-center sm:justify-between">

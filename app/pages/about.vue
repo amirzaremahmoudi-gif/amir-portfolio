@@ -1,9 +1,12 @@
 <script setup lang="ts">
-import { capabilityGroups, experience, outcomes, profile } from '~/data/profile'
+const { t } = useI18n()
+const { capabilityGroups, experience, outcomes, profile } = usePortfolioContent()
 
 useSeoMeta({
-  title: `About — ${profile.name}`,
-  description: `${profile.name} is a ${profile.title} specialising in fintech, investment and crypto platforms.`
+  title: () => t('about.seoTitle'),
+  description: () => t('about.seoDescription'),
+  ogTitle: () => t('about.seoTitle'),
+  ogDescription: () => t('about.seoDescription')
 })
 </script>
 
@@ -11,11 +14,11 @@ useSeoMeta({
   <div>
     <header class="portfolio-container grid gap-12 pb-20 pt-36 md:pt-48 lg:grid-cols-12 lg:pb-32">
       <p class="eyebrow lg:col-span-3">
-        About · {{ profile.name }}
+        {{ t('about.label') }} · {{ profile.name }}
       </p>
       <div class="lg:col-span-8 lg:col-start-5">
         <h1 class="editorial-display text-[clamp(4rem,8vw,8.5rem)]">
-          Turning complex financial systems into clear product experiences.
+          {{ t('about.headline') }}
         </h1>
       </div>
     </header>
@@ -25,10 +28,10 @@ useSeoMeta({
         <div
           class="aspect-[4/5] border border-default bg-elevated lg:col-span-4"
           role="img"
-          aria-label="Portrait to be provided"
+          :aria-label="t('about.portraitLabel')"
         >
           <div class="grid size-full place-items-center">
-            <span class="eyebrow">Portrait · TODO</span>
+            <span class="eyebrow">{{ t('about.portrait') }}</span>
           </div>
         </div>
         <div class="space-y-8 lg:col-span-6 lg:col-start-7">
@@ -41,15 +44,15 @@ useSeoMeta({
           <div class="grid gap-8 border-t border-default pt-8 sm:grid-cols-2">
             <div>
               <h2 class="eyebrow">
-                Current focus
+                {{ t('about.currentFocus') }}
               </h2>
               <p class="mt-4 leading-relaxed">
-                Fintech · Investment · Crypto platforms
+                {{ t('about.currentFocusValue') }}
               </p>
             </div>
             <div>
               <h2 class="eyebrow">
-                Based in
+                {{ t('about.basedIn') }}
               </h2>
               <p class="mt-4 leading-relaxed">
                 {{ profile.location }}
@@ -57,21 +60,21 @@ useSeoMeta({
             </div>
             <div>
               <h2 class="eyebrow">
-                Email
+                {{ t('common.email') }}
               </h2>
               <a
                 :href="`mailto:${profile.email}`"
                 class="mt-4 inline-block leading-relaxed underline decoration-transparent underline-offset-4 transition-colors hover:decoration-current"
-              >{{ profile.email }}</a>
+              ><span dir="ltr">{{ profile.email }}</span></a>
             </div>
             <div>
               <h2 class="eyebrow">
-                Phone
+                {{ t('common.phone') }}
               </h2>
               <a
                 :href="profile.phoneHref"
                 class="mt-4 inline-block leading-relaxed underline decoration-transparent underline-offset-4 transition-colors hover:decoration-current"
-              >{{ profile.phone }}</a>
+              ><span dir="ltr">{{ profile.phone }}</span></a>
             </div>
           </div>
         </div>
@@ -81,7 +84,7 @@ useSeoMeta({
     <section class="border-t border-default py-[var(--portfolio-section)]">
       <div class="portfolio-container grid gap-10 lg:grid-cols-12">
         <p class="eyebrow lg:col-span-3">
-          Experience
+          {{ t('about.experience') }}
         </p>
         <ol class="divide-y divide-default border-y border-default lg:col-span-9">
           <li
@@ -120,10 +123,10 @@ useSeoMeta({
       <div class="portfolio-container grid gap-10 lg:grid-cols-12">
         <div class="lg:col-span-3">
           <p class="eyebrow">
-            Selected outcomes
+            {{ t('about.outcomes') }}
           </p>
           <p class="mt-5 max-w-xs text-sm leading-relaxed text-muted">
-            Quantitative outcomes reported in the CV. Project attribution is preserved exactly as supplied.
+            {{ t('about.outcomesNote') }}
           </p>
         </div>
         <dl class="grid border-l border-t border-default sm:grid-cols-2 lg:col-span-9 lg:grid-cols-3">
@@ -149,7 +152,7 @@ useSeoMeta({
     <section class="border-t border-default py-[var(--portfolio-section)]">
       <div class="portfolio-container grid gap-10 lg:grid-cols-12">
         <p class="eyebrow lg:col-span-3">
-          Capabilities & tools
+          {{ t('about.capabilities') }}
         </p>
         <dl class="divide-y divide-default border-y border-default lg:col-span-9">
           <div
@@ -171,26 +174,26 @@ useSeoMeta({
     <section class="border-t border-default py-[var(--portfolio-section)]">
       <div class="portfolio-container grid gap-10 lg:grid-cols-12">
         <p class="eyebrow lg:col-span-3">
-          Education
+          {{ t('about.education') }}
         </p>
         <div class="grid gap-10 md:grid-cols-2 lg:col-span-9">
           <div>
             <h2 class="text-xl font-semibold tracking-[-.025em]">
-              Bachelor of Accounting
+              {{ t('about.degree') }}
             </h2>
             <p class="mt-3 leading-relaxed text-muted">
-              Islamic Azad University Tehran · 2011—2014
+              {{ t('about.university') }}
             </p>
           </div>
           <div>
             <h2 class="text-xl font-semibold tracking-[-.025em]">
-              Continued learning
+              {{ t('about.learning') }}
             </h2>
             <p class="mt-3 leading-relaxed text-muted">
-              Google UX Cert · NN/g · IxDF
+              {{ t('about.learningList') }}
             </p>
             <p class="mt-3 text-sm leading-relaxed text-muted">
-              Specific course titles and completion dates: TODO
+              {{ t('about.learningTodo') }}
             </p>
           </div>
         </div>

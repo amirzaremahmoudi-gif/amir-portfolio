@@ -1,7 +1,8 @@
 <script setup lang="ts">
 const colorMode = useColorMode()
+const { t } = useI18n()
 const isDark = ref(false)
-const label = computed(() => isDark.value ? 'Switch to light mode' : 'Switch to dark mode')
+const label = computed(() => isDark.value ? t('theme.light') : t('theme.dark'))
 
 function syncThemeState() {
   isDark.value = document.documentElement.classList.contains('dark')

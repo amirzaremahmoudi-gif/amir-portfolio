@@ -1,20 +1,21 @@
 <script setup lang="ts">
-const route = useRoute()
-const config = useRuntimeConfig()
+const { t } = useI18n()
+const localeHead = useLocaleHead({ seo: true })
 
-useHead({
-  meta: [{ name: 'viewport', content: 'width=device-width, initial-scale=1' }],
-  link: computed(() => [
-    { rel: 'icon', href: '/favicon.ico' },
-    { rel: 'canonical', href: new URL(route.path, config.public.siteUrl).toString() }
-  ]),
-  htmlAttrs: { lang: 'en' }
+useHead(() => ({
+  htmlAttrs: localeHead.value.htmlAttrs,
+  meta: [{ name: 'viewport', content: 'width=device-width, initial-scale=1' }, ...localeHead.value.meta],
+  link: [{ rel: 'icon', href: '/favicon.ico' }, ...localeHead.value.link]
+}))
+
+useSeoMeta({
+  title: () => t('home.seoTitle'),
+  description: () => t('home.seoDescription'),
+  ogTitle: () => t('home.seoTitle'),
+  ogDescription: () => t('home.seoDescription'),
+  ogType: 'website',
+  twitterCard: 'summary'
 })
-
-const title = 'Amir Zare — Senior Product Designer'
-const description = 'Portfolio of Amir Zare, a Senior Product Designer specialising in fintech, investment and crypto platforms.'
-
-useSeoMeta({ title, description, ogTitle: title, ogDescription: description, ogType: 'website', twitterCard: 'summary' })
 </script>
 
 <template>

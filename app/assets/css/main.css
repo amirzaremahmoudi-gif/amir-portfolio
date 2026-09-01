@@ -36,6 +36,7 @@
   --portfolio-reading: 46rem;
   --portfolio-gutter: clamp(1.25rem, 4.2vw, 4.5rem);
   --portfolio-section: clamp(5.5rem, 9vw, 9.5rem);
+  --font-persian: Tahoma, 'Segoe UI', Arial, sans-serif;
   --portfolio-space-1: .5rem;
   --portfolio-space-2: .75rem;
   --portfolio-space-3: 1rem;
@@ -78,6 +79,7 @@
 
 html { scroll-behavior: smooth; background: var(--portfolio-bg); }
 body { min-width: 20rem; overflow-x: hidden; background: var(--portfolio-bg); color: var(--portfolio-text); font-family: var(--font-sans); font-feature-settings: 'ss01' 1, 'ss02' 1; text-rendering: optimizeLegibility; }
+[lang='fa'] body { font-family: var(--font-persian); font-feature-settings: normal; line-height: 1.7; }
 [id] { scroll-margin-top: 7rem; }
 ::selection { background: var(--portfolio-accent); color: #10100f; }
 a, button { -webkit-tap-highlight-color: transparent; }
@@ -85,6 +87,9 @@ a, button { -webkit-tap-highlight-color: transparent; }
 .portfolio-container { width: min(100%, var(--portfolio-container)); margin-inline: auto; padding-inline: var(--portfolio-gutter); }
 .editorial-display { font-family: var(--font-serif); font-weight: 430; letter-spacing: -0.048em; line-height: .92; text-wrap: balance; }
 .eyebrow { color: var(--portfolio-muted); font-size: .69rem; font-weight: 700; letter-spacing: .17em; line-height: 1.45; text-transform: uppercase; }
+[lang='fa'] .editorial-display { font-family: var(--font-persian); font-weight: 700; letter-spacing: -.035em; line-height: 1.15; }
+[lang='fa'] .eyebrow { letter-spacing: .035em; line-height: 1.75; text-transform: none; }
+[lang='fa'] p { line-height: 1.9; }
 .section-divider { border-top: 1px solid var(--portfolio-line); }
 .surface-soft { background: var(--portfolio-surface); }
 .text-accent { color: var(--portfolio-accent); }

@@ -1,8 +1,10 @@
 <script setup lang="ts">
-import { expertise, profile } from '~/data/profile'
-
-const { data: projects } = await useAsyncData('home-work', () => queryCollection('work').order('order', 'ASC').all())
-useSeoMeta({ title: 'Amir Zare — Senior Product Designer', description: 'Senior Product Designer specialising in fintech, investment and crypto platforms.' })
+const { locale, t } = useI18n()
+const localePath = useLocalePath()
+const { expertise, profile } = usePortfolioContent()
+const forwardIcon = computed(() => locale.value === 'fa' ? 'i-lucide-arrow-left' : 'i-lucide-arrow-right')
+const { data: projects } = await useAsyncData(`home-work-${locale.value}`, () => locale.value === 'fa' ? queryCollection('work_fa').order('order', 'ASC').all() : queryCollection('work_en').order('order', 'ASC').all(), { watch: [locale] })
+useSeoMeta({ title: () => t('home.seoTitle'), description: () => t('home.seoDescription'), ogTitle: () => t('home.seoTitle'), ogDescription: () => t('home.seoDescription') })
 </script>
 
 <template>
@@ -13,7 +15,7 @@ useSeoMeta({ title: 'Amir Zare — Senior Product Designer', description: 'Senio
           {{ profile.title }} · {{ profile.location }}
         </p>
         <h1 class="editorial-display max-w-6xl text-[clamp(3.9rem,9.2vw,9rem)]">
-          Designing clarity <span class="text-accent italic">into</span> complex financial products.
+          {{ t('home.heroBefore') }} <span class="text-accent italic">{{ t('home.heroAccent') }}</span> {{ t('home.heroAfter') }}
         </h1>
       </div>
       <div class="motion-rise motion-rise-delay-1 flex flex-col justify-end gap-7 lg:col-span-3 lg:pb-3">
@@ -23,13 +25,13 @@ useSeoMeta({ title: 'Amir Zare — Senior Product Designer', description: 'Senio
         <div class="flex flex-wrap gap-3">
           <UButton
             to="#selected-work"
-            label="Selected work"
-            trailing-icon="i-lucide-arrow-right"
+            :label="t('home.selectedWork')"
+            :trailing-icon="forwardIcon"
             size="lg"
             class="rounded-full px-5"
           /><UButton
-            to="/about"
-            label="About"
+            :to="localePath('/about')"
+            :label="t('home.about')"
             color="neutral"
             variant="soft"
             size="lg"
@@ -40,28 +42,28 @@ useSeoMeta({ title: 'Amir Zare — Senior Product Designer', description: 'Senio
       <dl class="motion-rise motion-rise-delay-2 hero-meta grid grid-cols-2 gap-x-6 gap-y-5 border-t border-default pt-5 text-sm md:grid-cols-4 lg:col-span-12">
         <div>
           <dt class="eyebrow">
-            Focus
+            {{ t('home.focus') }}
           </dt><dd class="mt-2">
-            Fintech · Investment · Crypto
+            {{ t('home.focusValue') }}
           </dd>
         </div>
         <div>
           <dt class="eyebrow">
-            Practice
+            {{ t('home.practice') }}
           </dt><dd class="mt-2">
-            End-to-end product design
+            {{ t('home.practiceValue') }}
           </dd>
         </div>
         <div>
           <dt class="eyebrow">
-            Approach
+            {{ t('home.approach') }}
           </dt><dd class="mt-2">
-            AI-native workflow
+            {{ t('home.approachValue') }}
           </dd>
         </div>
         <div>
           <dt class="eyebrow">
-            Status
+            {{ t('home.status') }}
           </dt><dd class="mt-2 text-accent">
             {{ profile.availability }}
           </dd>
@@ -77,8 +79,8 @@ useSeoMeta({ title: 'Amir Zare — Senior Product Designer', description: 'Senio
         <SectionHeading
           id="selected-work"
           index="01"
-          title="Selected work"
-          description="Selected product work across financial platforms, conversion, interaction design and systems. Full case studies are currently being documented."
+          :title="t('home.selectedWork')"
+          :description="t('home.workDescription')"
         />
         <div class="mt-14 grid grid-cols-1 gap-x-7 gap-y-16 md:mt-20 md:grid-cols-12 md:gap-y-24">
           <ProjectCard
@@ -92,9 +94,9 @@ useSeoMeta({ title: 'Amir Zare — Senior Product Designer', description: 'Senio
           />
         </div>
         <UButton
-          to="/work"
-          label="View all projects"
-          trailing-icon="i-lucide-arrow-right"
+          :to="localePath('/work')"
+          :label="t('home.viewAll')"
+          :trailing-icon="forwardIcon"
           color="neutral"
           variant="link"
           class="mt-14 px-0"
@@ -110,7 +112,7 @@ useSeoMeta({ title: 'Amir Zare — Senior Product Designer', description: 'Senio
         <SectionHeading
           id="expertise"
           index="02"
-          title="Expertise"
+          :title="t('home.expertise')"
           class="lg:col-span-4"
         />
         <ul class="divide-y divide-default border-y border-default lg:col-span-8">
@@ -131,22 +133,22 @@ useSeoMeta({ title: 'Amir Zare — Senior Product Designer', description: 'Senio
     >
       <div class="portfolio-container grid gap-10 lg:grid-cols-12">
         <p class="eyebrow lg:col-span-3">
-          03 · About
+          03 · {{ t('home.aboutLabel') }}
         </p>
         <div class="lg:col-span-8 lg:col-start-5">
           <h2
             id="about-preview"
             class="editorial-display text-[clamp(3rem,6vw,6rem)]"
           >
-            Turning complex financial systems into clear product experiences.
+            {{ t('home.aboutHeadline') }}
           </h2>
           <p class="mt-8 max-w-2xl text-lg leading-relaxed text-muted">
             {{ profile.summary }}
           </p>
           <UButton
-            to="/about"
-            label="More about me"
-            trailing-icon="i-lucide-arrow-right"
+            :to="localePath('/about')"
+            :label="t('home.moreAbout')"
+            :trailing-icon="forwardIcon"
             color="neutral"
             variant="link"
             class="mt-8 px-0"

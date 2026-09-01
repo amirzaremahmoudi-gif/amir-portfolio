@@ -1,6 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   modules: [
+    '@nuxtjs/i18n',
     '@nuxt/eslint',
     ['@nuxt/ui', { fonts: false }],
     '@nuxt/content',
@@ -40,8 +41,12 @@ export default defineNuxtConfig({
 
   routeRules: {
     '/': { prerender: true },
-    '/work': { prerender: true },
-    '/about': { prerender: true }
+    '/en': { prerender: true },
+    '/en/work': { prerender: true },
+    '/en/about': { prerender: true },
+    '/fa': { prerender: true },
+    '/fa/work': { prerender: true },
+    '/fa/about': { prerender: true }
   },
 
   compatibilityDate: '2026-06-30',
@@ -53,6 +58,22 @@ export default defineNuxtConfig({
         braceStyle: '1tbs'
       }
     }
+  },
+
+  i18n: {
+    strategy: 'prefix',
+    defaultLocale: 'en',
+    locales: [
+      { code: 'en', name: 'English', language: 'en', dir: 'ltr', file: 'en.ts' },
+      { code: 'fa', name: 'فارسی', language: 'fa', dir: 'rtl', file: 'fa.ts' }
+    ],
+    langDir: 'locales',
+    detectBrowserLanguage: {
+      useCookie: true,
+      cookieKey: 'portfolio_locale',
+      redirectOn: 'root'
+    },
+    baseUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://example.com'
   },
 
   image: {

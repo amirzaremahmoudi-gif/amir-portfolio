@@ -1,17 +1,18 @@
 <script setup lang="ts">
 const route = useRoute()
+const { locale, t } = useI18n()
 const path = computed(() => `/work/${route.params.slug}`)
 
-const { data: project } = await useAsyncData(`project-${route.params.slug}`, () => queryCollection('work').path(path.value).first())
-if (!project.value) throw createError({ statusCode: 404, statusMessage: 'Project not found' })
+const { data: project } = await useAsyncData(`project-${locale.value}-${route.params.slug}`, () => locale.value === 'fa' ? queryCollection('work_fa').path(path.value).first() : queryCollection('work_en').path(path.value).first(), { watch: [locale, path] })
+if (!project.value) throw createError({ statusCode: 404, statusMessage: t('project.notFound') })
 
-const { data: allProjects } = await useAsyncData('project-navigation', () => queryCollection('work').order('order', 'ASC').select('path', 'title').all())
+const { data: allProjects } = await useAsyncData(`project-navigation-${locale.value}`, () => locale.value === 'fa' ? queryCollection('work_fa').order('order', 'ASC').select('path', 'title').all() : queryCollection('work_en').order('order', 'ASC').select('path', 'title').all(), { watch: [locale] })
 const currentIndex = computed(() => allProjects.value?.findIndex(item => item.path === path.value) ?? -1)
 const previous = computed(() => currentIndex.value > 0 ? allProjects.value?.[currentIndex.value - 1] : null)
 const next = computed(() => currentIndex.value >= 0 && currentIndex.value < (allProjects.value?.length || 0) - 1 ? allProjects.value?.[currentIndex.value + 1] : null)
 
 useSeoMeta({
-  title: () => `${project.value?.title} — Case Study`,
+  title: () => `${project.value?.title} — ${t('project.caseStudySuffix')}`,
   description: () => project.value?.description,
   ogTitle: () => project.value?.title,
   ogDescription: () => project.value?.description
@@ -59,7 +60,7 @@ useSeoMeta({
           v-else
           class="grid size-full place-items-center"
         >
-          <span class="eyebrow text-black/60">Case study hero image placeholder</span>
+          <span class="eyebrow text-black/60">{{ t('project.heroPlaceholder') }}</span>
         </div>
       </div>
     </div>
@@ -69,9 +70,9 @@ useSeoMeta({
         <aside class="hidden lg:col-span-3 lg:block">
           <div class="sticky top-28">
             <p class="eyebrow">
-              Case study outline
+              {{ t('project.outline') }}
             </p><ol class="mt-5 space-y-3 text-sm text-muted">
-              <li>Context</li><li>Challenge</li><li>Research</li><li>Decisions</li><li>Solution</li><li>Validation</li><li>Learnings</li>
+              <li>{{ t('project.context') }}</li><li>{{ t('project.challenge') }}</li><li>{{ t('project.research') }}</li><li>{{ t('project.decisions') }}</li><li>{{ t('project.solution') }}</li><li>{{ t('project.validation') }}</li><li>{{ t('project.learnings') }}</li>
             </ol>
           </div>
         </aside>

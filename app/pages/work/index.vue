@@ -1,19 +1,20 @@
 <script setup lang="ts">
-const { data: projects } = await useAsyncData('all-work', () => queryCollection('work').order('order', 'ASC').all())
-useSeoMeta({ title: 'Selected Work — Amir Zare', description: 'Product design work across fintech, investment, crypto, conversion and design systems.' })
+const { locale, t } = useI18n()
+const { data: projects } = await useAsyncData(`all-work-${locale.value}`, () => locale.value === 'fa' ? queryCollection('work_fa').order('order', 'ASC').all() : queryCollection('work_en').order('order', 'ASC').all(), { watch: [locale] })
+useSeoMeta({ title: () => t('work.seoTitle'), description: () => t('work.seoDescription'), ogTitle: () => t('work.seoTitle'), ogDescription: () => t('work.seoDescription') })
 </script>
 
 <template>
   <div class="portfolio-container pb-[var(--portfolio-section)] pt-32 md:pt-44">
     <header class="grid gap-10 border-b border-default pb-14 lg:grid-cols-12 lg:pb-20">
       <p class="eyebrow lg:col-span-3">
-        Selected projects · 2026
+        {{ t('work.eyebrow') }}
       </p>
       <div class="lg:col-span-8 lg:col-start-5">
         <h1 class="motion-rise editorial-display text-[clamp(4.5rem,9vw,9.5rem)]">
-          Selected <span class="text-accent italic">work</span>
+          {{ t('work.titleBefore') }} <span class="text-accent italic">{{ t('work.titleAccent') }}</span>
         </h1><p class="mt-8 max-w-2xl text-lg leading-relaxed text-muted">
-          A working index of product design engagements. Titles and categories are temporary; full context, decisions and outcomes will be added in the next content phase.
+          {{ t('work.intro') }}
         </p>
       </div>
     </header>
