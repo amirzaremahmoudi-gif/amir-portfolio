@@ -19,5 +19,7 @@ const targetPath = computed(() => switchLocalePath(targetLocale.value) || `/${ta
 </template>
 
 <style scoped>
-.language-switcher { border: 1px solid var(--portfolio-line); }
+.language-switcher { background: var(--portfolio-surface); transition: color var(--motion-control) var(--ease-standard), background-color var(--motion-control) var(--ease-standard), transform var(--motion-control) var(--ease-enter); }
+.language-switcher:hover { background: var(--portfolio-surface-strong); transform: translateY(-1px); }
+@media (prefers-reduced-motion: reduce) { .language-switcher { transition: none; } .language-switcher:hover { transform: none; } }
 </style>

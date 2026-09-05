@@ -3,8 +3,8 @@ export const localizedPortfolio = {
     profile: {
       name: 'Amir Zare', initials: 'AZ', title: 'Senior Product Designer',
       positioning: 'Senior Product Designer specialising in fintech, investment and crypto platforms.',
-      summary: 'Four years turning complex financial systems into clear, conversion-driven product experiences. I lead end-to-end design across fintech, investment and crypto platforms, using an AI-native workflow to accelerate research, ideation and prototyping.',
-      availability: 'Open to senior roles', location: 'Tehran, Iran', email: 'Amir.figma@gmail.com', phone: '+98 912 418 5428', phoneHref: 'tel:+989124185428', linkedin: 'https://linkedin.com/in/amir-zare', behance: 'https://behance.net/azuiux', cv: '/Amir_Zare_CV_2026.pdf'
+      summary: 'I design clear, conversion-driven product experiences for complex financial systems. I lead end-to-end design across fintech, investment and crypto platforms, using an AI-native workflow to accelerate research and prototyping.',
+      availability: 'Open to senior roles', location: 'Tehran, Iran', email: 'Amir.figma@gmail.com', phone: '+98 912 418 5428', phoneHref: 'tel:+989124185428', behance: 'https://behance.net/azuiux', cv: '/Amir_Zare_CV_2026.pdf'
     },
     expertise: ['End-to-End Product Design', 'Interaction Design', 'User Research & Strategy', 'Design Systems', 'Analytics & Experimentation', 'AI-Assisted Design Workflows'],
     outcomes: [
@@ -36,22 +36,22 @@ export const localizedPortfolio = {
   fa: {
     profile: {
       name: 'امیر زارع', initials: 'AZ', title: 'طراح ارشد محصول',
-      positioning: 'طراح ارشد محصول، متخصص در پلتفرم‌های فین‌تک، سرمایه‌گذاری و رمزارز.',
-      summary: 'چهار سال تجربه در تبدیل سیستم‌های مالی پیچیده به تجربه‌های محصول روشن و متمرکز بر تبدیل. طراحی سرتاسری محصولات فین‌تک، سرمایه‌گذاری و رمزارز را هدایت می‌کنم و با یک جریان کاری مبتنی بر هوش مصنوعی، پژوهش، ایده‌پردازی و نمونه‌سازی را سریع‌تر پیش می‌برم.',
-      availability: 'آماده بررسی فرصت‌های شغلی ارشد', location: 'تهران، ایران', email: 'Amir.figma@gmail.com', phone: '+98 912 418 5428', phoneHref: 'tel:+989124185428', linkedin: 'https://linkedin.com/in/amir-zare', behance: 'https://behance.net/azuiux', cv: '/Amir_Zare_CV_2026.pdf'
+      positioning: 'طراح ارشد محصول، متخصص در پلتفرم‌های فین‌تک، سرمایه‌گذاری و بازارهای مالی.',
+      summary: 'برای سیستم‌های مالی پیچیده، تجربه‌های محصول روشن و متمرکز بر تبدیل طراحی می‌کنم. طراحی سرتاسری محصولات فین‌تک، سرمایه‌گذاری و رمزارز را هدایت می‌کنم و با جریان کاری مبتنی بر هوش مصنوعی، پژوهش و نمونه‌سازی را سریع‌تر پیش می‌برم.',
+      availability: 'آماده بررسی فرصت‌های شغلی ارشد', location: 'تهران، ایران', email: 'Amir.figma@gmail.com', phone: '+98 912 418 5428', phoneHref: 'tel:+989124185428', behance: 'https://behance.net/azuiux', cv: '/Amir_Zare_CV_2026.pdf'
     },
-    expertise: ['طراحی سرتاسری محصول', 'طراحی تعامل', 'پژوهش کاربر و استراتژی', 'سیستم‌های طراحی', 'تحلیل داده و آزمایش', 'فرایند طراحی با کمک هوش مصنوعی'],
+    expertise: ['طراحی سرتاسری محصول', 'طراحی تعامل', 'پژوهش کاربر و استراتژی', 'دیزاین سیستم', 'تحلیل داده و آزمایش', 'فرایند طراحی با کمک هوش مصنوعی'],
     outcomes: [
       { value: '+۲۵٪', label: 'تبدیل سرنخ به سرمایه‌گذار', detail: 'از ۸٫۲٪ به ۱۰٫۳٪ · Toranj Capital' },
       { value: '+۳۰٪', label: 'میانگین زمان استفاده روزانه', detail: 'حدود ۱۴ هزار کاربر فعال ماهانه · Toranj Capital' },
-      { value: '-۴۰٪', label: 'زمان تحویل رابط کاربری', detail: 'سیستم طراحی یکپارچه برای ۴ محصول · Toranj Capital' },
+      { value: '-۴۰٪', label: 'زمان تحویل رابط کاربری', detail: 'دیزاین سیستم یکپارچه برای ۴ محصول · Toranj Capital' },
       { value: '-۵۰٪', label: 'چرخه ایده‌پردازی', detail: 'فرایند مبتنی بر هوش مصنوعی · از چند روز به چند ساعت' },
       { value: '+۶۰٪', label: 'سرعت جمع‌بندی پژوهش', detail: 'فرایند پژوهش با کمک Claude · Toranj Capital' },
       { value: '+۳۵٪', label: 'ارسال فرم تماس', detail: 'Vista Portfolio Management' },
       { value: '+۱۹٪', label: 'جذب مشتری', detail: 'Vista Portfolio Management' }
     ],
     experience: [
-      { dates: '۲۰۲۴ — اکنون', engagement: 'سمت فعلی', role: 'طراح ارشد UI/UX و محصول', company: 'Toranj Capital', industry: 'سرمایه‌گذاری و مدیریت دارایی', summary: 'تنها طراح وب‌سایت شرکتی، اپلیکیشن موبایل، صندوق بازنشستگی و Toranj Crowd؛ با مسئولیت طراحی از هویت بصری برند تا جریان‌های تعاملی و سیستم طراحی یکپارچه چندپلتفرمی.' },
+      { dates: '۲۰۲۴ — اکنون', engagement: 'سمت فعلی', role: 'طراح ارشد UI/UX و محصول', company: 'Toranj Capital', industry: 'سرمایه‌گذاری و مدیریت دارایی', summary: 'تنها طراح وب‌سایت شرکتی، اپلیکیشن موبایل، صندوق بازنشستگی و Toranj Crowd؛ با مسئولیت طراحی از هویت بصری برند تا جریان‌های تعاملی و دیزاین سیستم یکپارچه چندپلتفرمی.' },
       { dates: '۲۰۲۵', engagement: 'فریلنس', role: 'طراح محصول', company: 'Ramzinex', industry: 'صرافی رمزارز', summary: 'هدایت بازطراحی راهبردی صفحات تحلیل، وبلاگ و معامله؛ بازطراحی داشبوردهای مالی و نمودارهای معامله و ترسیم سفر کامل کاربر برای شناسایی موانع حفظ کاربر.' },
       { dates: '۲۰۲۴', engagement: 'فریلنس', role: 'طراح محصول', company: 'Vista Portfolio Management', industry: 'مدیریت دارایی', summary: 'طراحی معماری اطلاعات و جریان‌های کاربر با تمرکز بر تبدیل؛ همراه با طراحی بصری برای تقویت اعتماد در بازار مالی قانون‌گذاری‌شده.' },
       { dates: '۲۰۲۴', engagement: 'محصول', role: 'طراح محصول', company: 'Finogram', industry: 'تحلیل بازارهای مالی', summary: 'طراحی پلتفرمی یکپارچه برای تحلیل سهام، رمزارز، طلا و فارکس؛ شامل ابزارهای تعاملی تحلیل، رصد زنده عملکرد سبد و فضاهای ساختاریافته اجتماعی.' },
@@ -61,7 +61,7 @@ export const localizedPortfolio = {
     capabilityGroups: [
       { label: 'طراحی و نمونه‌سازی', value: 'Figma · Adobe XD · Framer · Protopie · طراحی تعامل · وب و موبایل واکنش‌گرا' },
       { label: 'پژوهش و استراتژی', value: 'پژوهش کاربر · آزمون کاربردپذیری · معماری اطلاعات · ترسیم سفر · آزمون A/B · نگارش تجربه کاربری · ساخت پرسونا' },
-      { label: 'روش‌ها و سیستم‌ها', value: 'Design Thinking · Double Diamond · Lean UX · Agile / Scrum · سیستم طراحی · Atomic Design' },
+      { label: 'روش‌ها و سیستم‌ها', value: 'Design Thinking · Double Diamond · Lean UX · Agile / Scrum · دیزاین سیستم · Atomic Design' },
       { label: 'تحلیل و داده', value: 'Google Analytics · Hotjar · Mixpanel' },
       { label: 'ابزارهای هوش مصنوعی', value: 'ChatGPT · Claude · Figma AI · UX Pilot · Galileo AI · Midjourney · Uizard' },
       { label: 'همکاری', value: 'Notion · Jira · Miro · FigJam · Zeplin · Slack' }

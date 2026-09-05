@@ -43,9 +43,11 @@ export default defineNuxtConfig({
     '/': { prerender: true },
     '/en': { prerender: true },
     '/en/work': { prerender: true },
+    '/en/work/toranj-sarmad': { prerender: true },
     '/en/about': { prerender: true },
     '/fa': { prerender: true },
     '/fa/work': { prerender: true },
+    '/fa/work/toranj-sarmad': { prerender: true },
     '/fa/about': { prerender: true }
   },
 
@@ -74,6 +76,21 @@ export default defineNuxtConfig({
       redirectOn: 'root'
     },
     baseUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://example.com'
+  },
+
+  icon: {
+    clientBundle: {
+      icons: [
+        'lucide:image-plus',
+        'lucide:arrow-up-right',
+        'lucide:sparkles',
+        'lucide:move-right',
+        'lucide:panels-top-left',
+        'lucide:inbox',
+        'lucide:wifi-off',
+        'lucide:clock-3'
+      ]
+    }
   },
 
   image: {

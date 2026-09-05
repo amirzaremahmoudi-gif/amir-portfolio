@@ -10,7 +10,7 @@ A production-ready foundation for a premium, editorial Product Designer portfoli
 - Nuxt Content v3 with a typed `work` collection
 - Nuxt Image
 - Nuxt Sitemap and Robots
-- Manrope Variable and Newsreader Variable, self-hosted through Fontsource
+- Montserrat Variable for English and Pelak Farsi Numeral for Persian, self-hosted as optimized WOFF2 files
 - SSR architecture compatible with Vercel
 
 ## Project structure

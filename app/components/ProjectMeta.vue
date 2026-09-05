@@ -16,18 +16,28 @@ const items = computed(() => [
       :key="item.label"
       class="bg-[color:var(--portfolio-bg)] py-6 sm:px-6 first:pl-0"
     >
-      <dt class="eyebrow">
-        {{ item.label }}
-      </dt><dd class="mt-3 text-sm">
-        {{ item.value }}
-      </dd>
+      <AsciiGlitchText
+        :text="item.label"
+        as="dt"
+        class="eyebrow"
+      />
+      <AsciiGlitchText
+        :text="item.value"
+        as="dd"
+        class="mt-3 text-sm"
+      />
     </div>
     <div class="bg-[color:var(--portfolio-bg)] py-6 sm:col-span-2 sm:px-6 lg:col-span-4 lg:pl-0">
-      <dt class="eyebrow">
-        {{ t('project.responsibilities') }}
-      </dt><dd class="mt-3 text-sm">
-        {{ responsibilities.join(' · ') }}
-      </dd>
+      <AsciiGlitchText
+        :text="t('project.responsibilities')"
+        as="dt"
+        class="eyebrow"
+      />
+      <AsciiGlitchText
+        :text="responsibilities.join(' · ')"
+        as="dd"
+        class="mt-3 text-sm"
+      />
     </div>
   </dl>
 </template>

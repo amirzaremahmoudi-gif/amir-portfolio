@@ -10,6 +10,7 @@ const { data: allProjects } = await useAsyncData(`project-navigation-${locale.va
 const currentIndex = computed(() => allProjects.value?.findIndex(item => item.path === path.value) ?? -1)
 const previous = computed(() => currentIndex.value > 0 ? allProjects.value?.[currentIndex.value - 1] : null)
 const next = computed(() => currentIndex.value >= 0 && currentIndex.value < (allProjects.value?.length || 0) - 1 ? allProjects.value?.[currentIndex.value + 1] : null)
+const isToranjSarmad = computed(() => route.params.slug === 'toranj-sarmad')
 
 useSeoMeta({
   title: () => `${project.value?.title} — ${t('project.caseStudySuffix')}`,
@@ -20,7 +21,12 @@ useSeoMeta({
 </script>
 
 <template>
-  <article v-if="project">
+  <ToranjSarmadCaseStudy
+    v-if="project && isToranjSarmad"
+    :previous="previous"
+    :next="next"
+  />
+  <article v-else-if="project">
     <header class="portfolio-container pb-16 pt-36 md:pb-24 md:pt-48">
       <div class="grid gap-10 lg:grid-cols-12">
         <p class="eyebrow lg:col-span-3">
@@ -46,7 +52,7 @@ useSeoMeta({
 
     <div class="portfolio-container">
       <div
-        class="project-hero relative aspect-[16/9] overflow-hidden border border-default"
+        class="project-hero relative aspect-[16/9] overflow-hidden"
         :data-tone="project.coverTone"
       >
         <NuxtImg
@@ -90,15 +96,20 @@ useSeoMeta({
 </template>
 
 <style scoped>
-.project-hero { background: #b56f45; }
+.project-hero { border-radius: var(--radius-media); background: #b56f45; box-shadow: var(--shadow-soft); transition: transform var(--motion-major) var(--ease-enter), box-shadow var(--motion-content) var(--ease-standard); }
+.project-hero:hover { box-shadow: var(--shadow-float); transform: scale(.995); }
 .project-hero[data-tone='sage'] { background: #7d8772; }
 .project-hero[data-tone='cobalt'] { background: #526278; }
 .project-hero[data-tone='sand'] { background: #c6ac7c; }
 .project-hero[data-tone='graphite'] { background: #62605b; }
-.case-study-content :deep(h2) { margin-top: clamp(4rem, 8vw, 7rem); font-family: var(--font-serif); font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 430; letter-spacing: -0.04em; line-height: .98; }
-.case-study-content :deep(h3) { margin-top: 3rem; font-size: 1.35rem; font-weight: 650; letter-spacing: -0.02em; }
+.case-study-content :deep(h2) { margin-top: clamp(4rem, 8vw, 7rem); font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: var(--type-display-weight); letter-spacing: -0.04em; line-height: var(--type-display-leading); text-wrap: balance; }
+.case-study-content :deep(h3) { margin-top: 3rem; font-size: 1.35rem; font-weight: var(--type-heading-weight); letter-spacing: -0.02em; }
 .case-study-content :deep(p) { margin-top: 1.4rem; font-size: 1.0625rem; line-height: 1.85; color: var(--portfolio-muted); }
 .case-study-content :deep(ul) { margin-top: 1.5rem; list-style: none; border-top: 1px solid var(--portfolio-line); }
 .case-study-content :deep(li) { border-bottom: 1px solid var(--portfolio-line); padding-block: 1rem; line-height: 1.6; }
-.case-study-content :deep(strong) { color: var(--portfolio-text); font-weight: 650; }
+.case-study-content :deep(strong) { color: var(--portfolio-text); font-weight: var(--type-body-strong-weight); }
+[lang='fa'] .case-study-content :deep(h2), [lang='fa'] .case-study-content :deep(h3) { letter-spacing: -.01em; }
+@supports (animation-timeline: view()) { .case-study-content :deep(h2), .case-study-content :deep(h3), .case-study-content :deep(p), .case-study-content :deep(ul) { animation: case-content-reveal var(--motion-major) var(--ease-enter) both; animation-timeline: view(); animation-range: entry 5% cover 18%; } }
+@keyframes case-content-reveal { from { opacity: .15; transform: translateY(1.5rem); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .project-hero { transition: none; } .project-hero:hover { transform: none; } .case-study-content :deep(h2), .case-study-content :deep(h3), .case-study-content :deep(p), .case-study-content :deep(ul) { animation: none !important; } }
 </style>

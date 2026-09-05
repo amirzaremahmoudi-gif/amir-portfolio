@@ -4,10 +4,15 @@ defineProps<{ value: string, label: string }>()
 
 <template>
   <aside class="border-y border-default py-10">
-    <p class="editorial-display text-6xl">
-      {{ value }}
-    </p><p class="eyebrow mt-3">
-      {{ label }}
-    </p>
+    <AsciiGlitchText
+      :text="value"
+      as="p"
+      class="editorial-display text-6xl"
+    />
+    <AsciiGlitchText
+      :text="label"
+      as="p"
+      class="eyebrow mt-3"
+    />
   </aside>
 </template>

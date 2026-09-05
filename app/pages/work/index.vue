@@ -5,30 +5,52 @@ useSeoMeta({ title: () => t('work.seoTitle'), description: () => t('work.seoDesc
 </script>
 
 <template>
-  <div class="portfolio-container pb-[var(--portfolio-section)] pt-32 md:pt-44">
-    <header class="grid gap-10 border-b border-default pb-14 lg:grid-cols-12 lg:pb-20">
-      <p class="eyebrow lg:col-span-3">
+  <div class="portfolio-container pb-[var(--portfolio-section)] pt-28 md:pt-32">
+    <header class="work-hero">
+      <p class="work-hero__kicker">
         {{ t('work.eyebrow') }}
       </p>
-      <div class="lg:col-span-8 lg:col-start-5">
-        <h1 class="motion-rise editorial-display text-[clamp(4.5rem,9vw,9.5rem)]">
-          {{ t('work.titleBefore') }} <span class="text-accent italic">{{ t('work.titleAccent') }}</span>
-        </h1><p class="mt-8 max-w-2xl text-lg leading-relaxed text-muted">
-          {{ t('work.intro') }}
-        </p>
-      </div>
-    </header>
-    <div class="grid grid-cols-1 gap-x-7 gap-y-16 pt-14 md:grid-cols-12 md:gap-y-24 md:pt-20">
-      <ProjectCard
-        v-for="(project, index) in projects"
-        :key="project.path"
-        :project="project"
-        :index="index"
-        :eager="index === 0"
-        :layout="index % 4 === 1 ? 'portrait' : index % 4 === 3 ? 'square' : 'landscape'"
-        heading-tag="h2"
-        :class="index % 4 === 0 ? 'md:col-span-8' : index % 4 === 1 ? 'md:col-span-4 md:mt-32' : 'md:col-span-6'"
+      <h1 class="work-hero__title">
+        {{ t('work.titleBefore') }} <span>{{ t('work.titleAccent') }}</span>
+      </h1>
+      <AsciiGlitchText
+        :text="t('work.intro')"
+        as="p"
+        class="work-hero__intro"
       />
-    </div>
+    </header>
+
+    <section
+      v-if="projects?.length"
+      class="work-group reveal-on-scroll"
+      :aria-label="t('work.eyebrow')"
+    >
+      <div class="project-list">
+        <ProjectCard
+          v-for="(project, index) in projects"
+          :key="project.path"
+          :project="project"
+          :index="index"
+          :eager="index === 0"
+          layout="cinematic"
+          hierarchy="secondary"
+          heading-tag="h2"
+          :show-role="false"
+        />
+      </div>
+    </section>
   </div>
 </template>
+
+<style scoped>
+.work-hero { display: flex; width: 100%; flex-direction: column; align-items: center; padding-block: clamp(1.5rem, 3vw, 3rem) clamp(3rem, 5vw, 5rem); text-align: center; }
+.work-hero__kicker { color: var(--portfolio-accent); font-size: clamp(.95rem, 1vw, 1.05rem); font-weight: 750; line-height: 1.5; }
+.work-hero__title { max-width: none; margin-top: .75rem; font-family: var(--font-display); font-size: clamp(3.25rem, 6vw, 6.5rem); font-weight: 850; letter-spacing: -.055em; line-height: 1.02; white-space: nowrap; }
+.work-hero__title span { color: var(--portfolio-accent); }
+.work-hero__intro { width: 100%; max-width: 48rem; margin: clamp(1.25rem, 2vw, 2rem) auto 0; color: var(--portfolio-muted); font-size: clamp(1rem, 1.1vw, 1.15rem); line-height: 1.85; }
+[lang='fa'] .work-hero__title { font-weight: 900; letter-spacing: -.012em; line-height: 1.18; }
+.work-group { position: relative; }
+.work-group::before { display: block; width: 100%; height: 1px; margin-bottom: 1.75rem; background: linear-gradient(90deg, var(--portfolio-line), transparent); content: ''; }
+.project-list { display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(4rem, 7vw, 7rem); padding-top: clamp(1.5rem, 3vw, 3rem); }
+@media (max-width: 767px) { .work-hero { padding-top: 1rem; padding-bottom: 3rem; } .work-hero__title { max-width: 100%; font-size: clamp(2.5rem, 12vw, 4rem); } .project-list { gap: 4rem; } }
+</style>
