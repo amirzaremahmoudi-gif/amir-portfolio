@@ -1,0 +1,19 @@
+{
+  "name": "Amir Zare Portfolio",
+  "short_name": "AZ Portfolio",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#373737",
+  "background_color": "#373737",
+  "display": "standalone"
+}
