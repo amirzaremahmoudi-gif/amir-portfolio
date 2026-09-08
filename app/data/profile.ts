@@ -4,7 +4,7 @@ export const localizedPortfolio = {
       name: 'Amir Zare', initials: 'AZ', title: 'Senior Product Designer',
       positioning: 'Senior Product Designer specialising in fintech, investment and crypto platforms.',
       summary: 'I design clear, conversion-driven product experiences for complex financial systems. I lead end-to-end design across fintech, investment and crypto platforms, using an AI-native workflow to accelerate research and prototyping.',
-      availability: 'Open to senior roles', location: 'Tehran, Iran', email: 'Amir.figma@gmail.com', phone: '+98 912 418 5428', phoneHref: 'tel:+989124185428', behance: 'https://behance.net/azuiux', cv: '/Amir_Zare_CV_2026.pdf'
+      availability: 'Open to senior roles', location: 'Tehran, Iran', email: 'Amir.figma@gmail.com', behance: 'https://behance.net/azuiux', cv: '/Amir_Zare_CV_2026.pdf'
     },
     expertise: ['End-to-End Product Design', 'Interaction Design', 'User Research & Strategy', 'Design Systems', 'Analytics & Experimentation', 'AI-Assisted Design Workflows'],
     outcomes: [
@@ -38,7 +38,7 @@ export const localizedPortfolio = {
       name: 'امیر زارع', initials: 'AZ', title: 'طراح ارشد محصول',
       positioning: 'طراح ارشد محصول، متخصص در پلتفرم‌های فین‌تک، سرمایه‌گذاری و بازارهای مالی.',
       summary: 'برای سیستم‌های مالی پیچیده، تجربه‌های محصول روشن و متمرکز بر تبدیل طراحی می‌کنم. طراحی سرتاسری محصولات فین‌تک، سرمایه‌گذاری و رمزارز را هدایت می‌کنم و با جریان کاری مبتنی بر هوش مصنوعی، پژوهش و نمونه‌سازی را سریع‌تر پیش می‌برم.',
-      availability: 'آماده بررسی فرصت‌های شغلی ارشد', location: 'تهران، ایران', email: 'Amir.figma@gmail.com', phone: '+98 912 418 5428', phoneHref: 'tel:+989124185428', behance: 'https://behance.net/azuiux', cv: '/Amir_Zare_CV_2026.pdf'
+      availability: 'آماده بررسی فرصت‌های شغلی ارشد', location: 'تهران، ایران', email: 'Amir.figma@gmail.com', behance: 'https://behance.net/azuiux', cv: '/Amir_Zare_CV_2026.pdf'
     },
     expertise: ['طراحی سرتاسری محصول', 'طراحی تعامل', 'پژوهش کاربر و استراتژی', 'دیزاین سیستم', 'تحلیل داده و آزمایش', 'فرایند طراحی با کمک هوش مصنوعی'],
     outcomes: [

@@ -10,13 +10,17 @@ withDefaults(defineProps<{
   hierarchy?: 'featured' | 'secondary' | 'visual'
   label?: string
   showRole?: boolean
+  comingSoon?: boolean
+  comingSoonLabel?: string
 }>(), {
   eager: false,
   layout: 'landscape',
   headingTag: 'h3',
   hierarchy: 'secondary',
   label: undefined,
-  showRole: true
+  showRole: true,
+  comingSoon: false,
+  comingSoonLabel: 'Coming soon'
 })
 
 const { t } = useI18n()
@@ -49,12 +53,16 @@ function resetPointer(event: PointerEvent) {
     class="project-card group"
     :data-layout="layout"
     :data-hierarchy="hierarchy"
+    :data-coming-soon="comingSoon || undefined"
     @pointermove="updatePointer"
     @pointerleave="resetPointer"
   >
     <NuxtLink
       :to="localePath(project.path)"
       class="project-link block focus-visible:outline-offset-8"
+      :aria-disabled="comingSoon || undefined"
+      :tabindex="comingSoon ? -1 : undefined"
+      @click="comingSoon && $event.preventDefault()"
     >
       <div class="project-media media-surface relative">
         <NuxtImg
@@ -93,6 +101,13 @@ function resetPointer(event: PointerEvent) {
           class="project-glow"
           aria-hidden="true"
         />
+        <div
+          v-if="comingSoon"
+          class="project-coming-soon"
+        >
+          <UIcon name="i-lucide-clock-3" />
+          <span>{{ comingSoonLabel }}</span>
+        </div>
       </div>
 
       <div class="project-copy">
@@ -133,6 +148,11 @@ function resetPointer(event: PointerEvent) {
 .project-placeholder-number { position: absolute; inset-inline-end: 1.25rem; inset-block-end: -.12em; color: rgb(0 0 0 / 11%); font-size: clamp(6rem, 13vw, 12rem); font-weight: 650; letter-spacing: -.08em; line-height: .8; }
 .project-reveal { position: absolute; inset-inline-end: 1rem; inset-block-end: 1rem; z-index: 3; display: flex; align-items: center; gap: .6rem; padding: .85rem 1.05rem; border-radius: 999px; color: #fff; background: var(--portfolio-accent); box-shadow: 0 .75rem 2rem color-mix(in srgb, var(--portfolio-accent) 30%, transparent); font-size: .72rem; font-weight: 600; opacity: 0; transform: translateY(.7rem) scale(.96); transition: opacity var(--motion-control) var(--ease-standard), transform var(--motion-control) var(--ease-enter); }
 .project-glow { position: absolute; inset: 0; z-index: 1; pointer-events: none; background: radial-gradient(circle at var(--pointer-x) var(--pointer-y), rgb(255 255 255 / 18%), transparent 28%); opacity: 0; transition: opacity var(--motion-content) var(--ease-standard); }
+.project-coming-soon { position:absolute; z-index:4; inset:0; display:flex; align-items:center; justify-content:center; gap:.6rem; background:rgb(8 11 16 / 38%); color:#fff; font-size:clamp(.82rem,1vw,.95rem); font-weight:800; backdrop-filter:blur(10px); }
+.project-coming-soon svg { width:1rem; height:1rem; color:var(--portfolio-accent); }
+.project-card[data-coming-soon='true'] .project-link { cursor:default; }
+.project-card[data-coming-soon='true'] .project-reveal,.project-card[data-coming-soon='true'] .project-glow { display:none; }
+.project-card[data-coming-soon='true'] .project-media :deep(img),.project-card[data-coming-soon='true'] .project-placeholder { filter:saturate(.58) brightness(.7); transform:none; }
 [dir='rtl'] .project-reveal svg { transform: scaleX(-1); }
 .project-copy { display: grid; grid-template-columns: minmax(0, 1fr); padding-top: 1.35rem; }
 .project-copy__body { min-width: 0; }
@@ -145,12 +165,19 @@ function resetPointer(event: PointerEvent) {
 .project-card:hover .project-reveal, .project-card:focus-within .project-reveal { opacity: 1; transform: none; }
 .project-card:hover .project-glow, .project-card:focus-within .project-glow { opacity: 1; }
 .project-card:hover .project-title, .project-card:focus-within .project-title { color: var(--portfolio-accent); transform: translateX(.2rem); }
+.project-card[data-coming-soon='true']:hover .project-title,.project-card[data-coming-soon='true']:focus-within .project-title { color:inherit; transform:none; }
 [dir='rtl'] .project-card:hover .project-title, [dir='rtl'] .project-card:focus-within .project-title { transform: translateX(-.2rem); }
 [lang='fa'] .project-title { font-weight: 900; letter-spacing: -.01em; line-height: 1.55; }
 [lang='fa'] .project-copy__meta, [lang='fa'] .project-description, [lang='fa'] .project-role { line-height: 1.85; }
 @media (max-width: 767px) {
+  .project-card, .project-link, .project-copy, .project-copy__body { width: 100%; max-width: 100%; min-width: 0; }
   .project-card[data-layout] .project-media { aspect-ratio: 4 / 3; }
   .project-copy { grid-template-columns: 1fr; }
+  .project-title, .project-description { max-width: 100%; overflow-wrap: anywhere; white-space: normal; }
+  .project-description { overflow: visible; text-overflow: clip; }
+  .project-description :deep(.ascii-glitch-text__stack),
+  .project-description :deep(.ascii-glitch-text__measure) { display: block; width: 100%; max-width: 100%; white-space: normal; }
+  .project-description :deep(.ascii-glitch-text__visual) { white-space: normal; }
   .project-media { transform: none; }
   .project-reveal { opacity: 1; transform: none; }
   .project-role { display: none; }

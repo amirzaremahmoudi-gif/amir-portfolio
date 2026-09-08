@@ -1,115 +1,36 @@
 <script setup lang="ts">
 const route = useRoute()
 const { locale, t } = useI18n()
-const path = computed(() => `/work/${route.params.slug}`)
+const slug = computed(() => String(route.params.slug))
+if (slug.value !== 'toranj-insurance') throw createError({ statusCode: 404, statusMessage: t('project.notFound') })
 
-const { data: project } = await useAsyncData(`project-${locale.value}-${route.params.slug}`, () => locale.value === 'fa' ? queryCollection('work_fa').path(path.value).first() : queryCollection('work_en').path(path.value).first(), { watch: [locale, path] })
+const { data: project } = await useAsyncData(`project-${locale.value}-${route.params.slug}`, () => locale.value === 'fa' ? queryCollection('work_fa').first() : queryCollection('work_en').first(), { watch: [locale] })
 if (!project.value) throw createError({ statusCode: 404, statusMessage: t('project.notFound') })
 
-const { data: allProjects } = await useAsyncData(`project-navigation-${locale.value}`, () => locale.value === 'fa' ? queryCollection('work_fa').order('order', 'ASC').select('path', 'title').all() : queryCollection('work_en').order('order', 'ASC').select('path', 'title').all(), { watch: [locale] })
-const currentIndex = computed(() => allProjects.value?.findIndex(item => item.path === path.value) ?? -1)
-const previous = computed(() => currentIndex.value > 0 ? allProjects.value?.[currentIndex.value - 1] : null)
-const next = computed(() => currentIndex.value >= 0 && currentIndex.value < (allProjects.value?.length || 0) - 1 ? allProjects.value?.[currentIndex.value + 1] : null)
-const isToranjSarmad = computed(() => route.params.slug === 'toranj-sarmad')
+const previous = null
+const next = null
+const config = useRuntimeConfig()
+const caseStudyOgImage = computed(() => new URL('/images/case-studies/toranj-insurance/hero-ui/hero-cinematic-poster-v2.png', config.public.siteUrl).toString())
 
 useSeoMeta({
-  title: () => `${project.value?.title} — ${t('project.caseStudySuffix')}`,
+  title: () => locale.value === 'fa' ? 'اپ ترنج (بیمه) | کیس‌استادی طراحی محصول' : 'Toranj App — Insurance | Product Design Case Study',
   description: () => project.value?.description,
   ogTitle: () => project.value?.title,
-  ogDescription: () => project.value?.description
+  ogDescription: () => project.value?.description,
+  ogImage: caseStudyOgImage,
+  ogImageAlt: () => project.value?.title,
+  ogType: 'article',
+  twitterCard: 'summary_large_image',
+  twitterTitle: () => project.value?.title,
+  twitterDescription: () => project.value?.description,
+  twitterImage: caseStudyOgImage
 })
 </script>
 
 <template>
-  <ToranjSarmadCaseStudy
-    v-if="project && isToranjSarmad"
+  <ToranjInsuranceCaseStudy
+    v-if="project"
     :previous="previous"
     :next="next"
   />
-  <article v-else-if="project">
-    <header class="portfolio-container pb-16 pt-36 md:pb-24 md:pt-48">
-      <div class="grid gap-10 lg:grid-cols-12">
-        <p class="eyebrow lg:col-span-3">
-          {{ project.category }} · {{ project.year }}
-        </p><div class="lg:col-span-8 lg:col-start-5">
-          <h1 class="editorial-display text-[clamp(4rem,8vw,8rem)]">
-            {{ project.title }}
-          </h1><p class="mt-8 max-w-2xl text-xl leading-relaxed text-muted">
-            {{ project.description }}
-          </p>
-        </div>
-      </div>
-      <div class="mt-16">
-        <ProjectMeta
-          :role="project.role"
-          :timeline="project.timeline"
-          :team="project.team"
-          :industry="project.industry"
-          :responsibilities="project.responsibilities"
-        />
-      </div>
-    </header>
-
-    <div class="portfolio-container">
-      <div
-        class="project-hero relative aspect-[16/9] overflow-hidden"
-        :data-tone="project.coverTone"
-      >
-        <NuxtImg
-          v-if="project.cover"
-          :src="project.cover"
-          :alt="project.coverAlt || ''"
-          width="1800"
-          height="1013"
-          class="size-full object-cover"
-        /><div
-          v-else
-          class="grid size-full place-items-center"
-        >
-          <span class="eyebrow text-black/60">{{ t('project.heroPlaceholder') }}</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="portfolio-container py-[var(--portfolio-section)]">
-      <div class="case-study-layout grid gap-14 lg:grid-cols-12">
-        <aside class="hidden lg:col-span-3 lg:block">
-          <div class="sticky top-28">
-            <p class="eyebrow">
-              {{ t('project.outline') }}
-            </p><ol class="mt-5 space-y-3 text-sm text-muted">
-              <li>{{ t('project.context') }}</li><li>{{ t('project.challenge') }}</li><li>{{ t('project.research') }}</li><li>{{ t('project.decisions') }}</li><li>{{ t('project.solution') }}</li><li>{{ t('project.validation') }}</li><li>{{ t('project.learnings') }}</li>
-            </ol>
-          </div>
-        </aside>
-        <div class="case-study-content lg:col-span-7 lg:col-start-5">
-          <ContentRenderer :value="project" />
-        </div>
-      </div>
-      <ProjectNavigation
-        :previous="previous"
-        :next="next"
-        class="mt-[var(--portfolio-section)]"
-      />
-    </div>
-  </article>
 </template>
-
-<style scoped>
-.project-hero { border-radius: var(--radius-media); background: #b56f45; box-shadow: var(--shadow-soft); transition: transform var(--motion-major) var(--ease-enter), box-shadow var(--motion-content) var(--ease-standard); }
-.project-hero:hover { box-shadow: var(--shadow-float); transform: scale(.995); }
-.project-hero[data-tone='sage'] { background: #7d8772; }
-.project-hero[data-tone='cobalt'] { background: #526278; }
-.project-hero[data-tone='sand'] { background: #c6ac7c; }
-.project-hero[data-tone='graphite'] { background: #62605b; }
-.case-study-content :deep(h2) { margin-top: clamp(4rem, 8vw, 7rem); font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: var(--type-display-weight); letter-spacing: -0.04em; line-height: var(--type-display-leading); text-wrap: balance; }
-.case-study-content :deep(h3) { margin-top: 3rem; font-size: 1.35rem; font-weight: var(--type-heading-weight); letter-spacing: -0.02em; }
-.case-study-content :deep(p) { margin-top: 1.4rem; font-size: 1.0625rem; line-height: 1.85; color: var(--portfolio-muted); }
-.case-study-content :deep(ul) { margin-top: 1.5rem; list-style: none; border-top: 1px solid var(--portfolio-line); }
-.case-study-content :deep(li) { border-bottom: 1px solid var(--portfolio-line); padding-block: 1rem; line-height: 1.6; }
-.case-study-content :deep(strong) { color: var(--portfolio-text); font-weight: var(--type-body-strong-weight); }
-[lang='fa'] .case-study-content :deep(h2), [lang='fa'] .case-study-content :deep(h3) { letter-spacing: -.01em; }
-@supports (animation-timeline: view()) { .case-study-content :deep(h2), .case-study-content :deep(h3), .case-study-content :deep(p), .case-study-content :deep(ul) { animation: case-content-reveal var(--motion-major) var(--ease-enter) both; animation-timeline: view(); animation-range: entry 5% cover 18%; } }
-@keyframes case-content-reveal { from { opacity: .15; transform: translateY(1.5rem); } to { opacity: 1; transform: none; } }
-@media (prefers-reduced-motion: reduce) { .project-hero { transition: none; } .project-hero:hover { transform: none; } .case-study-content :deep(h2), .case-study-content :deep(h3), .case-study-content :deep(p), .case-study-content :deep(ul) { animation: none !important; } }
-</style>

@@ -1,4 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+const publicSiteUrl = process.env.NUXT_PUBLIC_SITE_URL
+  || (process.env.NODE_ENV === 'production' ? 'https://azuiux.com' : 'http://localhost:3000')
+
 export default defineNuxtConfig({
   modules: [
     '@nuxtjs/i18n',
@@ -11,13 +14,13 @@ export default defineNuxtConfig({
   ],
 
   devtools: {
-    enabled: true
+    enabled: false
   },
 
   css: ['~/assets/css/main.css'],
 
   site: {
-    url: process.env.NUXT_PUBLIC_SITE_URL || 'https://example.com',
+    url: publicSiteUrl,
     name: 'Portfolio — Product Designer'
   },
 
@@ -35,20 +38,8 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
-      siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'http://localhost:3000'
+      siteUrl: publicSiteUrl
     }
-  },
-
-  routeRules: {
-    '/': { prerender: true },
-    '/en': { prerender: true },
-    '/en/work': { prerender: true },
-    '/en/work/toranj-sarmad': { prerender: true },
-    '/en/about': { prerender: true },
-    '/fa': { prerender: true },
-    '/fa/work': { prerender: true },
-    '/fa/work/toranj-sarmad': { prerender: true },
-    '/fa/about': { prerender: true }
   },
 
   compatibilityDate: '2026-06-30',
@@ -75,7 +66,7 @@ export default defineNuxtConfig({
       cookieKey: 'portfolio_locale',
       redirectOn: 'root'
     },
-    baseUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://example.com'
+    baseUrl: publicSiteUrl
   },
 
   icon: {
@@ -83,9 +74,12 @@ export default defineNuxtConfig({
       icons: [
         'lucide:image-plus',
         'lucide:arrow-up-right',
+        'lucide:box',
         'lucide:sparkles',
         'lucide:move-right',
         'lucide:panels-top-left',
+        'lucide:circle-dot',
+        'lucide:maximize-2',
         'lucide:inbox',
         'lucide:wifi-off',
         'lucide:clock-3'
@@ -96,5 +90,19 @@ export default defineNuxtConfig({
   image: {
     format: ['webp', 'avif'],
     quality: 82
+  },
+
+  sitemap: {
+    excludeAppSources: true,
+    urls: [
+      '/en',
+      '/fa',
+      '/en/work',
+      '/fa/work',
+      '/en/about',
+      '/fa/about',
+      '/en/work/toranj-insurance',
+      '/fa/work/toranj-insurance'
+    ]
   }
 })

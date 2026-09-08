@@ -1,4 +1,7 @@
+import { join } from 'node:path'
 import { defineCollection, defineContentConfig, z } from '@nuxt/content'
+
+const contentRoot = join(process.cwd(), 'content')
 
 const workSchema = z.object({
   title: z.string(),
@@ -22,12 +25,12 @@ export default defineContentConfig({
   collections: {
     work_en: defineCollection({
       type: 'page',
-      source: { include: 'en/work/*.md', prefix: '/work' },
+      source: { cwd: join(contentRoot, 'en/work'), include: 'toranj-insurance.md', prefix: '/work' },
       schema: workSchema
     }),
     work_fa: defineCollection({
       type: 'page',
-      source: { include: 'fa/work/*.md', prefix: '/work' },
+      source: { cwd: join(contentRoot, 'fa/work'), include: 'toranj-insurance.md', prefix: '/work' },
       schema: workSchema
     })
   }

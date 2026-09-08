@@ -5,6 +5,9 @@ defineProps<{
   ratio: string
   recommendation: string
   section: string
+  presentation: string
+  redaction: string
+  publicationReview: string
   caption?: string
   compact?: boolean
 }>()
@@ -14,6 +17,10 @@ defineProps<{
   <figure
     class="media-slot"
     :class="{ 'media-slot--compact': compact }"
+    :data-intended-asset="asset"
+    :data-presentation="presentation"
+    :data-redaction-requirement="redaction"
+    :data-publication-review="publicationReview"
   >
     <div
       class="media-slot__visual"

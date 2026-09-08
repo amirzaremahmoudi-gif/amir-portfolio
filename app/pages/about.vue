@@ -67,11 +67,6 @@ useSeoMeta({ title: () => t('about.seoTitle'), description: () => t('about.seoDe
                 {{ t('common.email') }}
               </dt><dd><a :href="`mailto:${profile.email}`"><span dir="ltr">{{ profile.email }}</span></a></dd>
             </div>
-            <div>
-              <dt class="eyebrow">
-                {{ t('common.phone') }}
-              </dt><dd><a :href="profile.phoneHref"><span dir="ltr">{{ profile.phone }}</span></a></dd>
-            </div>
           </dl>
         </div>
       </div>
@@ -170,7 +165,48 @@ useSeoMeta({ title: () => t('about.seoTitle'), description: () => t('about.seoDe
 .capability-list > div:first-child { border-top: 0; }
 .capability-list dt { font-size: clamp(1rem, 1.1vw, 1.15rem); font-weight: 750; }
 .capability-list dd { color: var(--portfolio-muted); font-size: clamp(.95rem, 1vw, 1.05rem); line-height: 1.8; }
-@media (max-width: 767px) { .about-hero { padding-top: 6.5rem; padding-bottom: 2.25rem; } .about-hero__title { max-width: 100%; font-size: clamp(2.45rem, 10vw, 3.3rem); } .about-profile-visual { width: min(100%, 22rem); height: 20rem; } .outcome-grid { grid-template-columns: 1fr; } .outcome-grid > div { min-height: 6rem; } }
+@media (max-width: 767px) {
+  .about-hero {
+    position: relative;
+    width: calc(100% - 2rem);
+    align-items: center;
+    margin: 5.75rem auto 1.25rem;
+    padding: 1.7rem 1.15rem 1.9rem;
+    overflow: hidden;
+    border: 1px solid color-mix(in srgb, var(--portfolio-accent) 28%, var(--portfolio-line));
+    border-radius: 1.5rem;
+    background:
+      radial-gradient(circle at 50% 0%, color-mix(in srgb, var(--portfolio-accent) 14%, transparent), transparent 42%),
+      color-mix(in srgb, var(--portfolio-surface) 76%, transparent);
+    box-shadow: 0 1.25rem 3rem rgb(0 0 0 / 12%);
+    text-align: center;
+  }
+  .about-hero__meta { align-items: center; gap: .55rem; }
+  .about-hero__label {
+    display: inline-flex;
+    min-height: 1.9rem;
+    align-items: center;
+    justify-content: center;
+    padding: .32rem .72rem;
+    border: 1px solid color-mix(in srgb, var(--portfolio-accent) 36%, transparent);
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--portfolio-accent) 8%, transparent);
+    font-size: .78rem;
+    line-height: 1;
+  }
+  .about-hero__identity { font-size: .82rem; line-height: 1.55; text-align: center; }
+  .about-hero__title {
+    max-width: 12.5em;
+    margin: 1rem auto 0;
+    font-size: clamp(2rem, 9.2vw, 2.75rem);
+    line-height: 1.16;
+    text-align: center;
+  }
+  [lang='fa'] .about-hero__title { max-width: 10.5em; line-height: 1.32; }
+  .about-profile-visual { width: min(100%, 22rem); height: 20rem; }
+  .outcome-grid { grid-template-columns: 1fr; }
+  .outcome-grid > div { min-height: 6rem; }
+}
 @media (max-width: 479px) { .profile-facts { grid-template-columns: 1fr; } .profile-facts > div:nth-child(even) { padding-inline-start: 0; border-inline-start: 0; } .profile-facts > div + div { border-top: 1px solid var(--portfolio-line); } .outcome-grid { grid-template-columns: 1fr; } .outcome-grid > div { min-height: auto; border-inline-start: 0; } .capability-list > div { grid-template-columns: 1fr; gap: .65rem; } }
 @media (prefers-reduced-motion: reduce) { .about-profile-portrait, .outcome-grid > div { transition: none; } .about-profile-visual:hover .about-profile-portrait, .outcome-grid > div:hover { transform: none; } }
 </style>
