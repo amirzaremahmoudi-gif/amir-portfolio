@@ -20,7 +20,7 @@ const outlineList = useTemplateRef<HTMLOListElement>('outlineList')
 let sectionObserver: IntersectionObserver | undefined
 let bodyOverflow = ''
 const heroScreens: GalleryImage[] = [
-  { src: '/images/case-studies/toranj-insurance/hero-ui/hero-cinematic-poster-v2.png', width: 1637, height: 960 }
+  { src: '/images/case-studies/toranj-insurance/hero-ui/hero-cinematic-poster-v4.png', width: 1672, height: 941 }
 ]
 const finalUiScreens: GalleryImage[] = [
   { src: '/images/case-studies/toranj-insurance/purchase-ui/otp-original-hq.png', width: 2560, height: 1380 },
@@ -82,16 +82,17 @@ function stepWireframe(direction: number) {
 }
 
 function handleGalleryKeydown(event: KeyboardEvent) {
+  const isRtl = locale.value === 'fa'
   if (activeWireframe.value !== null) {
     if (event.key === 'Escape') closeWireframe()
-    if (event.key === 'ArrowLeft') stepWireframe(-1)
-    if (event.key === 'ArrowRight') stepWireframe(1)
+    if (event.key === 'ArrowLeft') stepWireframe(isRtl ? 1 : -1)
+    if (event.key === 'ArrowRight') stepWireframe(isRtl ? -1 : 1)
     return
   }
   if (activeGallery.value === null) return
   if (event.key === 'Escape') closeGallery()
-  if (event.key === 'ArrowLeft') stepGallery(-1)
-  if (event.key === 'ArrowRight') stepGallery(1)
+  if (event.key === 'ArrowLeft') stepGallery(isRtl ? 1 : -1)
+  if (event.key === 'ArrowRight') stepGallery(isRtl ? -1 : 1)
 }
 
 onMounted(() => {
@@ -392,6 +393,7 @@ onBeforeUnmount(() => {
               <div
                 v-if="activeWireframeScreen"
                 class="wireframe-lightbox"
+                :class="{ 'is-rtl': locale === 'fa' }"
                 role="dialog"
                 aria-modal="true"
                 :aria-label="locale === 'fa' ? 'نمای تمام‌صفحه وایرفریم‌ها' : 'Fullscreen wireframe gallery'"
@@ -429,7 +431,7 @@ onBeforeUnmount(() => {
                     :aria-label="locale === 'fa' ? 'قبلی' : 'Previous'"
                     @click="stepWireframe(-1)"
                   >
-                    <UIcon name="i-lucide-chevron-left" />
+                    <UIcon :name="locale === 'fa' ? 'i-lucide-chevron-right' : 'i-lucide-chevron-left'" />
                   </button>
                   <span>{{ (activeWireframe ?? 0) + 1 }} / {{ content.wireframes.screens.length }}</span>
                   <button
@@ -437,7 +439,7 @@ onBeforeUnmount(() => {
                     :aria-label="locale === 'fa' ? 'بعدی' : 'Next'"
                     @click="stepWireframe(1)"
                   >
-                    <UIcon name="i-lucide-chevron-right" />
+                    <UIcon :name="locale === 'fa' ? 'i-lucide-chevron-left' : 'i-lucide-chevron-right'" />
                   </button>
                 </div>
               </div>
@@ -525,6 +527,7 @@ onBeforeUnmount(() => {
               <div
                 v-if="activeGalleryImage"
                 class="final-ui-lightbox"
+                :class="{ 'is-rtl': locale === 'fa' }"
                 role="dialog"
                 aria-modal="true"
                 :aria-label="locale === 'fa' ? 'نمای تمام‌صفحه صفحات رابط کاربری' : 'Fullscreen interface gallery'"
@@ -539,12 +542,13 @@ onBeforeUnmount(() => {
                   <UIcon name="i-lucide-x" />
                 </button>
                 <button
+                  v-if="activeGalleryScreens.length > 1"
                   class="final-ui-lightbox__nav final-ui-lightbox__nav--previous"
                   type="button"
                   :aria-label="locale === 'fa' ? 'تصویر قبلی' : 'Previous image'"
                   @click="stepGallery(-1)"
                 >
-                  <UIcon name="i-lucide-chevron-left" />
+                  <UIcon :name="locale === 'fa' ? 'i-lucide-chevron-right' : 'i-lucide-chevron-left'" />
                 </button>
                 <div class="final-ui-lightbox__image">
                   <img
@@ -555,12 +559,13 @@ onBeforeUnmount(() => {
                   >
                 </div>
                 <button
+                  v-if="activeGalleryScreens.length > 1"
                   class="final-ui-lightbox__nav final-ui-lightbox__nav--next"
                   type="button"
                   :aria-label="locale === 'fa' ? 'تصویر بعدی' : 'Next image'"
                   @click="stepGallery(1)"
                 >
-                  <UIcon name="i-lucide-chevron-right" />
+                  <UIcon :name="locale === 'fa' ? 'i-lucide-chevron-left' : 'i-lucide-chevron-right'" />
                 </button>
                 <span class="final-ui-lightbox__count">{{ activeGalleryIndex + 1 }} / {{ activeGalleryScreens.length }}</span>
               </div>
@@ -1344,20 +1349,20 @@ onBeforeUnmount(() => {
 .final-ui-screen { position:relative; min-width:0; overflow:hidden; padding:0; border:0; border-radius:.9rem; background:#f4f8f5; box-shadow:0 1.5rem 4rem rgb(0 0 0 / 16%); cursor:zoom-in; }
 .final-ui-screen img { display:block; width:100%; height:100%; aspect-ratio:16/10; object-fit:contain; transition:transform var(--motion-control) var(--ease-standard); }
 .final-ui-screen:hover img,.final-ui-screen:focus-visible img { transform:scale(1.025); }
-.final-ui-screen__action { position:absolute; inset-block-end:.75rem; inset-inline-end:.75rem; display:grid; width:2.5rem; height:2.5rem; place-items:center; border-radius:50%; background:rgb(7 11 15 / 72%); color:#fff; box-shadow:0 .75rem 2rem rgb(0 0 0 / 22%); backdrop-filter:blur(12px); }
-.final-ui-screen__action svg { width:1.05rem; height:1.05rem; }
+.final-ui-screen__action { position:absolute; inset-block-end:.75rem; inset-inline-end:.75rem; display:grid; width:2.5rem; height:2.5rem; place-items:center; padding:0; border-radius:50%; background:rgb(7 11 15 / 72%); color:#fff; line-height:0; box-shadow:0 .75rem 2rem rgb(0 0 0 / 22%); backdrop-filter:blur(12px); }
+.final-ui-screen__action .iconify { display:block; width:1.05rem; height:1.05rem; margin:0; }
 .final-ui-lightbox { position:fixed; z-index:1000; inset:0; display:grid; grid-template-columns:auto minmax(0,1fr) auto; grid-template-rows:1fr auto; align-items:center; gap:1rem; padding:clamp(1rem,3vw,2.5rem); background:rgb(4 7 10 / 94%); backdrop-filter:blur(18px); }
 .final-ui-lightbox__image { display:grid; min-width:0; height:calc(100vh - clamp(5rem,10vw,8rem)); place-items:center; }
 .final-ui-lightbox__image img { display:block; max-width:100%; max-height:100%; width:auto; height:auto; object-fit:contain; filter:drop-shadow(0 2rem 4rem rgb(0 0 0 / 35%)); }
-.final-ui-lightbox__close,.final-ui-lightbox__nav { display:grid; width:3rem; height:3rem; place-items:center; border:0; border-radius:50%; background:rgb(255 255 255 / 10%); color:#fff; cursor:pointer; transition:background-color var(--motion-control),transform var(--motion-control) var(--ease-standard); }
+.final-ui-lightbox__close,.final-ui-lightbox__nav { display:grid; width:3rem; height:3rem; place-items:center; padding:0; border:0; border-radius:50%; background:rgb(255 255 255 / 10%); color:#fff; line-height:0; cursor:pointer; transition:background-color var(--motion-control),transform var(--motion-control) var(--ease-standard); }
 .final-ui-lightbox__close:hover,.final-ui-lightbox__nav:hover { background:rgb(255 255 255 / 18%); transform:scale(1.04); }
 .final-ui-lightbox__close { position:absolute; inset-block-start:1rem; inset-inline-end:1rem; z-index:1; }
-.final-ui-lightbox__close svg,.final-ui-lightbox__nav svg { width:1.35rem; height:1.35rem; }
+.final-ui-lightbox__close .iconify,.final-ui-lightbox__nav .iconify { display:block; width:1.35rem; height:1.35rem; margin:0; }
 .final-ui-lightbox__nav--previous { grid-column:1; grid-row:1; }.final-ui-lightbox__image { grid-column:2; grid-row:1; }.final-ui-lightbox__nav--next { grid-column:3; grid-row:1; }
 .final-ui-lightbox__count { grid-column:1/-1; grid-row:2; justify-self:center; color:rgb(255 255 255 / 72%); font-size:.82rem; font-variant-numeric:tabular-nums; direction:ltr; }
 .gallery-fade-enter-active,.gallery-fade-leave-active { transition:opacity var(--motion-control) var(--ease-standard); }.gallery-fade-enter-from,.gallery-fade-leave-to { opacity:0; }
 @media (max-width:1023px) { .final-ui-gallery { grid-template-columns:repeat(2,minmax(0,1fr)); } }
-@media (max-width:767px) { .final-ui-gallery { grid-template-columns:1fr; }.final-ui-showcase { margin-top:2.5rem; }.final-ui-screen { border-radius:.7rem; }.final-ui-lightbox { grid-template-columns:1fr 1fr; grid-template-rows:minmax(0,1fr) auto; gap:.75rem; padding:3.75rem 1rem 1rem; }.final-ui-lightbox__image { grid-column:1/-1; grid-row:1; height:auto; max-height:calc(100vh - 8rem); }.final-ui-lightbox__nav { grid-row:2; }.final-ui-lightbox__nav--previous { grid-column:1; justify-self:end; }.final-ui-lightbox__nav--next { grid-column:2; justify-self:start; }.final-ui-lightbox__count { grid-row:2; align-self:center; } }
+@media (max-width:767px) { .final-ui-gallery { grid-template-columns:1fr; }.final-ui-showcase { margin-top:2.5rem; }.final-ui-screen { border-radius:.7rem; }.final-ui-lightbox { grid-template-columns:3rem minmax(4rem,auto) 3rem; grid-template-rows:minmax(0,1fr) auto; justify-content:center; column-gap:.85rem; row-gap:1rem; padding:3.75rem 1rem max(1rem,env(safe-area-inset-bottom)); }.final-ui-lightbox__image { grid-column:1/-1; grid-row:1; height:auto; max-height:calc(100vh - 9rem); }.final-ui-lightbox__nav { grid-row:2; justify-self:center; }.final-ui-lightbox__nav--previous { grid-column:1; }.final-ui-lightbox__nav--next { grid-column:3; }.final-ui-lightbox__count { grid-column:2; grid-row:2; align-self:center; justify-self:center; min-width:4rem; text-align:center; } }
 
 /* Edge states — real product captures, available as a fullscreen gallery */
 .state-gallery { margin-top:clamp(2rem,3.5vw,3rem); }
@@ -1422,8 +1427,9 @@ onBeforeUnmount(() => {
 #section-6 .wireframe-card figcaption .wireframe-card__open { width:2.35rem; height:2.35rem; background:var(--portfolio-accent); }
 #section-6 .wireframe-card figcaption .wireframe-card__open .iconify { display:block; width:1rem; height:1rem; border:0; border-radius:0; background-color:currentColor; color:inherit; }
 .wireframe-card:hover .wireframe-card__open,.wireframe-card:focus-visible .wireframe-card__open { background:color-mix(in srgb,var(--portfolio-accent) 82%,#fff); transform:scale(1.07); }
-.wireframe-lightbox { position:fixed; z-index:1000; inset:0; display:grid; grid-template-rows:minmax(0,1fr) auto; gap:1rem; padding:4.5rem 1rem 1rem; background:rgb(4 7 10 / 96%); backdrop-filter:blur(18px); }
-.wireframe-lightbox__close { position:absolute; z-index:2; inset-block-start:1rem; inset-inline-end:1rem; display:grid; width:3rem; height:3rem; place-items:center; border:1px solid rgb(255 255 255 / 14%); border-radius:50%; background:rgb(255 255 255 / 9%); color:#fff; cursor:pointer; }
+.wireframe-lightbox { position:fixed; z-index:1000; inset:0; display:grid; grid-template-rows:minmax(0,1fr) auto; gap:1rem; padding:4.5rem 1rem max(1rem,env(safe-area-inset-bottom)); background:rgb(4 7 10 / 96%); backdrop-filter:blur(18px); }
+.wireframe-lightbox__close { position:absolute; z-index:2; inset-block-start:1rem; inset-inline-end:1rem; display:grid; width:3rem; height:3rem; place-items:center; padding:0; border:1px solid rgb(255 255 255 / 14%); border-radius:50%; background:rgb(255 255 255 / 9%); color:#fff; line-height:0; cursor:pointer; }
+.wireframe-lightbox__close .iconify { display:block; width:1.35rem; height:1.35rem; margin:0; }
 .wireframe-lightbox__stage { display:grid; min-height:0; place-items:center; }
 .wireframe-phone--fullscreen { width:auto; max-width:100%; height:100%; max-height:calc(100vh - 10rem); aspect-ratio:9/16; padding:clamp(.7rem,2vh,1rem); border-radius:clamp(1.25rem,3vh,2rem); box-shadow:0 2rem 5rem rgb(0 0 0 / 42%); }
 .wireframe-phone--fullscreen .wireframe-status { height:clamp(1.5rem,4vh,2.25rem); font-size:clamp(.55rem,1.4vh,.8rem); }
@@ -1434,7 +1440,9 @@ onBeforeUnmount(() => {
 .wireframe-phone--fullscreen .wireframe-block[data-priority='lead'] { min-height:clamp(4.25rem,15vh,8rem); }
 .wireframe-phone--fullscreen .wireframe-block[data-priority='action'] { min-height:clamp(2.4rem,8vh,4rem); }
 .wireframe-lightbox__controls { display:flex; align-items:center; justify-content:center; gap:1rem; color:rgb(255 255 255 / 72%); direction:ltr; }
-.wireframe-lightbox__controls button { display:grid; width:2.75rem; height:2.75rem; place-items:center; border:1px solid rgb(255 255 255 / 14%); border-radius:50%; background:rgb(255 255 255 / 8%); color:#fff; cursor:pointer; }
+.wireframe-lightbox.is-rtl .wireframe-lightbox__controls { direction:rtl; }
+.wireframe-lightbox__controls button { display:grid; width:2.75rem; height:2.75rem; place-items:center; padding:0; border:1px solid rgb(255 255 255 / 14%); border-radius:50%; background:rgb(255 255 255 / 8%); color:#fff; line-height:0; cursor:pointer; }
+.wireframe-lightbox__controls button .iconify { display:block; width:1.2rem; height:1.2rem; margin:0; }
 .wireframe-lightbox__controls span { min-width:3rem; font-size:.8rem; text-align:center; }
 .ia-map__tabs,.review-tabs { display:none; }
 

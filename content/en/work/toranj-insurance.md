@@ -6,7 +6,7 @@ role: Product Designer
 category: Fintech · Insurtech
 order: 0
 featured: true
-cover: /images/case-studies/toranj-insurance/hero-ui/hero-cinematic-poster-v2.png
+cover: /images/case-studies/toranj-insurance/hero-ui/hero-cinematic-poster-v4.png
 coverAlt: Cinematic poster for the Rose Toranj and Afran identities
 coverTone: graphite
 timeline: 3 months

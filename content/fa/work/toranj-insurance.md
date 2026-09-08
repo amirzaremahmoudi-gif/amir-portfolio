@@ -6,7 +6,7 @@ role: طراح محصول
 category: فین‌تک · اینشورتک
 order: 0
 featured: true
-cover: /images/case-studies/toranj-insurance/hero-ui/hero-cinematic-poster-v2.png
+cover: /images/case-studies/toranj-insurance/hero-ui/hero-cinematic-poster-v4.png
 coverAlt: پوستر سینمایی هویت‌های رز ترنج و افران
 coverTone: graphite
 timeline: ۳ ماه

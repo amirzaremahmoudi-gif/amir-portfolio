@@ -10,7 +10,7 @@ if (!project.value) throw createError({ statusCode: 404, statusMessage: t('proje
 const previous = null
 const next = null
 const config = useRuntimeConfig()
-const caseStudyOgImage = computed(() => new URL('/images/case-studies/toranj-insurance/hero-ui/hero-cinematic-poster-v2.png', config.public.siteUrl).toString())
+const caseStudyOgImage = computed(() => new URL('/images/case-studies/toranj-insurance/hero-ui/hero-cinematic-poster-v4.png', config.public.siteUrl).toString())
 
 useSeoMeta({
   title: () => locale.value === 'fa' ? 'اپ ترنج (بیمه) | کیس‌استادی طراحی محصول' : 'Toranj App — Insurance | Product Design Case Study',
