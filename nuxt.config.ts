@@ -25,8 +25,8 @@ export default defineNuxtConfig({
   },
 
   colorMode: {
-    preference: 'system',
-    fallback: 'light',
+    preference: 'dark',
+    fallback: 'dark',
     classSuffix: ''
   },
 
@@ -55,17 +55,13 @@ export default defineNuxtConfig({
 
   i18n: {
     strategy: 'prefix',
-    defaultLocale: 'en',
+    defaultLocale: 'fa',
     locales: [
       { code: 'en', name: 'English', language: 'en', dir: 'ltr', file: 'en.ts' },
       { code: 'fa', name: 'فارسی', language: 'fa', dir: 'rtl', file: 'fa.ts' }
     ],
     langDir: 'locales',
-    detectBrowserLanguage: {
-      useCookie: true,
-      cookieKey: 'portfolio_locale',
-      redirectOn: 'root'
-    },
+    detectBrowserLanguage: false,
     baseUrl: publicSiteUrl
   },
 
