@@ -375,7 +375,16 @@ onBeforeUnmount(() => {
                     <span>{{ block }}</span>
                   </div>
                 </div>
-              </div><figcaption><span>{{ screen.n }}</span>{{ screen.title }}<UIcon name="i-lucide-maximize-2" /></figcaption>
+              </div><figcaption>
+                <span>{{ screen.n }}</span>
+                <strong>{{ screen.title }}</strong>
+                <span
+                  class="wireframe-card__open"
+                  aria-hidden="true"
+                >
+                  <UIcon name="i-lucide-maximize-2" />
+                </span>
+              </figcaption>
             </figure>
           </div>
           <Teleport to="body">
@@ -1408,7 +1417,11 @@ onBeforeUnmount(() => {
 
 .wireframe-card { position:relative; cursor:zoom-in; }
 .wireframe-card:focus-visible { outline:2px solid var(--portfolio-accent); outline-offset:4px; }
-.wireframe-card figcaption svg { width:1rem; height:1rem; margin-inline-start:auto; color:var(--portfolio-muted); }
+.wireframe-card figcaption strong { min-width:0; font-size:inherit; font-weight:inherit; }
+.wireframe-card figcaption .wireframe-card__open { position:absolute; z-index:2; inset-block-start:.7rem; inset-inline-end:.7rem; display:grid; width:2.35rem; height:2.35rem; place-items:center; margin:0; border:1px solid rgb(255 255 255 / 42%); border-radius:50%; background:var(--portfolio-accent); color:#fff; box-shadow:0 .55rem 1.4rem rgb(0 0 0 / 28%); transition:background-color var(--motion-control),transform var(--motion-control) var(--ease-standard); }
+#section-6 .wireframe-card figcaption .wireframe-card__open { width:2.35rem; height:2.35rem; background:var(--portfolio-accent); }
+#section-6 .wireframe-card figcaption .wireframe-card__open .iconify { display:block; width:1rem; height:1rem; border:0; border-radius:0; background-color:currentColor; color:inherit; }
+.wireframe-card:hover .wireframe-card__open,.wireframe-card:focus-visible .wireframe-card__open { background:color-mix(in srgb,var(--portfolio-accent) 82%,#fff); transform:scale(1.07); }
 .wireframe-lightbox { position:fixed; z-index:1000; inset:0; display:grid; grid-template-rows:minmax(0,1fr) auto; gap:1rem; padding:4.5rem 1rem 1rem; background:rgb(4 7 10 / 96%); backdrop-filter:blur(18px); }
 .wireframe-lightbox__close { position:absolute; z-index:2; inset-block-start:1rem; inset-inline-end:1rem; display:grid; width:3rem; height:3rem; place-items:center; border:1px solid rgb(255 255 255 / 14%); border-radius:50%; background:rgb(255 255 255 / 9%); color:#fff; cursor:pointer; }
 .wireframe-lightbox__stage { display:grid; min-height:0; place-items:center; }

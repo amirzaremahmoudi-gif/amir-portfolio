@@ -60,7 +60,10 @@ useSeoMeta({ title: () => t('home.seoTitle'), description: () => t('home.seoDesc
                 {{ t('home.expertise') }}
               </p>
             </div>
-            <MorphText :words="expertise.slice(0, 4)" />
+            <MorphText
+              :words="expertise.slice(0, 4)"
+              :interval="1800"
+            />
           </div>
           <nav
             class="hero-actions"
@@ -247,7 +250,7 @@ useSeoMeta({ title: () => t('home.seoTitle'), description: () => t('home.seoDesc
   .hero-services__head { display: flex; align-items: center; justify-content: center; gap: .6rem; }
   .hero-services__label { color: var(--portfolio-muted); font-size: .82rem; font-weight: 600; letter-spacing: .01em; text-align: center; }
   .hero-services__icon { display: block; width: 1.45rem; height: 1.45rem; padding: .28rem; border-radius: .45rem; background: var(--portfolio-accent-soft); box-shadow: 0 .45rem 1rem color-mix(in srgb, var(--portfolio-accent) 12%, transparent); color: var(--portfolio-accent-hover); }
-  .hero-services :deep(.morph-text) { display: inline-grid; width: 100%; min-height: 1.75em; place-items: center; color: var(--portfolio-text); font-size: clamp(1rem, 4.7vw, 1.18rem); font-weight: 600; text-align: center; }
+  .hero-services :deep(.morph-text) { display: inline-grid; width: 100%; min-height: 1.75em; place-items: center; color: var(--portfolio-text); font-size: clamp(1rem, 4.7vw, 1.18rem); font-weight: 900; text-align: center; }
   .hero-services :deep(.morph-text__measure), .hero-services :deep(.morph-text__word) { white-space: nowrap; text-align: center; }
   .hero-actions { align-self: center; justify-content: center; gap: .5rem 2rem; }
   .hero-action { min-height: 2.5rem; gap: .4rem; font-size: .84rem; }
@@ -277,17 +280,15 @@ useSeoMeta({ title: () => t('home.seoTitle'), description: () => t('home.seoDesc
   .selected-work-heading__title { font-size: clamp(1.65rem, 8vw, 2rem); }
   .selected-work-heading__description { display: -webkit-box; width: 100%; max-width: none; overflow: hidden; font-size: .78rem; line-height: 1.65; text-align: center; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
   .selected-work-heading__link { min-height: 2rem; justify-self: center; margin-top: .1rem; font-size: .78rem; }
-  .selected-work-grid { display: flex; gap: .75rem; margin-top: 1rem; margin-inline: calc(var(--portfolio-gutter) * -1); padding-inline: var(--portfolio-gutter); padding-bottom: .4rem; overflow-x: auto; overscroll-behavior-inline: contain; scroll-padding-inline: var(--portfolio-gutter); scroll-snap-type: inline mandatory; scrollbar-width: none; }
-  .selected-work-grid::-webkit-scrollbar { display: none; }
-  .selected-work-grid :deep(.project-card) { flex: 0 0 min(76vw, 17rem); scroll-snap-align: start; }
-  .selected-work-grid :deep(.project-media) { aspect-ratio: 16 / 10; box-shadow: 0 .85rem 2rem rgb(0 0 0 / 10%); }
+  .selected-work-grid { display: grid; width: 100%; grid-template-columns: minmax(0, 1fr); margin-top: 1rem; overflow: visible; }
+  .selected-work-grid :deep(.project-card) { width: 100%; min-width: 0; }
+  .selected-work-grid :deep(.project-media) { width: 100%; aspect-ratio: 1637 / 960; box-shadow: 0 .85rem 2rem rgb(0 0 0 / 10%); }
+  .selected-work-grid :deep(.project-media img) { object-fit: cover; object-position: center; }
   .selected-work-grid :deep(.project-copy) { padding-top: .7rem; }
   .selected-work-grid :deep(.project-title) { font-size: .92rem; }
   .selected-work-grid :deep(.project-placeholder-label) { inset-block-start: 1rem; inset-inline-start: 1rem; font-size: .62rem; }
   .selected-work-grid :deep(.project-placeholder-number) { font-size: 5rem; }
-  .selected-work-grid :deep(.project-reveal) { width: 2.25rem; height: 2.25rem; justify-content: center; padding: 0; }
-  .selected-work-grid :deep(.project-reveal span) { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
-  .selected-work-grid :deep(.project-reveal svg) { width: 1rem; height: 1rem; }
+  .selected-work-grid :deep(.project-reveal) { display: none; }
   .about-preview { padding-block: 1.15rem 1.5rem; }
   .about-preview__layout { gap: .85rem; }
   .about-preview__title { max-width: 18ch; overflow: visible; font-size: 1.08rem; line-height: 1.6; }
