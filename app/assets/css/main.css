@@ -87,6 +87,7 @@
   --portfolio-muted: #6d665d;
   --portfolio-line: #d8cdbd;
   --portfolio-accent: #e46f2b;
+  --portfolio-working-bg: #f1ece3;
   --portfolio-accent-hover: #c9581d;
   --portfolio-accent-soft: #f3ddcc;
   --portfolio-footer-bg: #0e1015;
@@ -145,6 +146,7 @@ html[lang='fa'] {
   --portfolio-muted: #989eaa;
   --portfolio-line: #252a33;
   --portfolio-accent: #ff9454;
+  --portfolio-working-bg: #111721;
   --portfolio-accent-hover: #ffad7a;
   --portfolio-accent-soft: #45271a;
   --portfolio-footer-bg: #151820;

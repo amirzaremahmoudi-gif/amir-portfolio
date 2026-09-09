@@ -78,7 +78,10 @@ export default defineNuxtConfig({
         'lucide:maximize-2',
         'lucide:inbox',
         'lucide:wifi-off',
-        'lucide:clock-3'
+        'lucide:clock-3',
+        'lucide:focus',
+        'lucide:blocks',
+        'lucide:badge-check'
       ]
     }
   },

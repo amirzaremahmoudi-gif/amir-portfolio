@@ -3,7 +3,7 @@ title: اپ ترنج (بیمه)
 description: محصولی موبایل‌محور برای خرید و مدیریت بیمه‌های متصل به سرمایه‌گذاری در طرح‌های رز ترنج و افران.
 year: "۳ ماه"
 role: طراح محصول
-category: فین‌تک · اینشورتک
+category: اپلیکیشن سرمایه‌گذاری
 order: 0
 featured: true
 cover: /images/case-studies/toranj-insurance/hero-ui/hero-cinematic-poster-v4.png

@@ -117,3 +117,109 @@ The heading and overview copy were legible at full-view capture size, so a separ
 - Mobile wrapping is intentionally retained below 768px to prevent clipping.
 
 final result: passed
+
+---
+
+# Home page design QA
+
+final result: passed
+
+## Visual source of truth
+
+- Selected concept: `C:\Users\a.zare\.codex\generated_images\01a05709-aec6-78d3-97a0-6db9cc69c080\exec-8a9b1669-e337-4d4c-844a-47753d16c669.png`
+- Source size: 807 × 1949 px
+- Implemented matched-width capture: `D:\Projects\amir-portfolio\design-qa-assets\home-expanded-fa-807.png`
+- Full desktop implementation capture: `D:\Projects\amir-portfolio\design-qa-assets\home-expanded-fa-desktop.jpg`
+- Focused featured-work capture: `D:\Projects\amir-portfolio\design-qa-assets\home-expanded-fa-featured.jpg`
+- Side-by-side review artifact: `D:\Projects\amir-portfolio\design-qa-assets\home-expanded-comparison.jpg`
+- Compact decisions refinement: `D:\Projects\amir-portfolio\design-qa-assets\home-expanded-decisions-compact.png`
+- Working method and evidence refinement: `D:\Projects\amir-portfolio\design-qa-assets\home-working-evidence-final.png`
+- Centered decisions, dark theme: `D:\Projects\amir-portfolio\design-qa-assets\home-decisions-centered-pattern-dark.png`
+- Centered decisions, light theme: `D:\Projects\amir-portfolio\design-qa-assets\home-decisions-centered-pattern-light.png`
+- Professional evidence surface, dark theme: `D:\Projects\amir-portfolio\design-qa-assets\home-evidence-pattern-dark.png`
+- Professional evidence surface, light theme: `D:\Projects\amir-portfolio\design-qa-assets\home-evidence-pattern-light.png`
+- Final homepage after professional-evidence removal: `D:\Projects\amir-portfolio\design-qa-assets\home-without-professional-evidence.png`
+- Compared state: Persian, RTL, dark theme, home page.
+
+## Comparison summary
+
+- Final editorial sequence: featured case snapshot, a compact three-decision editorial strip, three-step working method, then the existing about preview.
+- Matched the concept's restrained orange accents, asymmetric desktop composition, internal dividers, and borderless surfaces while reducing the decision section's vertical footprint.
+- Used approved Toranj case-study assets and the existing approved portrait instead of reproducing fictional imagery from the generated concept.
+- Preserved all pre-existing navigation, hero, footer, locale, and theme behavior.
+- Deliberately omitted the proposed final CTA section, per the user's selection.
+
+## Responsive verification
+
+- Desktop: 1280 × 920 and 1294 × 920; no horizontal overflow.
+- Tablet: 768 × 1024 and matched-width 807 × 1000; no element exceeds the viewport bounds.
+- Mobile: 390 × 844; compact single-column composition, no horizontal overflow in RTL or LTR.
+- Persian: `lang=fa`, `dir=rtl`, dark and light themes verified.
+- English: `lang=en`, `dir=ltr`, dark and light themes verified.
+
+## Interaction and browser verification
+
+- Featured Toranj project link opens the English and Persian case-study route.
+- The decision strip is intentionally informational: it contains no repeated imagery or per-item calls to action.
+- Language switcher verified in both directions.
+- Theme switcher verified in both directions and restored to Persian dark for handoff.
+- Production preview console: no warnings or errors from the home page.
+- The removed professional-evidence section leaves no DOM node, translation entry, dedicated icon registration, responsive style, or layout gap.
+
+## Issue history
+
+- P2 — The four evidence icons were absent in the first development-server review because their dynamic names were not present in the explicit Nuxt Icon client bundle. Fixed by registering all four icons and rendering statically discoverable icon names. Rechecked in the production preview: all four masks resolve and the console is clean.
+- P2 — The initial decisions implementation was too tall and repeated every item with a large image and call to action. Rebuilt it as a text-only three-column editorial strip; mobile uses three concise stacked rows. Production measurements are 513.81px on desktop and 724.86px on mobile, with zero images, zero links, and no horizontal overflow.
+- P2 — The working-method heading and steps were visually offset and the desktop title wrapped unnecessarily. Centered the complete section, kept the desktop title on one line, equalized all three step panels, and replaced plain numbers with restrained circular index markers. Production measurement confirms a 56.56px single title line and three equal 209.09px centered steps at 1280px.
+- P2 — Professional evidence used an asymmetric heading/table split and undersized utility cells. Moved the centered heading above four independent editorial cards, added consistent icon surfaces and subtle accent rules, and aligned all copy from the center. The desktop cards are four equal 192px panels; mobile uses a compact 2 × 2 grid, reducing the section from 926.66px to 589.05px without horizontal overflow.
+- P2 — The decisions header and card copy were split across opposing alignments, while the section did not separate clearly from adjacent content. Centered the full header and all three decisions, kept the Persian desktop title to one measured 52.41px line, and introduced a token-driven tonal surface with a masked dot field and restrained accent glow. Production browser QA confirms distinct adaptive light/dark backgrounds, centered geometry, mobile wrapping without overflow, and a clean console in both themes.
+- P2 — The professional-evidence section ended without a clear boundary and shared too much of the surrounding page surface. Added a full-width adaptive tonal background, a distinct masked diagonal pattern with a restrained bottom accent glow, and an explicit token-driven bottom divider before the about preview. Production QA confirms the divider in both themes, a clean console, and the existing 2 × 2 mobile card grid at 590.05px with no overflow.
+- Scope removal — Removed the complete professional-evidence section at the user's annotated request. Its data mapping, bilingual locale copy, four dedicated icon bundle entries, template markup, and desktop/mobile styles were removed with it. The working-method section now transitions directly into the about preview without a hidden node or blank spacer.
+- Content reduction — Removed the working-method introduction and all three step descriptions at the user's annotated targets. The public section now retains only its label, primary heading, numbered visual markers, and three concise step titles; the unused bilingual copy and paragraph styles were removed as well.
+- UX writing — Replaced the three homepage decision descriptions with concise, general, outcome-led copy in Persian and English. The homepage now speaks to progressive disclosure, consistent interaction patterns, and information prioritisation without changing the approved detailed case-study narrative.
+- UX writing — Replaced the homepage about-preview summary with concise, human, outcome-led copy focused on helping users understand, decide, and move forward. The longer profile summary remains unchanged on the dedicated About page.
+- No remaining P0, P1, or P2 issues.
+
+## Validation
+
+- Typecheck: passed.
+- ESLint: passed.
+- Production build with `NUXT_PUBLIC_SITE_URL=https://azuiux.com`: passed.
+- `git diff --check`: passed (line-ending notices only).
+
+---
+
+# Working method — typographic rhythm QA
+
+## Evidence
+
+- Source visual truth: `C:\Users\a.zare\.codex\generated_images\01a05709-aec6-78d3-97a0-6db9cc69c080\exec-dd967268-f553-4bde-94e3-d696b13d3ccd.png`
+- Source pixels: 1536 × 1024.
+- Final desktop implementation: `D:\Projects\amir-portfolio\design-qa-assets\home-working-method-typographic-final-fa-dark.png`
+- Final mobile dark implementation: `D:\Projects\amir-portfolio\design-qa-assets\home-working-method-typographic-mobile-fa-dark.png`
+- Final mobile light implementation: `D:\Projects\amir-portfolio\design-qa-assets\home-working-method-typographic-mobile-fa-light.png`
+- English tablet implementation: `D:\Projects\amir-portfolio\design-qa-assets\home-working-method-typographic-tablet-en-light.png`
+- Combined comparison input: `D:\Projects\amir-portfolio\design-qa-assets\home-working-method-typographic-comparison.png`
+- Desktop CSS viewport: 1294 × 920 at device density 1; source and implementation were normalized into the same 1440 × 900 comparison canvas.
+- Compared state: Persian, RTL, dark theme, working-method section in the homepage context.
+
+## Findings and comparison history
+
+- Initial P2 — The first coded pass preserved the selected three-column composition but the editable outline numerals and icon surfaces were too small and faint compared with the selected visual. Increased numeral scale and stroke contrast, enlarged the library-icon surfaces, and retained the intentionally shorter section height requested in the earlier homepage refinement.
+- Post-fix evidence — The final desktop capture has three equal columns, large locale-aware outline numerals, centered orange icon surfaces, centered titles, internal dividers, and the selected subtle vertical rhythm. No outer card borders or raster section artwork were introduced.
+- Typography — Existing portfolio display fonts, weight hierarchy, and centered single-line desktop headline match the selected direction; Persian uses ۰۱/۰۲/۰۳ and English uses 01/02/03.
+- Spacing and layout — Desktop and tablet keep three equal tracks; mobile changes to three compact 140px rows. At 390px there is zero document-level horizontal overflow.
+- Colors and tokens — All foregrounds, surfaces, lines, accent tints, and pattern contrast derive from the portfolio theme tokens and adapt independently in dark and light modes.
+- Image quality and assets — The section contains no raster images. The visual system is live text, CSS layout, and three icons from the project's existing Lucide library; no custom SVG or placeholder art is used.
+- Copy and content — Existing approved bilingual headings and stage titles are unchanged.
+- Focused comparison — The working-method section itself is the focused region, so no additional crop was required beyond the section/viewport captures listed above.
+- Browser verification — Persian RTL dark/light, English LTR dark/light, desktop 1294 × 920, tablet 768 × 1024, and mobile 390 × 844 were checked. Theme and language switching work, icon masks render, and the production-preview console contains no errors for port 3002.
+
+## Validation
+
+- Typecheck: passed.
+- ESLint: passed.
+- Production build with `NUXT_PUBLIC_SITE_URL=https://azuiux.com`: passed.
+- `git diff --check`: passed (line-ending notices only).
+
+final result: passed

@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { toranjInsuranceContent } from '~/data/toranjInsurance'
+
 const { locale, t } = useI18n()
 const localePath = useLocalePath()
 const { expertise, profile } = usePortfolioContent()
@@ -6,6 +8,33 @@ const forwardIcon = computed(() => locale.value === 'fa' ? 'i-lucide-arrow-left'
 const heroSealSrc = computed(() => locale.value === 'fa' ? '/images/home/amir-zare-mobile-seal-bold.png' : '/images/home/amir-zare-mobile-seal-en.png')
 const { data: projects } = await useAsyncData(`home-work-${locale.value}`, () => locale.value === 'fa' ? queryCollection('work_fa').all() : queryCollection('work_en').all(), { watch: [locale] })
 const selectedProjects = computed(() => projects.value || [])
+const featuredProject = computed(() => selectedProjects.value[0])
+const caseContent = computed(() => toranjInsuranceContent[locale.value === 'fa' ? 'fa' : 'en'])
+const featuredDecisionBodies = computed(() => [
+  t('home.decisions.items.progressive'),
+  t('home.decisions.items.identity'),
+  t('home.decisions.items.hierarchy')
+])
+const featuredDecisions = computed(() => caseContent.value.decisions.items.slice(0, 3).map((decision, index) => ({
+  ...decision,
+  number: String(index + 1).padStart(2, '0'),
+  body: featuredDecisionBodies.value[index]
+})))
+const snapshotItems = computed(() => [
+  { label: t('home.snapshot.product'), value: featuredProject.value?.category || caseContent.value.hero.summary },
+  { label: t('home.snapshot.role'), value: featuredProject.value?.role || caseContent.value.hero.meta[0]?.[1] },
+  { label: t('home.snapshot.timeline'), value: featuredProject.value?.timeline || caseContent.value.hero.meta[1]?.[1] },
+  { label: t('home.snapshot.scope'), value: t('home.snapshot.scopeValue') },
+  { label: t('home.snapshot.status'), value: caseContent.value.hero.meta[3]?.[1], status: true }
+])
+const workingSteps = computed(() => {
+  const numbers = locale.value === 'fa' ? ['۰۱', '۰۲', '۰۳'] : ['01', '02', '03']
+  return [
+    { number: numbers[0], icon: 'i-lucide-focus', title: t('home.working.steps.frame') },
+    { number: numbers[1], icon: 'i-lucide-blocks', title: t('home.working.steps.structure') },
+    { number: numbers[2], icon: 'i-lucide-badge-check', title: t('home.working.steps.delivery') }
+  ]
+})
 useSeoMeta({ title: () => t('home.seoTitle'), description: () => t('home.seoDescription'), ogTitle: () => t('home.seoTitle'), ogDescription: () => t('home.seoDescription') })
 </script>
 
@@ -120,6 +149,89 @@ useSeoMeta({ title: () => t('home.seoTitle'), description: () => t('home.seoDesc
             :label="index === 0 ? t('work.featured') : t('work.secondary')"
           />
         </div>
+
+        <dl class="project-snapshot">
+          <div
+            v-for="item in snapshotItems"
+            :key="item.label"
+            class="project-snapshot__item"
+          >
+            <dt>{{ item.label }}</dt>
+            <dd :class="{ 'is-status': item.status }">
+              <span
+                v-if="item.status"
+                class="project-snapshot__status"
+                aria-hidden="true"
+              />{{ item.value }}
+            </dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <section
+      class="decision-showcase reveal-on-scroll section-divider"
+      aria-labelledby="home-decisions-title"
+    >
+      <div class="portfolio-container">
+        <header class="home-section-heading">
+          <p class="eyebrow">
+            {{ t('home.decisions.label') }}
+          </p>
+          <h2 id="home-decisions-title">
+            {{ t('home.decisions.title') }}
+          </h2>
+          <p>{{ t('home.decisions.intro') }}</p>
+        </header>
+
+        <div class="decision-stories">
+          <article
+            v-for="decision in featuredDecisions"
+            :key="decision.title"
+            class="decision-story"
+          >
+            <div class="decision-story__copy">
+              <span class="decision-story__number">{{ decision.number }}</span>
+              <h3>{{ decision.title }}</h3>
+              <p>{{ decision.body }}</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section
+      class="working-method reveal-on-scroll section-divider"
+      aria-labelledby="working-method-title"
+    >
+      <div class="portfolio-container">
+        <header class="home-section-heading home-section-heading--wide">
+          <p class="eyebrow">
+            {{ t('home.working.label') }}
+          </p>
+          <h2 id="working-method-title">
+            {{ t('home.working.title') }}
+          </h2>
+        </header>
+
+        <ol class="working-method__steps">
+          <li
+            v-for="step in workingSteps"
+            :key="step.number"
+          >
+            <span
+              class="working-method__number"
+              aria-hidden="true"
+            >{{ step.number }}</span>
+            <span class="working-method__icon">
+              <UIcon
+                :name="step.icon"
+                aria-hidden="true"
+              />
+            </span>
+            <h3>{{ step.title }}</h3>
+          </li>
+        </ol>
       </div>
     </section>
 
@@ -152,7 +264,7 @@ useSeoMeta({ title: () => t('home.seoTitle'), description: () => t('home.seoDesc
             {{ t('home.aboutHeadline') }}
           </h2>
           <AsciiGlitchText
-            :text="profile.summary"
+            :text="t('home.aboutSummary')"
             as="p"
             class="about-preview__summary"
           />
@@ -193,7 +305,7 @@ useSeoMeta({ title: () => t('home.seoTitle'), description: () => t('home.seoDesc
 [dir='ltr'] .hero-action:hover svg, [dir='ltr'] .hero-action:focus-visible svg { transform: translateX(.3rem); }
 [lang='fa'] .hero-title { font-size: clamp(4.4rem, 7.35vw, 7.35rem); font-weight: 900; letter-spacing: -.018em; line-height: 1.06; }
 [lang='fa'] .hero-positioning { letter-spacing: -.01em; line-height: 1.62; }
-.selected-work-section { padding-block: clamp(2.25rem, 3.5vw, 3.5rem); overflow: hidden; }
+.selected-work-section { padding-block: clamp(1.5rem, 2.5vw, 2.5rem); overflow: hidden; }
 .selected-work-section::after { position: absolute; inset-inline: var(--portfolio-gutter); bottom: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--portfolio-line) 10%, var(--portfolio-line) 90%, transparent); content: ''; }
 .selected-work-heading { display: grid; grid-template-areas: 'title link' 'description link'; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: .35rem clamp(1rem, 2.2vw, 2.25rem); }
 .selected-work-heading__title { grid-area: title; font-family: var(--font-display); font-size: clamp(2.2rem, 3.2vw, 3.4rem); font-weight: 700; letter-spacing: -.04em; line-height: 1.08; white-space: nowrap; }
@@ -201,13 +313,60 @@ useSeoMeta({ title: () => t('home.seoTitle'), description: () => t('home.seoDesc
 .selected-work-heading__link { position: relative; display: inline-flex; grid-area: link; min-height: 2.75rem; align-items: center; gap: .6rem; font-size: clamp(.92rem, 1vw, 1.02rem); font-weight: 700; white-space: nowrap; }
 .selected-work-heading__link::after { position: absolute; inset-inline: 0; bottom: .15rem; height: 1px; background: var(--portfolio-accent); content: ''; transform: scaleX(.18); transform-origin: inline-start; transition: transform var(--motion-content) var(--ease-enter); }
 .selected-work-heading__link:hover::after, .selected-work-heading__link:focus-visible::after { transform: scaleX(1); }
-.selected-work-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(1rem, 1.5vw, 1.5rem); margin-top: clamp(1.75rem, 2.5vw, 2.75rem); }
-.selected-work-grid :deep(.project-copy) { padding-top: 1rem; }
+.selected-work-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(.75rem, 1.2vw, 1.15rem); margin-top: clamp(1.15rem, 1.8vw, 1.75rem); }
+.selected-work-grid :deep(.project-card[data-layout='cinematic'] .project-media) { aspect-ratio: 8 / 3; }
+.selected-work-grid :deep(.project-media img) { object-fit: cover; }
+.selected-work-grid :deep(.project-copy) { padding-top: .75rem; }
 .selected-work-grid :deep(.project-title) { overflow: hidden; font-size: clamp(1.05rem, 1.25vw, 1.3rem); font-weight: 700; text-overflow: ellipsis; white-space: nowrap; }
 .selected-work-grid :deep(.project-description), .selected-work-grid :deep(.project-role) { display: none; }
+.project-snapshot { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); margin-top: clamp(1rem, 1.6vw, 1.5rem); border-block: 1px solid var(--portfolio-line); }
+.project-snapshot__item { min-width: 0; padding: clamp(.75rem, 1.1vw, 1rem); }
+.project-snapshot__item + .project-snapshot__item { border-inline-start: 1px solid var(--portfolio-line); }
+.project-snapshot dt { color: var(--portfolio-muted); font-size: .7rem; line-height: 1.5; }
+.project-snapshot dd { margin-top: .4rem; overflow: hidden; color: var(--portfolio-text); font-size: clamp(.8rem, .9vw, .95rem); font-weight: 700; line-height: 1.55; text-overflow: ellipsis; white-space: nowrap; }
+.project-snapshot dd.is-status { display: flex; align-items: center; gap: .5rem; }
+.project-snapshot__status { width: .5rem; height: .5rem; flex: 0 0 auto; border-radius: 50%; background: var(--portfolio-accent); box-shadow: 0 0 0 .3rem color-mix(in srgb, var(--portfolio-accent) 12%, transparent); }
+.decision-showcase, .working-method { position: relative; padding-block: clamp(4rem, 7vw, 7rem); overflow: hidden; }
+.home-section-heading { width: min(100%, 55rem); margin-inline-start: auto; }
+.home-section-heading--wide { width: min(100%, 64rem); }
+.home-section-heading .eyebrow { color: var(--portfolio-accent); font-size: .78rem; font-weight: 700; }
+.home-section-heading h2 { margin-top: .75rem; font-family: var(--font-display); font-size: clamp(2.15rem, 4vw, 4.5rem); font-weight: 700; letter-spacing: -.045em; line-height: 1.08; text-wrap: balance; }
+.home-section-heading > p:last-child { max-width: 48rem; margin-top: .85rem; color: var(--portfolio-muted); font-size: clamp(.92rem, 1.05vw, 1.08rem); line-height: 1.8; }
+.decision-showcase { padding-block: clamp(3.25rem, 4.75vw, 5rem); background: linear-gradient(180deg, color-mix(in srgb, var(--portfolio-surface) 72%, var(--portfolio-bg)), color-mix(in srgb, var(--portfolio-surface) 42%, var(--portfolio-bg))); isolation: isolate; }
+.decision-showcase::before { position: absolute; inset: 0; z-index: -1; pointer-events: none; background-image: radial-gradient(circle, color-mix(in srgb, var(--portfolio-line) 82%, transparent) 1px, transparent 1.25px), radial-gradient(circle at 50% 0%, color-mix(in srgb, var(--portfolio-accent) 9%, transparent), transparent 45%); background-size: 1.5rem 1.5rem, 100% 100%; content: ''; -webkit-mask-image: linear-gradient(90deg, transparent 2%, #000 24%, #000 76%, transparent 98%); mask-image: linear-gradient(90deg, transparent 2%, #000 24%, #000 76%, transparent 98%); opacity: .62; }
+.decision-showcase .home-section-heading { display: block; width: min(100%, 72rem); margin-inline: auto; text-align: center; }
+.decision-showcase .home-section-heading h2 { font-size: clamp(2.15rem, 3.15vw, 3.65rem); white-space: nowrap; }
+.decision-showcase .home-section-heading > p:last-child { max-width: 48rem; margin: .8rem auto 0; }
+.decision-stories { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: clamp(2rem, 3vw, 3rem); border-block: 1px solid var(--portfolio-line); }
+.decision-story { min-width: 0; padding: clamp(1.5rem, 2.3vw, 2.4rem); }
+.decision-story + .decision-story { border-inline-start: 1px solid var(--portfolio-line); }
+.decision-story__copy { max-width: 25rem; margin-inline: auto; text-align: center; }
+.decision-story__number { display: inline-flex; align-items: center; justify-content: center; gap: .65rem; color: var(--portfolio-accent); font-family: var(--font-display); font-size: .82rem; font-weight: 700; }
+.decision-story__number::after { width: 1.5rem; height: 1px; background: var(--portfolio-accent); content: ''; opacity: .75; }
+.decision-story h3 { margin-top: 1rem; font-family: var(--font-display); font-size: clamp(1.25rem, 1.55vw, 1.7rem); font-weight: 700; letter-spacing: -.025em; line-height: 1.25; text-wrap: balance; }
+.decision-story__copy > p { margin-top: .7rem; color: var(--portfolio-muted); font-size: clamp(.82rem, .9vw, .94rem); line-height: 1.75; }
+.working-method { padding-block: clamp(3.5rem, 5vw, 5.5rem); background: var(--portfolio-working-bg); isolation: isolate; }
+.working-method .home-section-heading { width: 100%; max-width: 72rem; margin-inline: auto; text-align: center; }
+.working-method .home-section-heading h2 { font-size: clamp(2.25rem, 3.4vw, 4rem); white-space: nowrap; }
+.working-method__steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: clamp(1.5rem, 2.4vw, 2.25rem); border-block: 1px solid var(--portfolio-line); list-style: none; }
+.working-method__steps li { position: relative; display: grid; min-width: 0; min-height: clamp(13rem, 17vw, 16rem); place-items: center; align-content: center; padding: clamp(1.25rem, 2vw, 2rem); overflow: hidden; text-align: center; isolation: isolate; }
+.working-method__steps li + li { border-inline-start: 1px solid var(--portfolio-line); }
+.working-method__number { position: absolute; inset: 50% auto auto 50%; z-index: -1; color: transparent; font-family: var(--font-display); font-size: clamp(9rem, 14vw, 14rem); font-weight: 900; letter-spacing: -.09em; line-height: .8; opacity: .82; transform: translate(-50%, -52%); animation: working-number-drift 7s ease-in-out infinite; -webkit-text-stroke: 1px color-mix(in srgb, var(--portfolio-text) 30%, transparent); user-select: none; }
+.working-method__steps li:nth-child(2) .working-method__number { animation-delay: -2.3s; }
+.working-method__steps li:nth-child(3) .working-method__number { animation-delay: -4.6s; }
+.working-method__icon { display: grid; width: 3.5rem; height: 3.5rem; place-items: center; border-radius: 50%; color: var(--portfolio-accent); background: color-mix(in srgb, var(--portfolio-accent) 13%, var(--portfolio-surface)); box-shadow: 0 .85rem 2rem color-mix(in srgb, var(--portfolio-accent) 14%, transparent); transition: transform var(--motion-content) var(--ease-enter), background-color var(--motion-content) var(--ease-standard); }
+.working-method__icon :deep(svg) { width: 1.35rem; height: 1.35rem; stroke-width: 1.8; }
+.working-method__steps h3 { max-width: 18rem; margin-top: 1.15rem; font-family: var(--font-display); font-size: clamp(1.2rem, 1.45vw, 1.6rem); font-weight: 700; letter-spacing: -.025em; line-height: 1.3; text-wrap: balance; }
+.working-method__steps li:hover .working-method__icon { background: color-mix(in srgb, var(--portfolio-accent) 20%, var(--portfolio-surface)); transform: translateY(-.25rem); }
+.working-method__steps li:hover .working-method__number { opacity: .9; -webkit-text-stroke-color: color-mix(in srgb, var(--portfolio-accent) 25%, var(--portfolio-line)); }
+@keyframes working-number-drift { 0%, 100% { opacity: .78; translate: 0 0; } 50% { opacity: .9; translate: 0 -.28rem; } }
+@keyframes working-number-drift-mobile { 0%, 100% { opacity: .46; translate: 0 0; } 50% { opacity: .56; translate: 0 -.18rem; } }
 [lang='fa'] .selected-work-heading__title { font-weight: 900; letter-spacing: -.01em; line-height: 1.25; }
 [lang='fa'] .selected-work-grid :deep(.project-title) { font-weight: 900; }
 [lang='fa'] .selected-work-heading__description { line-height: 1.85; }
+[lang='fa'] .home-section-heading h2, [lang='fa'] .decision-story h3, [lang='fa'] .working-method__steps h3 { font-weight: 900; letter-spacing: -.012em; }
+[lang='fa'] .home-section-heading h2 { line-height: 1.3; }
+[lang='fa'] .decision-story h3 { line-height: 1.4; }
 .about-preview { position: relative; overflow: hidden; padding-block: clamp(2rem, 3vw, 3rem); isolation: isolate; }
 .about-preview::before { position: absolute; inset: 0; z-index: -1; background: radial-gradient(circle at 15% 20%, color-mix(in srgb, var(--portfolio-accent) 7%, transparent), transparent 30%); content: ''; }
 .about-preview__layout { display: grid; grid-template-columns: minmax(15rem, 19rem) minmax(0, 1fr); align-items: center; gap: clamp(2rem, 4vw, 4.5rem); }
@@ -226,7 +385,7 @@ useSeoMeta({ title: () => t('home.seoTitle'), description: () => t('home.seoDesc
 [lang='fa'] .about-preview__title { max-width: 18em; font-weight: 900; letter-spacing: -.012em; line-height: 1.22; }
 [lang='fa'] .about-preview__summary { line-height: 1.85; }
 @media (max-width: 1100px) { .selected-work-heading__description { white-space: normal; } .selected-work-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (max-width: 900px) { .hero-positioning { white-space: normal; } .about-preview__layout { grid-template-columns: minmax(13rem, 16rem) minmax(0, 1fr); gap: 2rem; } .about-preview__visual { height: 17rem; } .about-preview__title { font-size: clamp(2rem, 4.8vw, 2.8rem); } }
+@media (max-width: 900px) { .hero-positioning { white-space: normal; } .project-snapshot { grid-template-columns: repeat(3, minmax(0, 1fr)); } .project-snapshot__item:nth-child(4), .project-snapshot__item:nth-child(5) { border-top: 1px solid var(--portfolio-line); } .project-snapshot__item:nth-child(4) { border-inline-start: 0; } .working-method .home-section-heading h2 { white-space: normal; } .about-preview__layout { grid-template-columns: minmax(13rem, 16rem) minmax(0, 1fr); gap: 2rem; } .about-preview__visual { height: 17rem; } .about-preview__title { font-size: clamp(2rem, 4.8vw, 2.8rem); } }
 @media (max-width: 767px) {
   .home-hero { --hero-height: max(44rem, 80svh); min-height: var(--hero-height); }
   .home-hero::before { background-size: 3.5rem 3.5rem, 3.5rem 3.5rem, .875rem .875rem; opacity: .16; }
@@ -261,7 +420,32 @@ useSeoMeta({ title: () => t('home.seoTitle'), description: () => t('home.seoDesc
   .selected-work-heading__description { font-size: .88rem; line-height: 1.75; }
   .selected-work-heading__link { justify-self: start; }
   .selected-work-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem .75rem; margin-top: 1.5rem; }
+  .selected-work-grid :deep(.project-card[data-layout='cinematic'] .project-media) { aspect-ratio: 4 / 3; }
   .selected-work-grid :deep(.project-title) { font-size: 1rem; }
+  .project-snapshot { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .project-snapshot__item { padding: 1rem .85rem; }
+  .project-snapshot__item:nth-child(n) { border-top: 1px solid var(--portfolio-line); border-inline-start: 0; }
+  .project-snapshot__item:nth-child(-n+2) { border-top: 0; }
+  .project-snapshot__item:nth-child(even) { border-inline-start: 1px solid var(--portfolio-line); }
+  .project-snapshot__item:last-child { grid-column: 1 / -1; border-inline-start: 0; }
+  .decision-showcase, .working-method { padding-block: 3.5rem; }
+  .home-section-heading { margin-inline: 0; }
+  .home-section-heading h2 { font-size: clamp(1.9rem, 7vw, 2.7rem); }
+  .decision-showcase { padding-block: 2.75rem; }
+  .decision-showcase .home-section-heading { display: block; }
+  .decision-showcase .home-section-heading h2 { font-size: clamp(1.9rem, 7vw, 2.7rem); white-space: normal; }
+  .decision-showcase .home-section-heading > p:last-child { margin-top: .7rem; }
+  .decision-stories { grid-template-columns: 1fr; margin-top: 1.75rem; }
+  .decision-story { padding: 1.35rem .25rem; }
+  .decision-story + .decision-story { border-top: 1px solid var(--portfolio-line); border-inline-start: 0; }
+  .decision-story__copy { max-width: 38rem; }
+  .working-method::after { display: none; }
+  .working-method__steps { grid-template-columns: 1fr; }
+  .working-method__steps li { min-height: 8.75rem; padding: 1.25rem 1rem; }
+  .working-method__steps li + li { border-top: 1px solid var(--portfolio-line); border-inline-start: 0; }
+  .working-method__number { inset: 50% auto auto 50%; font-size: clamp(6.5rem, 30vw, 9rem); opacity: .5; transform: translate(-50%, -52%); animation-name: working-number-drift-mobile; -webkit-text-stroke-color: color-mix(in srgb, var(--portfolio-text) 22%, transparent); }
+  .working-method__icon { width: 2.65rem; height: 2.65rem; }
+  .working-method__steps h3 { margin-top: .75rem; }
   .about-preview { padding-block: 1.5rem 1.75rem; }
   .about-preview__layout { position: relative; grid-template-columns: 1fr; align-items: start; gap: 1rem; }
   .about-preview__visual { width: 100%; height: auto; aspect-ratio: auto; align-self: start; justify-self: stretch; padding: .25rem; border: 0; border-radius: 1.2rem; background: color-mix(in srgb, var(--portfolio-surface) 88%, transparent); box-shadow: 0 1.2rem 3rem rgb(0 0 0 / 18%); }
@@ -289,6 +473,23 @@ useSeoMeta({ title: () => t('home.seoTitle'), description: () => t('home.seoDesc
   .selected-work-grid :deep(.project-placeholder-label) { inset-block-start: 1rem; inset-inline-start: 1rem; font-size: .62rem; }
   .selected-work-grid :deep(.project-placeholder-number) { font-size: 5rem; }
   .selected-work-grid :deep(.project-reveal) { display: none; }
+  .project-snapshot { margin-top: 1.25rem; }
+  .project-snapshot dt { font-size: .62rem; }
+  .project-snapshot dd { font-size: .76rem; white-space: normal; }
+  .decision-showcase, .working-method { padding-block: 2.75rem; }
+  .decision-showcase { padding-block: 2.25rem; }
+  .home-section-heading { text-align: start; }
+  .working-method .home-section-heading { text-align: center; }
+  .home-section-heading .eyebrow { font-size: .68rem; }
+  .home-section-heading h2 { margin-top: .5rem; font-size: clamp(1.55rem, 7.8vw, 2.05rem); }
+  .home-section-heading > p:last-child { margin-top: .6rem; font-size: .8rem; line-height: 1.75; }
+  .decision-stories { margin-top: 1.35rem; }
+  .decision-story { padding: 1.1rem 0; }
+  .decision-story__number { font-size: .7rem; }
+  .decision-story h3 { margin-top: .55rem; font-size: 1.1rem; }
+  .decision-story__copy > p { margin-top: .4rem; font-size: .78rem; line-height: 1.7; }
+  .working-method__steps { margin-top: 1.75rem; }
+  .working-method__steps h3 { font-size: 1.05rem; }
   .about-preview { padding-block: 1.15rem 1.5rem; }
   .about-preview__layout { gap: .85rem; }
   .about-preview__title { max-width: 18ch; overflow: visible; font-size: 1.08rem; line-height: 1.6; }
@@ -297,5 +498,5 @@ useSeoMeta({ title: () => t('home.seoTitle'), description: () => t('home.seoDesc
   .about-preview__link { font-size: .75rem; }
 }
 @media (max-width: 380px) { .hero-name-stage { width: min(80vw, 18.5rem); } .hero-actions { gap: .5rem 1.35rem; } }
-@media (prefers-reduced-motion: reduce) { .hero-action::after, .hero-action svg, .selected-work-heading__link::after, .about-preview__portrait, .about-preview__link::after { transition: none; } .hero-action:hover svg, .hero-action:focus-visible svg, .about-preview__visual:hover .about-preview__portrait { transform: none; } }
+@media (prefers-reduced-motion: reduce) { .hero-action::after, .hero-action svg, .selected-work-heading__link::after, .about-preview__portrait, .about-preview__link::after, .working-method__icon { transition: none; } .working-method__number { animation: none; } .hero-action:hover svg, .hero-action:focus-visible svg, .about-preview__visual:hover .about-preview__portrait, .working-method__steps li:hover .working-method__icon { transform: none; } }
 </style>
