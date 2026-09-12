@@ -2,7 +2,37 @@
 const { locale, t } = useI18n()
 const localeHead = useLocaleHead({ seo: true })
 const config = useRuntimeConfig()
+const route = useRoute()
+const siteUrl = computed(() => String(config.public.siteUrl).replace(/\/$/, ''))
 const defaultOgImage = computed(() => new URL('/images/amir-zare.png', config.public.siteUrl).toString())
+const canonicalUrl = computed(() => new URL(route.path, `${siteUrl.value}/`).toString())
+
+const identityStructuredData = computed(() => ({
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebSite',
+      '@id': `${siteUrl.value}/#website`,
+      'url': `${siteUrl.value}/`,
+      'name': 'Amir Zare | امیر زارع',
+      'alternateName': ['Amir Zare Portfolio', 'وب‌سایت امیر زارع'],
+      'inLanguage': ['fa-IR', 'en'],
+      'creator': { '@id': `${siteUrl.value}/#person` }
+    },
+    {
+      '@type': 'Person',
+      '@id': `${siteUrl.value}/#person`,
+      'name': 'امیر زارع',
+      'alternateName': 'Amir Zare',
+      'url': `${siteUrl.value}/${locale.value}`,
+      'image': defaultOgImage.value,
+      'jobTitle': locale.value === 'fa' ? 'طراح ارشد محصول و تجربه کاربری' : 'Senior Product and UX Designer',
+      'description': t('home.seoDescription'),
+      'knowsAbout': ['Product Design', 'User Experience Design', 'Fintech', 'Investment Platforms', 'Design Systems'],
+      'sameAs': ['https://behance.net/azuiux']
+    }
+  ]
+}))
 
 const criticalFont = computed(() => locale.value === 'fa'
   ? '/fonts/pelak-fa-900.woff2'
@@ -20,7 +50,8 @@ useHead(() => ({
     { rel: 'manifest', href: '/site.webmanifest' },
     { rel: 'preload', href: criticalFont.value, as: 'font', type: 'font/woff2', crossorigin: 'anonymous' },
     ...localeHead.value.link
-  ]
+  ],
+  script: [{ key: 'identity-structured-data', type: 'application/ld+json', textContent: JSON.stringify(identityStructuredData.value) }]
 }))
 
 useSeoMeta({
@@ -30,6 +61,9 @@ useSeoMeta({
   ogDescription: () => t('home.seoDescription'),
   ogImage: defaultOgImage,
   ogImageAlt: () => locale.value === 'fa' ? 'امیر زارع، طراح ارشد محصول' : 'Amir Zare, Senior Product Designer',
+  ogUrl: canonicalUrl,
+  ogLocale: () => locale.value === 'fa' ? 'fa_IR' : 'en_US',
+  ogLocaleAlternate: () => locale.value === 'fa' ? ['en_US'] : ['fa_IR'],
   ogType: 'website',
   twitterCard: 'summary_large_image',
   twitterTitle: () => t('home.seoTitle'),

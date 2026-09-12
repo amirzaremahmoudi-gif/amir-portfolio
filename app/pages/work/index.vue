@@ -2,7 +2,14 @@
 const { locale, t } = useI18n()
 const { data: projects } = await useAsyncData(`all-work-${locale.value}`, () => locale.value === 'fa' ? queryCollection('work_fa').all() : queryCollection('work_en').all(), { watch: [locale] })
 const sortedProjects = computed(() => [...(projects.value || [])].sort((a, b) => a.order - b.order))
-useSeoMeta({ title: () => t('work.seoTitle'), description: () => t('work.seoDescription'), ogTitle: () => t('work.seoTitle'), ogDescription: () => t('work.seoDescription') })
+useSeoMeta({
+  title: () => t('work.seoTitle'),
+  description: () => t('work.seoDescription'),
+  ogTitle: () => t('work.seoTitle'),
+  ogDescription: () => t('work.seoDescription'),
+  twitterTitle: () => t('work.seoTitle'),
+  twitterDescription: () => t('work.seoDescription')
+})
 </script>
 
 <template>

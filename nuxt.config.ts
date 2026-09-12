@@ -21,7 +21,7 @@ export default defineNuxtConfig({
 
   site: {
     url: publicSiteUrl,
-    name: 'Portfolio — Product Designer'
+    name: 'Amir Zare | امیر زارع'
   },
 
   colorMode: {
@@ -81,7 +81,10 @@ export default defineNuxtConfig({
         'lucide:clock-3',
         'lucide:focus',
         'lucide:blocks',
-        'lucide:badge-check'
+        'lucide:badge-check',
+        'lucide:layers-3',
+        'lucide:map-pinned',
+        'lucide:at-sign'
       ]
     }
   },
@@ -100,6 +103,8 @@ export default defineNuxtConfig({
       '/fa/work',
       '/en/about',
       '/fa/about',
+      '/en/work/toranj-capital-redesign',
+      '/fa/work/toranj-capital-redesign',
       '/en/work/toranj-insurance',
       '/fa/work/toranj-insurance'
     ]

@@ -1,7 +1,47 @@
 <script setup lang="ts">
-const { t } = useI18n()
+const { locale, t } = useI18n()
 const { capabilityGroups, outcomes, profile } = usePortfolioContent()
-useSeoMeta({ title: () => t('about.seoTitle'), description: () => t('about.seoDescription'), ogTitle: () => t('about.seoTitle'), ogDescription: () => t('about.seoDescription') })
+const config = useRuntimeConfig()
+const siteUrl = computed(() => String(config.public.siteUrl).replace(/\/$/, ''))
+const aboutUrl = computed(() => `${siteUrl.value}/${locale.value}/about`)
+const profileImage = computed(() => `${siteUrl.value}/images/amir-zare.png`)
+
+useSeoMeta({
+  title: () => t('about.seoTitle'),
+  description: () => t('about.seoDescription'),
+  ogTitle: () => t('about.seoTitle'),
+  ogDescription: () => t('about.seoDescription'),
+  twitterTitle: () => t('about.seoTitle'),
+  twitterDescription: () => t('about.seoDescription')
+})
+
+useHead(() => ({
+  script: [{
+    key: 'profile-page-structured-data',
+    type: 'application/ld+json',
+    textContent: JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'ProfilePage',
+      '@id': `${aboutUrl.value}#profile-page`,
+      'url': aboutUrl.value,
+      'name': t('about.seoTitle'),
+      'description': t('about.seoDescription'),
+      'inLanguage': locale.value === 'fa' ? 'fa-IR' : 'en',
+      'isPartOf': { '@id': `${siteUrl.value}/#website` },
+      'mainEntity': {
+        '@type': 'Person',
+        '@id': `${siteUrl.value}/#person`,
+        'name': 'امیر زارع',
+        'alternateName': 'Amir Zare',
+        'url': `${siteUrl.value}/${locale.value}`,
+        'image': profileImage.value,
+        'jobTitle': locale.value === 'fa' ? 'طراح ارشد محصول و تجربه کاربری' : 'Senior Product and UX Designer',
+        'description': t('about.seoDescription'),
+        'sameAs': [profile.value.behance]
+      }
+    })
+  }]
+}))
 </script>
 
 <template>
