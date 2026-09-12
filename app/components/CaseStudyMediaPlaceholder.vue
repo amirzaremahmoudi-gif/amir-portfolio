@@ -3,7 +3,7 @@ defineProps<{
   index: number
   asset: string
   ratio: string
-  recommendation: string
+  recommendation?: string
   section: string
   presentation: string
   redaction: string
@@ -45,7 +45,9 @@ defineProps<{
     </div>
     <figcaption>
       <span>{{ section }}</span>
-      <p>{{ recommendation }}</p>
+      <p v-if="recommendation">
+        {{ recommendation }}
+      </p>
       <small v-if="caption">{{ caption }}</small>
     </figcaption>
   </figure>

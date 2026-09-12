@@ -1,11 +1,14 @@
 ---
 title: Toranj Capital Website Redesign
-description: Corporate website work within end-to-end design ownership across Toranj Capital's investment platforms.
+description: From fragmented financial services to one clear, cohesive, decision-led experience.
 year: "2024 — Present"
-role: Lead UI/UX & Product Designer
+role: Product Designer
 category: Fintech · Web
-order: 1
+order: 0
 featured: true
+caseStudyPath: /work/toranj-capital-redesign
+cover: /images/case-studies/toranj-capital-redesign/hero-cinematic-desktop-v1.png
+coverAlt: Cinematic cover for the Toranj Capital website redesign case study
 coverTone: clay
 timeline: 2024 — Present
 team: Sole designer across four platforms

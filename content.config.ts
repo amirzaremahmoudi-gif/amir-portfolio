@@ -14,6 +14,7 @@ const workSchema = z.object({
   cover: z.string().optional(),
   coverAlt: z.string().optional(),
   coverTone: z.enum(['clay', 'sage', 'cobalt', 'sand', 'graphite']),
+  caseStudyPath: z.string().optional(),
   metric: z.string().optional(),
   timeline: z.string(),
   team: z.string(),
@@ -25,12 +26,18 @@ export default defineContentConfig({
   collections: {
     work_en: defineCollection({
       type: 'page',
-      source: { cwd: join(contentRoot, 'en/work'), include: 'toranj-insurance.md', prefix: '/work' },
+      source: [
+        { cwd: join(contentRoot, 'en/work'), include: 'toranj-insurance.md', prefix: '/work' },
+        { cwd: join(contentRoot, 'en/work'), include: 'toranj-capital.md', prefix: '/work' }
+      ],
       schema: workSchema
     }),
     work_fa: defineCollection({
       type: 'page',
-      source: { cwd: join(contentRoot, 'fa/work'), include: 'toranj-insurance.md', prefix: '/work' },
+      source: [
+        { cwd: join(contentRoot, 'fa/work'), include: 'toranj-insurance.md', prefix: '/work' },
+        { cwd: join(contentRoot, 'fa/work'), include: 'toranj-capital.md', prefix: '/work' }
+      ],
       schema: workSchema
     })
   }

@@ -7,26 +7,30 @@ useSeoMeta({ title: () => t('about.seoTitle'), description: () => t('about.seoDe
 <template>
   <div>
     <header class="about-hero portfolio-container">
-      <div class="about-hero__meta">
-        <AsciiGlitchText
-          :text="t('about.label')"
-          as="p"
-          class="about-hero__label"
-        />
-        <AsciiGlitchText
-          :text="`${profile.name} · ${profile.location}`"
-          as="p"
-          class="about-hero__identity"
-        />
+      <div class="about-hero__surface">
+        <div class="about-hero__meta">
+          <AsciiGlitchText
+            :text="t('about.label')"
+            as="p"
+            class="about-hero__label"
+          />
+          <div class="about-hero__identity-row">
+            <AsciiGlitchText
+              :text="`${profile.name} · ${profile.location}`"
+              as="p"
+              class="about-hero__identity"
+            />
+          </div>
+        </div>
+        <h1 class="about-hero__title motion-rise">
+          {{ t('about.headline') }}
+        </h1>
       </div>
-      <h1 class="about-hero__title motion-rise">
-        {{ t('about.headline') }}
-      </h1>
     </header>
 
-    <section class="about-section-boundary reveal-on-scroll section-divider py-[var(--portfolio-section)]">
-      <div class="portfolio-container grid gap-12 lg:grid-cols-12">
-        <div class="about-profile-visual lg:col-span-3">
+    <section class="about-intro-section about-section-boundary reveal-on-scroll section-divider py-[var(--portfolio-section)]">
+      <div class="about-intro-layout portfolio-container">
+        <div class="about-profile-visual">
           <NuxtImg
             src="/images/amir-zare.png"
             :alt="profile.name"
@@ -36,7 +40,7 @@ useSeoMeta({ title: () => t('about.seoTitle'), description: () => t('about.seoDe
             class="about-profile-portrait"
           />
         </div>
-        <div class="lg:col-span-8 lg:col-start-5">
+        <div class="about-intro-copy">
           <p class="about-intro__lead">
             {{ profile.positioning }}
           </p>
@@ -45,27 +49,44 @@ useSeoMeta({ title: () => t('about.seoTitle'), description: () => t('about.seoDe
             as="p"
             class="about-intro__summary mt-8 text-[1.05rem] leading-[1.9] text-muted"
           />
-          <dl class="profile-facts mt-12 grid sm:grid-cols-2">
+          <dl class="profile-facts mt-12">
             <div>
-              <AsciiGlitchText
-                :text="t('about.currentFocus')"
-                as="dt"
-                class="eyebrow"
-              />
+              <dt class="profile-facts__label">
+                <span class="profile-facts__icon"><UIcon
+                  name="i-lucide-layers-3"
+                  aria-hidden="true"
+                /></span>
+                <AsciiGlitchText
+                  :text="t('about.currentFocus')"
+                  as="span"
+                  class="eyebrow"
+                />
+              </dt>
               <dd>{{ t('about.currentFocusValue') }}</dd>
             </div>
             <div>
-              <AsciiGlitchText
-                :text="t('about.basedIn')"
-                as="dt"
-                class="eyebrow"
-              />
+              <dt class="profile-facts__label">
+                <span class="profile-facts__icon"><UIcon
+                  name="i-lucide-map-pinned"
+                  aria-hidden="true"
+                /></span>
+                <AsciiGlitchText
+                  :text="t('about.basedIn')"
+                  as="span"
+                  class="eyebrow"
+                />
+              </dt>
               <dd>{{ profile.location }}</dd>
             </div>
             <div>
-              <dt class="eyebrow">
-                {{ t('common.email') }}
-              </dt><dd><a :href="`mailto:${profile.email}`"><span dir="ltr">{{ profile.email }}</span></a></dd>
+              <dt class="profile-facts__label">
+                <span class="profile-facts__icon"><UIcon
+                  name="i-lucide-at-sign"
+                  aria-hidden="true"
+                /></span>
+                <span class="eyebrow">{{ t('common.email') }}</span>
+              </dt>
+              <dd><a :href="`mailto:${profile.email}`"><span dir="ltr">{{ profile.email }}</span></a></dd>
             </div>
           </dl>
         </div>
@@ -124,26 +145,37 @@ useSeoMeta({ title: () => t('about.seoTitle'), description: () => t('about.seoDe
 </template>
 
 <style scoped>
-.about-hero { display: flex; flex-direction: column; align-items: flex-start; padding-top: clamp(7rem, 7.5vw, 7.75rem); padding-bottom: clamp(2.25rem, 3vw, 3rem); }
-.about-hero__meta { display: flex; flex-direction: column; gap: .45rem; }
-.about-hero__label { color: var(--portfolio-accent); font-size: clamp(.95rem, 1vw, 1.05rem); font-weight: 700; }
-.about-hero__identity { color: var(--portfolio-muted); font-size: clamp(1rem, 1.15vw, 1.2rem); line-height: 1.7; }
-.about-hero__title { width: 100%; max-width: 100%; margin-top: clamp(.8rem, 1.2vw, 1.15rem); font-family: var(--font-display); font-size: clamp(2.8rem, 4.2vw, 4.4rem); font-weight: 700; letter-spacing: -.05em; line-height: 1.08; text-wrap: balance; }
-[lang='fa'] .about-hero__title { max-width: 15em; font-weight: 900; letter-spacing: -.012em; line-height: 1.2; }
+.about-hero { width: 100%; max-width: none; margin-inline: 0; padding: 0; }
+.about-hero__surface { position: relative; display: flex; min-height: 100vh; min-height: 100svh; align-items: center; justify-content: center; flex-direction: column; gap: clamp(1.1rem, 1.8vw, 1.65rem); padding: clamp(7.5rem, 10vw, 9rem) max(var(--portfolio-gutter), calc((100vw - var(--portfolio-container)) / 2 + var(--portfolio-gutter))) clamp(12rem, 26vh, 20rem); overflow: hidden; border-radius: 0; background-color: #fdf8f3; background-image: url('/images/about-topographic-light.png'); background-position: center; background-size: cover; box-shadow: 0 1.75rem 5rem rgb(49 34 20 / 8%); isolation: isolate; text-align: center; }
+:global(.dark .about-hero__surface) { background-color: #0b0d10; background-image: url('/images/about-topographic-dark.png'); box-shadow: 0 2rem 5.5rem rgb(0 0 0 / 24%); }
+.about-hero__surface::after { width: clamp(2.75rem, 4vw, 4rem); height: .2rem; margin-top: clamp(.25rem, .7vw, .65rem); border-radius: 999px; background: var(--portfolio-accent); content: ''; box-shadow: 0 0 1.75rem color-mix(in srgb, var(--portfolio-accent) 44%, transparent); }
+.about-hero__meta { display: flex; width: 100%; align-items: center; justify-content: center; flex-direction: column; gap: .7rem; margin: 0; text-align: center; }
+.about-hero__label { display: inline-flex; min-height: 2.3rem; align-items: center; justify-content: center; padding: .45rem .95rem; border-radius: 999px; background: color-mix(in srgb, var(--portfolio-accent) 14%, transparent); color: var(--portfolio-accent); font-size: clamp(.78rem, .9vw, .92rem); font-weight: 800; text-align: center; }
+.about-hero__identity-row { display: flex; width: 100%; align-items: center; justify-content: center; color: var(--portfolio-muted); text-align: center; }
+.about-hero__identity { width: 100%; font-size: clamp(.82rem, .95vw, 1rem); line-height: 1.7; text-align: center; }
+.about-hero__title { width: min(100%, 18em); margin: .35rem auto 0; color: var(--portfolio-text); font-family: var(--font-display); font-size: clamp(3rem, 3.65vw, 4.45rem); font-weight: 760; letter-spacing: -.055em; line-height: 1.08; text-align: center; text-wrap: balance; }
+[lang='fa'] .about-hero__title { width: min(100%, 18em); font-weight: 900; letter-spacing: -.012em; line-height: 1.22; }
+[lang='en'] .about-hero__title { width: min(100%, 20em); }
 .about-section-boundary::after { position: absolute; inset-inline: var(--portfolio-gutter); bottom: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--portfolio-line) 10%, var(--portfolio-line) 90%, transparent); content: ''; }
-.about-profile-visual { position: relative; width: min(100%, 19rem); height: 20rem; align-self: center; justify-self: center; padding: .45rem; border: 1px solid color-mix(in srgb, var(--portfolio-accent) 52%, var(--portfolio-line)); border-radius: 1.25rem; background: color-mix(in srgb, var(--portfolio-surface) 86%, transparent); box-shadow: 0 1.25rem 3rem rgb(0 0 0 / 12%); }
-.about-profile-visual::before { position: absolute; inset: -.5rem .75rem .75rem -.5rem; z-index: -1; border: 1px solid color-mix(in srgb, var(--portfolio-accent) 30%, transparent); border-radius: inherit; content: ''; }
-.about-profile-visual::after { position: absolute; inset-inline-end: -.22rem; bottom: 2.25rem; width: .45rem; height: 3.25rem; border-radius: 999px; background: var(--portfolio-accent); content: ''; }
-.about-profile-portrait { width: 100%; height: 100%; border-radius: .9rem; object-fit: cover; object-position: center top; transition: transform var(--motion-cinematic) var(--ease-enter), filter var(--motion-content) var(--ease-standard); }
+.about-intro-section { position: relative; overflow: hidden; }
+.about-intro-layout { display: grid; grid-template-columns: minmax(17rem, .72fr) minmax(0, 1.55fr); gap: clamp(3rem, 7vw, 7rem); align-items: center; }
+.about-intro-copy { min-width: 0; }
+.about-profile-visual { position: relative; width: min(100%, 22rem); height: clamp(24rem, 34vw, 32rem); align-self: center; justify-self: center; padding: .55rem; overflow: hidden; border-radius: 1.6rem; background: linear-gradient(165deg, color-mix(in srgb, var(--portfolio-accent) 28%, var(--portfolio-surface)), color-mix(in srgb, var(--portfolio-surface) 92%, transparent)); box-shadow: 0 2rem 5rem rgb(0 0 0 / 17%); }
+.about-profile-visual::before { position: absolute; inset: 1.15rem; z-index: 1; border-radius: inherit; background: linear-gradient(180deg, transparent 55%, rgb(0 0 0 / 22%)); content: ''; pointer-events: none; }
+.about-profile-visual::after { position: absolute; inset-inline-end: 1.25rem; bottom: 2.5rem; z-index: 2; width: .55rem; height: 4.5rem; border-radius: 999px; background: var(--portfolio-accent); box-shadow: 0 0 2rem color-mix(in srgb, var(--portfolio-accent) 44%, transparent); content: ''; }
+.about-profile-portrait { width: 100%; height: 100%; border-radius: 1.15rem; object-fit: cover; object-position: center top; transition: transform var(--motion-cinematic) var(--ease-enter), filter var(--motion-content) var(--ease-standard); }
 .about-profile-visual:hover .about-profile-portrait { filter: saturate(1.05); transform: scale(1.025); }
 .about-intro__lead { width: 100%; font-family: var(--font-display); font-size: clamp(1.65rem, 1.9vw, 2.15rem); font-weight: 800; letter-spacing: -.035em; line-height: 1.4; text-wrap: balance; }
 .about-intro__summary { width: 100%; max-width: none; }
 [lang='fa'] .about-intro__lead { font-weight: 900; letter-spacing: -.01em; }
-.profile-facts { border-block: 1px solid var(--portfolio-line); }
-.profile-facts > div { display: flex; min-height: 7.5rem; flex-direction: column; align-items: center; justify-content: center; padding: 1.5rem 1rem; text-align: center; }
-.profile-facts > div:nth-child(even) { border-inline-start: 1px solid var(--portfolio-line); }
-.profile-facts > div:nth-child(n+3) { border-top: 1px solid var(--portfolio-line); }
-.profile-facts dd { margin-top: .8rem; font-size: .88rem; line-height: 1.7; }
+.profile-facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .8rem; }
+.profile-facts > div { min-width: 0; min-height: 8.75rem; padding: 1.25rem; border-radius: 1.25rem; background: color-mix(in srgb, var(--portfolio-surface) 82%, transparent); box-shadow: 0 1rem 2.75rem rgb(0 0 0 / 8%); transition: background-color var(--motion-control), transform var(--motion-control) var(--ease-enter); }
+.profile-facts > div:last-child { grid-column: 1 / -1; min-height: 6.5rem; }
+.profile-facts > div:hover { background: color-mix(in srgb, var(--portfolio-accent) 8%, var(--portfolio-surface)); transform: translateY(-.2rem); }
+.profile-facts__label { display: flex; align-items: center; gap: .7rem; }
+.profile-facts__icon { display: grid; width: 2.35rem; flex: 0 0 auto; aspect-ratio: 1; place-items: center; border-radius: .8rem; background: color-mix(in srgb, var(--portfolio-accent) 12%, transparent); color: var(--portfolio-accent); }
+.profile-facts__icon svg { width: 1rem; height: 1rem; }
+.profile-facts dd { margin-top: 1rem; font-size: .9rem; font-weight: 650; line-height: 1.75; }
 .profile-facts a { text-decoration: underline; text-decoration-color: transparent; text-underline-offset: .3rem; transition: color var(--motion-control), text-decoration-color var(--motion-control); }
 .profile-facts a:hover { color: var(--portfolio-accent); text-decoration-color: currentColor; }
 .outcomes-section { padding-block: clamp(2.5rem, 4vw, 4rem); }
@@ -167,46 +199,45 @@ useSeoMeta({ title: () => t('about.seoTitle'), description: () => t('about.seoDe
 .capability-list dd { color: var(--portfolio-muted); font-size: clamp(.95rem, 1vw, 1.05rem); line-height: 1.8; }
 @media (max-width: 767px) {
   .about-hero {
-    position: relative;
-    width: calc(100% - 2rem);
-    align-items: center;
-    margin: 5.75rem auto 1.25rem;
-    padding: 1.7rem 1.15rem 1.9rem;
-    overflow: hidden;
-    border: 1px solid color-mix(in srgb, var(--portfolio-accent) 28%, var(--portfolio-line));
-    border-radius: 1.5rem;
-    background:
-      radial-gradient(circle at 50% 0%, color-mix(in srgb, var(--portfolio-accent) 14%, transparent), transparent 42%),
-      color-mix(in srgb, var(--portfolio-surface) 76%, transparent);
-    box-shadow: 0 1.25rem 3rem rgb(0 0 0 / 12%);
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+  }
+  .about-hero__surface {
+    min-height: 100vh;
+    min-height: 100svh;
+    gap: .9rem;
+    padding: 7rem 1.15rem clamp(8rem, 20vh, 11rem);
+    border-radius: 0;
+    background-position: center bottom;
+    box-shadow: 0 1.25rem 3rem rgb(49 34 20 / 9%);
     text-align: center;
   }
-  .about-hero__meta { align-items: center; gap: .55rem; }
+  :global(.dark .about-hero__surface) { box-shadow: 0 1.5rem 3.5rem rgb(0 0 0 / 22%); }
+  .about-hero__surface::after { width: 2.75rem; margin-top: .45rem; }
+  .about-hero__meta { gap: .5rem; }
   .about-hero__label {
-    display: inline-flex;
     min-height: 1.9rem;
-    align-items: center;
-    justify-content: center;
     padding: .32rem .72rem;
-    border: 1px solid color-mix(in srgb, var(--portfolio-accent) 36%, transparent);
-    border-radius: 999px;
-    background: color-mix(in srgb, var(--portfolio-accent) 8%, transparent);
     font-size: .78rem;
     line-height: 1;
   }
   .about-hero__identity { font-size: .82rem; line-height: 1.55; text-align: center; }
   .about-hero__title {
-    max-width: 12.5em;
-    margin: 1rem auto 0;
-    font-size: clamp(2rem, 9.2vw, 2.75rem);
-    line-height: 1.16;
+    width: min(100%, 22rem);
+    margin: .5rem auto 0;
+    font-size: clamp(1.9rem, 8.1vw, 2.15rem);
+    line-height: 1.22;
     text-align: center;
   }
-  [lang='fa'] .about-hero__title { max-width: 10.5em; line-height: 1.32; }
-  .about-profile-visual { width: min(100%, 22rem); height: 20rem; }
+  [lang='fa'] .about-hero__title { width: min(100%, 22rem); line-height: 1.28; }
+  [lang='en'] .about-hero__title { width: min(100%, 22rem); font-size: clamp(1.52rem, 6.55vw, 1.75rem); line-height: 1.2; }
+  .about-intro-layout { grid-template-columns: 1fr; gap: 2.5rem; }
+  .about-profile-visual { width: min(100%, 20rem); height: 24rem; }
   .outcome-grid { grid-template-columns: 1fr; }
   .outcome-grid > div { min-height: 6rem; }
 }
-@media (max-width: 479px) { .profile-facts { grid-template-columns: 1fr; } .profile-facts > div:nth-child(even) { padding-inline-start: 0; border-inline-start: 0; } .profile-facts > div + div { border-top: 1px solid var(--portfolio-line); } .outcome-grid { grid-template-columns: 1fr; } .outcome-grid > div { min-height: auto; border-inline-start: 0; } .capability-list > div { grid-template-columns: 1fr; gap: .65rem; } }
+@media (max-width: 479px) { .profile-facts { grid-template-columns: 1fr; } .profile-facts > div, .profile-facts > div:last-child { grid-column: auto; min-height: 7rem; } .outcome-grid { grid-template-columns: 1fr; } .outcome-grid > div { min-height: auto; border-inline-start: 0; } .capability-list > div { grid-template-columns: 1fr; gap: .65rem; } }
 @media (prefers-reduced-motion: reduce) { .about-profile-portrait, .outcome-grid > div { transition: none; } .about-profile-visual:hover .about-profile-portrait, .outcome-grid > div:hover { transform: none; } }
 </style>

@@ -10,6 +10,7 @@ export interface ProjectSummary {
   cover?: string
   coverAlt?: string
   coverTone: string
+  caseStudyPath?: string
   metric?: string
   timeline: string
   team: string

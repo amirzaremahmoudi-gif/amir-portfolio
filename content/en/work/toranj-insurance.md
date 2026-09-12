@@ -4,7 +4,7 @@ description: A mobile-first product for purchasing and managing investment-linke
 year: "3 months"
 role: Product Designer
 category: Fintech · Insurtech
-order: 0
+order: 1
 featured: true
 cover: /images/case-studies/toranj-insurance/hero-ui/hero-cinematic-poster-v4.png
 coverAlt: Cinematic poster for the Rose Toranj and Afran identities

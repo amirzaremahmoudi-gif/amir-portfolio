@@ -4,7 +4,7 @@ description: محصولی موبایل‌محور برای خرید و مدیر�
 year: "۳ ماه"
 role: طراح محصول
 category: اپلیکیشن سرمایه‌گذاری
-order: 0
+order: 1
 featured: true
 cover: /images/case-studies/toranj-insurance/hero-ui/hero-cinematic-poster-v4.png
 coverAlt: پوستر سینمایی هویت‌های رز ترنج و افران

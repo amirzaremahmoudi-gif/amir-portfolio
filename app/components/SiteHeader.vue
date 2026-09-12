@@ -5,6 +5,7 @@ const localePath = useLocalePath()
 const { activeLocale, profile } = usePortfolioContent()
 const mobileOpen = ref(false)
 const scrolled = ref(false)
+const isCapitalRedesign = computed(() => route.path.endsWith('/work/toranj-capital-redesign'))
 
 function updateScrolled() {
   scrolled.value = window.scrollY > 20
@@ -37,7 +38,7 @@ function isActive(to: string) {
 <template>
   <header
     class="site-header fixed inset-x-0 top-0 z-50"
-    :class="{ 'is-scrolled': scrolled }"
+    :class="{ 'is-scrolled': scrolled, 'is-capital-redesign': isCapitalRedesign }"
   >
     <a
       href="#main-content"
@@ -107,11 +108,12 @@ function isActive(to: string) {
       :title="t('nav.title')"
       :description="t('nav.description')"
       :side="activeLocale === 'fa' ? 'left' : 'right'"
-      :ui="{ content: 'w-full max-w-[30rem] bg-[color:var(--portfolio-bg)] shadow-2xl', overlay: 'bg-black/35', header: 'min-h-20 px-6 sm:px-8', body: 'flex flex-1 flex-col px-6 pb-8 sm:px-8' }"
+      :ui="{ content: 'w-full max-w-[30rem] bg-[color:var(--portfolio-bg)] shadow-2xl', overlay: 'bg-black/35', header: 'relative min-h-24 px-6 pe-6 ps-20 sm:px-8 sm:ps-24', body: 'flex flex-1 flex-col px-6 pb-8 sm:px-8' }"
     >
       <template #close>
         <UButton
           icon="i-lucide-x"
+          class="absolute left-5 top-5 min-h-11 min-w-11 justify-center rounded-full sm:left-7"
           color="neutral"
           variant="ghost"
           :aria-label="t('nav.close')"
@@ -153,6 +155,7 @@ function isActive(to: string) {
 .site-header { pointer-events: none; transition: transform var(--motion-control) var(--ease-standard); }
 .site-header__inner { position: relative; }
 .site-header__inner::after { position: absolute; inset-inline: var(--portfolio-gutter); bottom: 0; height: 1px; background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--portfolio-line) 92%, transparent) 12%, color-mix(in srgb, var(--portfolio-line) 92%, transparent) 88%, transparent); content: ''; opacity: .78; transform: scaleX(.96); transition: opacity var(--motion-control) var(--ease-standard), transform var(--motion-content) var(--ease-enter); }
+.site-header.is-capital-redesign .site-header__inner::after { display: none; }
 .site-header.is-scrolled .site-header__inner::after { opacity: 0; transform: scaleX(.75); }
 .site-header__bar { pointer-events: auto; border-radius: 999px; background: transparent; transition: background-color var(--motion-control) var(--ease-standard), box-shadow var(--motion-control) var(--ease-standard), transform var(--motion-control) var(--ease-enter); }
 .site-header.is-scrolled .site-header__bar { background: color-mix(in srgb, var(--portfolio-bg) 88%, transparent); box-shadow: 0 .75rem 2.5rem rgb(17 19 24 / 9%); backdrop-filter: blur(20px) saturate(150%); transform: translateY(-.15rem); }

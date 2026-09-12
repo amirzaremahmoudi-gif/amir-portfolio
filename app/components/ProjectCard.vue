@@ -58,13 +58,20 @@ function resetPointer(event: PointerEvent) {
     @pointerleave="resetPointer"
   >
     <NuxtLink
-      :to="localePath(project.path)"
+      :to="localePath(project.caseStudyPath || project.path)"
       class="project-link block focus-visible:outline-offset-8"
       :aria-disabled="comingSoon || undefined"
       :tabindex="comingSoon ? -1 : undefined"
       @click="comingSoon && $event.preventDefault()"
     >
       <div class="project-media media-surface relative">
+        <div
+          v-if="label"
+          class="project-label"
+        >
+          <span>{{ String(index + 1).padStart(2, '0') }}</span>
+          {{ label }}
+        </div>
         <NuxtImg
           v-if="project.cover"
           :src="project.cover"
@@ -146,6 +153,8 @@ function resetPointer(event: PointerEvent) {
 .project-placeholder[data-tone='graphite'] { background: #555553; }
 .project-placeholder-label { position: absolute; inset-block-start: 1.5rem; inset-inline-start: 1.5rem; color: rgb(0 0 0 / 58%); }
 .project-placeholder-number { position: absolute; inset-inline-end: 1.25rem; inset-block-end: -.12em; color: rgb(0 0 0 / 11%); font-size: clamp(6rem, 13vw, 12rem); font-weight: 650; letter-spacing: -.08em; line-height: .8; }
+.project-label { position: absolute; inset-block-start: 1rem; inset-inline-start: 1rem; z-index: 4; display: inline-flex; min-height: 2.25rem; align-items: center; gap: .6rem; padding: .45rem .8rem; border: 1px solid rgb(255 255 255 / 15%); border-radius: 999px; background: rgb(10 13 18 / 68%); box-shadow: 0 .65rem 1.5rem rgb(0 0 0 / 16%); color: #fff; font-size: .68rem; font-weight: 750; backdrop-filter: blur(14px); }
+.project-label span { color: #ff8a47; font-variant-numeric: tabular-nums; }
 .project-reveal { position: absolute; inset-inline-end: 1rem; inset-block-end: 1rem; z-index: 3; display: flex; align-items: center; gap: .6rem; padding: .85rem 1.05rem; border-radius: 999px; color: #fff; background: var(--portfolio-accent); box-shadow: 0 .75rem 2rem color-mix(in srgb, var(--portfolio-accent) 30%, transparent); font-size: .72rem; font-weight: 600; opacity: 0; transform: translateY(.7rem) scale(.96); transition: opacity var(--motion-control) var(--ease-standard), transform var(--motion-control) var(--ease-enter); }
 .project-glow { position: absolute; inset: 0; z-index: 1; pointer-events: none; background: radial-gradient(circle at var(--pointer-x) var(--pointer-y), rgb(255 255 255 / 18%), transparent 28%); opacity: 0; transition: opacity var(--motion-content) var(--ease-standard); }
 .project-coming-soon { position:absolute; z-index:4; inset:0; display:flex; align-items:center; justify-content:center; gap:.6rem; background:rgb(8 11 16 / 38%); color:#fff; font-size:clamp(.82rem,1vw,.95rem); font-weight:800; backdrop-filter:blur(10px); }

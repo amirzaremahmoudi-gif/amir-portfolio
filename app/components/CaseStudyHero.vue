@@ -4,12 +4,33 @@ defineProps<{
   summary: string
   description?: string
   meta: string[][]
+  media?: {
+    src: string
+    alt: string
+    width: number
+    height: number
+  }
 }>()
 </script>
 
 <template>
   <header class="case-hero portfolio-container pb-14 pt-28 md:pb-20 md:pt-40">
-    <div class="case-hero__surface">
+    <div
+      class="case-hero__surface"
+      :class="{ 'case-hero__surface--with-media': media }"
+    >
+      <figure
+        v-if="media"
+        class="case-hero__media"
+      >
+        <img
+          :src="media.src"
+          :alt="media.alt"
+          :width="media.width"
+          :height="media.height"
+          fetchpriority="high"
+        >
+      </figure>
       <div class="case-hero__copy">
         <h1 class="case-hero__title">
           {{ title }}
@@ -42,6 +63,7 @@ defineProps<{
 
 <style scoped>
 .case-hero__surface { padding-block: clamp(2.5rem, 5vw, 5rem); border-block: 1px solid var(--portfolio-line); }
+.case-hero__media { display: none; }
 .case-hero__copy { display: flex; flex-direction: column; align-items: center; text-align: center; }
 .case-hero__title { max-width: 100%; color: var(--portfolio-accent); font-family: var(--font-display); font-size: clamp(3.5rem, 7vw, 7rem); font-weight: 850; letter-spacing: -.06em; line-height: 1; white-space: nowrap; }
 .case-hero__summary { width: 100%; max-width: 56rem; margin-top: clamp(1.25rem, 2.5vw, 2.25rem); color: var(--portfolio-muted); font-size: clamp(1.05rem, 1.25vw, 1.3rem); line-height: 1.85; }
@@ -79,6 +101,74 @@ defineProps<{
     border-radius: 999px;
     background: var(--portfolio-accent);
     content: '';
+  }
+
+  .case-hero__surface--with-media {
+    display: grid;
+    gap: .35rem;
+    padding: .42rem;
+    overflow: hidden;
+    border: 0;
+    border-radius: 1.35rem;
+    background: color-mix(in srgb, var(--portfolio-surface) 88%, transparent);
+    box-shadow: 0 1.25rem 3.5rem rgb(0 0 0 / 14%);
+  }
+
+  .case-hero__surface--with-media::before { display: none; }
+
+  .case-hero__media {
+    display: block;
+    overflow: hidden;
+    aspect-ratio: 16 / 9;
+    border-radius: 1rem;
+    background: var(--portfolio-bg);
+  }
+
+  .case-hero__media img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .case-hero__surface--with-media .case-hero__copy {
+    padding: 1rem .8rem .75rem;
+  }
+
+  .case-hero__surface--with-media .case-hero__meta {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: .35rem;
+    padding: 0;
+    border: 0;
+  }
+
+  .case-hero__surface--with-media .case-hero__meta > div,
+  .case-hero__surface--with-media .case-hero__meta > div + div,
+  .case-hero__surface--with-media .case-hero__meta > div:nth-child(3),
+  .case-hero__surface--with-media .case-hero__meta > div:nth-child(n+3) {
+    display: flex;
+    min-height: 4.4rem;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding: .68rem .75rem;
+    border: 0;
+    border-radius: .85rem;
+    background: color-mix(in srgb, var(--portfolio-bg) 68%, transparent);
+  }
+
+  .case-hero__surface--with-media .case-hero__meta dt { font-size: .67rem; }
+  .case-hero__surface--with-media .case-hero__meta dd {
+    display: -webkit-box;
+    margin-top: .32rem;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+    font-size: .7rem;
+    line-height: 1.5;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
   }
 
   .case-hero__copy {
