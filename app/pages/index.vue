@@ -35,6 +35,7 @@ useSeoMeta({ title: () => t('home.seoTitle'), description: () => t('home.seoDesc
     <section
       class="home-hero"
     >
+      <HeroProductPattern />
       <div class="portfolio-container home-hero__mast">
         <div class="hero-intro motion-rise">
           <div class="hero-meta">
@@ -258,9 +259,8 @@ useSeoMeta({ title: () => t('home.seoTitle'), description: () => t('home.seoDesc
 </template>
 
 <style scoped>
-.home-hero { --hero-height: 100svh; position: relative; min-height: var(--hero-height); overflow: hidden; background: linear-gradient(180deg, color-mix(in srgb, var(--portfolio-surface) 56%, var(--portfolio-bg)), var(--portfolio-bg)); isolation: isolate; }
-.home-hero::before { position: absolute; inset: 0; z-index: -1; pointer-events: none; background-image: linear-gradient(color-mix(in srgb, var(--portfolio-line) 30%, transparent) 1px, transparent 1px), linear-gradient(90deg, color-mix(in srgb, var(--portfolio-line) 30%, transparent) 1px, transparent 1px), radial-gradient(circle, color-mix(in srgb, var(--portfolio-accent) 32%, transparent) 1px, transparent 1.5px); background-position: center, center, center; background-size: 4.5rem 4.5rem, 4.5rem 4.5rem, 1.125rem 1.125rem; content: ''; -webkit-mask-image: linear-gradient(115deg, transparent 6%, rgb(0 0 0 / 18%) 30%, #000 58%, transparent 94%); mask-image: linear-gradient(115deg, transparent 6%, rgb(0 0 0 / 18%) 30%, #000 58%, transparent 94%); opacity: .34; }
-.home-hero__mast { display: grid; grid-template-rows: minmax(0, 1fr) auto; width: 100%; min-height: var(--hero-height); padding-top: clamp(7rem, 12vh, 8.5rem); padding-bottom: clamp(2rem, 4vh, 3rem); }
+.home-hero { --hero-height: 100svh; position: relative; min-height: var(--hero-height); overflow: hidden; background: var(--portfolio-bg); isolation: isolate; }
+.home-hero__mast { position: relative; z-index: 1; display: grid; grid-template-rows: minmax(0, 1fr) auto; width: 100%; min-height: var(--hero-height); padding-top: clamp(7rem, 12vh, 8.5rem); padding-bottom: clamp(2rem, 4vh, 3rem); }
 .hero-intro { display: flex; min-width: 0; flex-direction: column; align-items: center; justify-content: center; padding-block: clamp(2rem, 5vh, 4rem); text-align: center; }
 .hero-meta { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: .7rem 1.05rem; color: var(--portfolio-muted); font-size: clamp(1rem, 1.12vw, 1.12rem); font-weight: 500; text-align: center; }
 .hero-meta__role { color: var(--portfolio-text); font-weight: 700; }
@@ -376,7 +376,6 @@ useSeoMeta({ title: () => t('home.seoTitle'), description: () => t('home.seoDesc
 @media (max-width: 900px) { .hero-positioning { white-space: normal; } .working-method .home-section-heading h2 { white-space: normal; } .about-preview__layout { grid-template-columns: minmax(13rem, 16rem) minmax(0, 1fr); gap: 2rem; } .about-preview__visual { height: 17rem; } .about-preview__title { font-size: clamp(2rem, 4.8vw, 2.8rem); } }
 @media (max-width: 767px) {
   .home-hero { --hero-height: max(44rem, 80svh); min-height: var(--hero-height); }
-  .home-hero::before { background-size: 3.5rem 3.5rem, 3.5rem 3.5rem, .875rem .875rem; opacity: .16; }
   .home-hero__mast { display: flex; min-height: var(--hero-height); flex-direction: column; justify-content: center; padding-top: 6.5rem; padding-bottom: 2.5rem; }
   .hero-intro { align-items: center; justify-content: center; padding: 0; text-align: center; }
   .hero-meta { flex-direction: column; justify-content: center; gap: 0; font-size: .9rem; line-height: 1.6; text-align: center; }
@@ -384,9 +383,13 @@ useSeoMeta({ title: () => t('home.seoTitle'), description: () => t('home.seoDesc
   .hero-meta__role { padding-bottom: .38rem; border-bottom: 1px solid color-mix(in srgb, var(--portfolio-accent) 72%, transparent); color: color-mix(in srgb, var(--portfolio-text) 92%, var(--portfolio-accent)); font-size: 1.05rem; font-weight: 800; letter-spacing: -.01em; }
   .hero-meta__separator { display: none; }
   .hero-meta__location { display: none; }
-  .hero-name-stage { position: relative; display: grid; width: min(82vw, 20rem); aspect-ratio: 1; place-items: center; overflow: hidden; margin-top: 1rem; border-radius: 50%; background: #10141c; box-shadow: 0 1.5rem 3.25rem rgb(20 31 49 / 22%), inset 0 0 2.75rem rgb(255 255 255 / 3%); isolation: isolate; }
-  :global(.dark) .hero-name-stage { background: color-mix(in srgb, var(--portfolio-surface) 42%, transparent); box-shadow: 0 1.25rem 2.75rem rgb(0 0 0 / 18%); }
-  .hero-name-stage__art { display: block; width: 100%; height: 100%; object-fit: contain; }
+  .hero-name-stage { position: relative; display: grid; width: min(82vw, 20rem); aspect-ratio: 1; place-items: center; overflow: visible; margin-top: 1rem; border-radius: 50%; background: transparent; isolation: isolate; }
+  .hero-name-stage::before, .hero-name-stage::after { position: absolute; z-index: 0; border-radius: 50%; content: ''; pointer-events: none; will-change: transform; }
+  .hero-name-stage::before { inset: -.55rem; background: conic-gradient(from 20deg, transparent 0 14%, color-mix(in srgb, var(--portfolio-accent) 62%, transparent) 18%, transparent 25% 59%, color-mix(in srgb, var(--portfolio-text) 30%, transparent) 64%, transparent 71% 88%, color-mix(in srgb, var(--portfolio-accent) 45%, transparent) 92%, transparent 98%); mask: radial-gradient(farthest-side, transparent calc(100% - 1.2px), #000 calc(100% - .8px)); animation: hero-seal-orbit 17s linear infinite; }
+  .hero-name-stage::after { inset: -.48rem; background: radial-gradient(circle at 50% 0, var(--portfolio-accent) 0 2px, color-mix(in srgb, var(--portfolio-accent) 34%, transparent) 2.4px, transparent 4.8px); opacity: .82; animation: hero-seal-orbit 9s linear infinite reverse; filter: drop-shadow(0 0 .28rem color-mix(in srgb, var(--portfolio-accent) 38%, transparent)); }
+  .hero-name-stage__art { position: relative; z-index: 1; display: block; width: 100%; height: 100%; border-radius: 50%; object-fit: contain; }
+  :global(.light .hero-name-stage__art) { filter: brightness(0); }
+  :global(.dark .hero-name-stage__art) { filter: none; }
   .hero-title { position: absolute; width: 1px; height: 1px; padding: 0; border: 0; margin: -1px; clip: rect(0, 0, 0, 0); overflow: hidden; white-space: nowrap; }
   [lang='fa'] .hero-title { font-size: 1px; line-height: 1; }
   .hero-name-stage__location { display: none; }
@@ -478,5 +481,6 @@ useSeoMeta({ title: () => t('home.seoTitle'), description: () => t('home.seoDesc
   .about-preview__link { font-size: .75rem; }
 }
 @media (max-width: 380px) { .hero-name-stage { width: min(80vw, 18.5rem); } .hero-actions { gap: .5rem 1.35rem; } }
-@media (prefers-reduced-motion: reduce) { .hero-action::after, .hero-action svg, .selected-work-heading__link::after, .about-preview__portrait, .about-preview__link::after, .working-method__icon { transition: none; } .working-method__number { animation: none; } .hero-action:hover svg, .hero-action:focus-visible svg, .about-preview__visual:hover .about-preview__portrait, .working-method__steps li:hover .working-method__icon { transform: none; } }
+@keyframes hero-seal-orbit { to { transform: rotate(1turn); } }
+@media (prefers-reduced-motion: reduce) { .hero-action::after, .hero-action svg, .selected-work-heading__link::after, .about-preview__portrait, .about-preview__link::after, .working-method__icon { transition: none; } .working-method__number, .hero-name-stage::before, .hero-name-stage::after { animation: none; } .hero-action:hover svg, .hero-action:focus-visible svg, .about-preview__visual:hover .about-preview__portrait, .working-method__steps li:hover .working-method__icon { transform: none; } }
 </style>
