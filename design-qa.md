@@ -50,6 +50,10 @@ The hero copy region was checked directly because typography, centered alignment
 - [x] Independent light and dark artwork.
 - [x] Persian and English responsive wrapping.
 - [x] No horizontal overflow at tested desktop or mobile widths.
+- [x] Seven numeric outcome labels align above the seven visible desktop data nodes.
+- [x] Labels reuse the existing outcome values, contain numbers only, and remain decorative to assistive technology.
+- [x] The responsive overlay uses the same 2:1 cover geometry and crop alignment as the source artwork.
+- [x] Dark/light artwork selection and Persian/English hero wrapping remain intact.
 - [x] ESLint, Nuxt typecheck, and diff whitespace checks pass.
 
 final result: passed

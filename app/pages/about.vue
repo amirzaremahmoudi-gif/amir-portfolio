@@ -48,6 +48,7 @@ useHead(() => ({
   <div>
     <header class="about-hero portfolio-container">
       <div class="about-hero__surface">
+        <AboutHeroMetrics />
         <div class="about-hero__meta">
           <AsciiGlitchText
             :text="t('about.label')"
@@ -188,12 +189,12 @@ useHead(() => ({
 .about-hero { width: 100%; max-width: none; margin-inline: 0; padding: 0; }
 .about-hero__surface { position: relative; display: flex; min-height: 100vh; min-height: 100svh; align-items: center; justify-content: center; flex-direction: column; gap: clamp(1.1rem, 1.8vw, 1.65rem); padding: clamp(7.5rem, 10vw, 9rem) max(var(--portfolio-gutter), calc((100vw - var(--portfolio-container)) / 2 + var(--portfolio-gutter))) clamp(12rem, 26vh, 20rem); overflow: hidden; border-radius: 0; background-color: #fdf8f3; background-image: url('/images/about-topographic-light.png'); background-position: center; background-size: cover; box-shadow: 0 1.75rem 5rem rgb(49 34 20 / 8%); isolation: isolate; text-align: center; }
 :global(.dark .about-hero__surface) { background-color: #0b0d10; background-image: url('/images/about-topographic-dark.png'); box-shadow: 0 2rem 5.5rem rgb(0 0 0 / 24%); }
-.about-hero__surface::after { width: clamp(2.75rem, 4vw, 4rem); height: .2rem; margin-top: clamp(.25rem, .7vw, .65rem); border-radius: 999px; background: var(--portfolio-accent); content: ''; box-shadow: 0 0 1.75rem color-mix(in srgb, var(--portfolio-accent) 44%, transparent); }
-.about-hero__meta { display: flex; width: 100%; align-items: center; justify-content: center; flex-direction: column; gap: .7rem; margin: 0; text-align: center; }
+.about-hero__surface::after { position: relative; z-index: 1; width: clamp(2.75rem, 4vw, 4rem); height: .2rem; margin-top: clamp(.25rem, .7vw, .65rem); border-radius: 999px; background: var(--portfolio-accent); content: ''; box-shadow: 0 0 1.75rem color-mix(in srgb, var(--portfolio-accent) 44%, transparent); }
+.about-hero__meta { position: relative; z-index: 1; display: flex; width: 100%; align-items: center; justify-content: center; flex-direction: column; gap: .7rem; margin: 0; text-align: center; }
 .about-hero__label { display: inline-flex; min-height: 2.3rem; align-items: center; justify-content: center; padding: .45rem .95rem; border-radius: 999px; background: color-mix(in srgb, var(--portfolio-accent) 14%, transparent); color: var(--portfolio-accent); font-size: clamp(.78rem, .9vw, .92rem); font-weight: 800; text-align: center; }
 .about-hero__identity-row { display: flex; width: 100%; align-items: center; justify-content: center; color: var(--portfolio-muted); text-align: center; }
 .about-hero__identity { width: 100%; font-size: clamp(.82rem, .95vw, 1rem); line-height: 1.7; text-align: center; }
-.about-hero__title { width: min(100%, 18em); margin: .35rem auto 0; color: var(--portfolio-text); font-family: var(--font-display); font-size: clamp(3rem, 3.65vw, 4.45rem); font-weight: 760; letter-spacing: -.055em; line-height: 1.08; text-align: center; text-wrap: balance; }
+.about-hero__title { position: relative; z-index: 1; width: min(100%, 18em); margin: .35rem auto 0; color: var(--portfolio-text); font-family: var(--font-display); font-size: clamp(3rem, 3.65vw, 4.45rem); font-weight: 760; letter-spacing: -.055em; line-height: 1.08; text-align: center; text-wrap: balance; }
 [lang='fa'] .about-hero__title { width: min(100%, 18em); font-weight: 900; letter-spacing: -.012em; line-height: 1.22; }
 [lang='en'] .about-hero__title { width: min(100%, 20em); }
 .about-section-boundary::after { position: absolute; inset-inline: var(--portfolio-gutter); bottom: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--portfolio-line) 10%, var(--portfolio-line) 90%, transparent); content: ''; }

@@ -52,6 +52,14 @@ useSeoMeta({ title: () => t('home.seoTitle'), description: () => t('home.seoDesc
             <span class="hero-meta__location">{{ profile.location }}</span>
           </div>
           <div class="hero-name-stage">
+            <span
+              class="hero-name-stage__light-art"
+              :style="{
+                maskImage: `url(${heroSealSrc})`,
+                WebkitMaskImage: `url(${heroSealSrc})`
+              }"
+              aria-hidden="true"
+            />
             <NuxtImg
               :src="heroSealSrc"
               alt=""
@@ -265,7 +273,7 @@ useSeoMeta({ title: () => t('home.seoTitle'), description: () => t('home.seoDesc
 .hero-meta { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: .7rem 1.05rem; color: var(--portfolio-muted); font-size: clamp(1rem, 1.12vw, 1.12rem); font-weight: 500; text-align: center; }
 .hero-meta__role { color: var(--portfolio-text); font-weight: 700; }
 .hero-meta__separator { color: var(--portfolio-accent); }
-.hero-meta__ornament, .hero-name-stage__art, .hero-name-stage__location, .hero-services__icon { display: none; }
+.hero-meta__ornament, .hero-name-stage__art, .hero-name-stage__light-art, .hero-name-stage__location, .hero-services__icon { display: none; }
 .hero-name-stage { display: contents; }
 .hero-title { max-width: none; margin-top: clamp(1.4rem, 2.6vh, 2.2rem); font-family: var(--font-display); font-size: clamp(4.5rem, 7.6vw, 7.6rem); font-weight: 700; letter-spacing: -.05em; line-height: .98; white-space: nowrap; }
 .hero-positioning { max-width: none; margin-top: clamp(1.35rem, 2.8vh, 2.2rem); font-size: clamp(1.4rem, 1.9vw, 2rem); font-weight: 700; letter-spacing: -.02em; line-height: 1.5; text-align: center; text-wrap: balance; white-space: nowrap; }
@@ -385,10 +393,13 @@ useSeoMeta({ title: () => t('home.seoTitle'), description: () => t('home.seoDesc
   .hero-meta__location { display: none; }
   .hero-name-stage { position: relative; display: grid; width: min(82vw, 20rem); aspect-ratio: 1; place-items: center; overflow: visible; margin-top: 1rem; border-radius: 50%; background: transparent; isolation: isolate; }
   .hero-name-stage::before, .hero-name-stage::after { position: absolute; z-index: 0; border-radius: 50%; content: ''; pointer-events: none; will-change: transform; }
-  .hero-name-stage::before { inset: -.55rem; background: conic-gradient(from 20deg, transparent 0 14%, color-mix(in srgb, var(--portfolio-accent) 62%, transparent) 18%, transparent 25% 59%, color-mix(in srgb, var(--portfolio-text) 30%, transparent) 64%, transparent 71% 88%, color-mix(in srgb, var(--portfolio-accent) 45%, transparent) 92%, transparent 98%); mask: radial-gradient(farthest-side, transparent calc(100% - 1.2px), #000 calc(100% - .8px)); animation: hero-seal-orbit 17s linear infinite; }
-  .hero-name-stage::after { inset: -.48rem; background: radial-gradient(circle at 50% 0, var(--portfolio-accent) 0 2px, color-mix(in srgb, var(--portfolio-accent) 34%, transparent) 2.4px, transparent 4.8px); opacity: .82; animation: hero-seal-orbit 9s linear infinite reverse; filter: drop-shadow(0 0 .28rem color-mix(in srgb, var(--portfolio-accent) 38%, transparent)); }
+  .hero-name-stage::before { inset: -.55rem; background: conic-gradient(from 20deg, transparent 0 14%, color-mix(in srgb, var(--portfolio-accent) 62%, transparent) 18%, transparent 25% 59%, color-mix(in srgb, var(--portfolio-text) 30%, transparent) 64%, transparent 71% 88%, color-mix(in srgb, var(--portfolio-accent) 45%, transparent) 92%, transparent 98%); mask: radial-gradient(farthest-side, transparent calc(100% - 1.2px), #000 calc(100% - .8px)); animation: hero-seal-orbit 13s linear infinite; }
+  .hero-name-stage::after { inset: -.48rem; background: radial-gradient(circle at 50% 0, var(--portfolio-accent) 0 2px, color-mix(in srgb, var(--portfolio-accent) 34%, transparent) 2.4px, transparent 4.8px); opacity: .55; animation: hero-seal-signal 13s var(--ease-standard) infinite; filter: drop-shadow(0 0 .28rem color-mix(in srgb, var(--portfolio-accent) 38%, transparent)); }
   .hero-name-stage__art { position: relative; z-index: 1; display: block; width: 100%; height: 100%; border-radius: 50%; object-fit: contain; }
-  :global(.light .hero-name-stage__art) { filter: brightness(0); }
+  .hero-name-stage__light-art { position: absolute; inset: 0; z-index: 2; border-radius: 50%; background: var(--portfolio-accent-hover); mask-position: center; mask-repeat: no-repeat; mask-size: contain; filter: drop-shadow(0 .45rem .85rem color-mix(in srgb, var(--portfolio-accent) 20%, transparent)); }
+  :global(.light .hero-name-stage) { background: transparent; }
+  :global(.light .hero-name-stage__light-art) { display: block; }
+  :global(.light .hero-name-stage__art) { opacity: 0; filter: none; }
   :global(.dark .hero-name-stage__art) { filter: none; }
   .hero-title { position: absolute; width: 1px; height: 1px; padding: 0; border: 0; margin: -1px; clip: rect(0, 0, 0, 0); overflow: hidden; white-space: nowrap; }
   [lang='fa'] .hero-title { font-size: 1px; line-height: 1; }
@@ -482,5 +493,6 @@ useSeoMeta({ title: () => t('home.seoTitle'), description: () => t('home.seoDesc
 }
 @media (max-width: 380px) { .hero-name-stage { width: min(80vw, 18.5rem); } .hero-actions { gap: .5rem 1.35rem; } }
 @keyframes hero-seal-orbit { to { transform: rotate(1turn); } }
+@keyframes hero-seal-signal { 0%, 54%, 100% { opacity: .34; transform: rotate(0deg) scale(1); } 68% { opacity: .9; transform: rotate(252deg) scale(1.012); } 78% { opacity: .5; transform: rotate(286deg) scale(1); } }
 @media (prefers-reduced-motion: reduce) { .hero-action::after, .hero-action svg, .selected-work-heading__link::after, .about-preview__portrait, .about-preview__link::after, .working-method__icon { transition: none; } .working-method__number, .hero-name-stage::before, .hero-name-stage::after { animation: none; } .hero-action:hover svg, .hero-action:focus-visible svg, .about-preview__visual:hover .about-preview__portrait, .working-method__steps li:hover .working-method__icon { transform: none; } }
 </style>
