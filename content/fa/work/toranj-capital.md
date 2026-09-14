@@ -1,6 +1,6 @@
 ---
 title: بازطراحی وب‌سایت ترنج کپیتال
-description: از پراکندگی خدمات مالی تا یک تجربه یکپارچه، روشن و تصمیم‌محور.
+description: بازطراحی ساختار سایت تا کاربران سریع‌تر صندوق‌ها و خدمات مالی موردنیازشان را پیدا کنند.
 year: "۲۰۲۴ — اکنون"
 role: طراح محصول
 category: فین‌تک · وب
@@ -8,7 +8,7 @@ order: 0
 featured: true
 caseStudyPath: /work/toranj-capital-redesign
 cover: /images/case-studies/toranj-capital-redesign/hero-cinematic-desktop-v1.png
-coverAlt: کاور سینمایی مطالعه موردی بازطراحی وب‌سایت ترنج کپیتال
+coverAlt: نمای صفحه اصلی بازطراحی‌شده وب‌سایت ترنج کپیتال
 coverTone: clay
 timeline: ۲۰۲۴ — اکنون
 team: تنها طراح در چهار پلتفرم

@@ -1,6 +1,6 @@
 ---
 title: Toranj Capital Website Redesign
-description: From fragmented financial services to one clear, cohesive, decision-led experience.
+description: Restructuring the website so people can find the right fund or financial service faster.
 year: "2024 — Present"
 role: Product Designer
 category: Fintech · Web
@@ -8,7 +8,7 @@ order: 0
 featured: true
 caseStudyPath: /work/toranj-capital-redesign
 cover: /images/case-studies/toranj-capital-redesign/hero-cinematic-desktop-v1.png
-coverAlt: Cinematic cover for the Toranj Capital website redesign case study
+coverAlt: Redesigned Toranj Capital homepage
 coverTone: clay
 timeline: 2024 — Present
 team: Sole designer across four platforms

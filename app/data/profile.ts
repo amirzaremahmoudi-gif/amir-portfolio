@@ -2,8 +2,8 @@ export const localizedPortfolio = {
   en: {
     profile: {
       name: 'Amir Zare', initials: 'AZ', title: 'Senior Product Designer',
-      positioning: 'Senior Product Designer specialising in fintech, investment and crypto platforms.',
-      summary: 'I design clear, conversion-driven product experiences for complex financial systems. I lead end-to-end design across fintech, investment and crypto platforms, using an AI-native workflow to accelerate research and prototyping.',
+      positioning: 'Senior Product Designer focused on fintech, investment and crypto products.',
+      summary: 'I design financial products that are easier to understand and use. My work covers the full process, from research and product structure to interaction design, prototyping and handoff.',
       availability: 'Open to senior roles', location: 'Tehran, Iran', email: 'Amir.figma@gmail.com', behance: 'https://behance.net/azuiux', cv: '/Amir_Zare_CV_2026.pdf'
     },
     expertise: ['End-to-End Product Design', 'Interaction Design', 'User Research & Strategy', 'Design Systems', 'Analytics & Experimentation', 'AI-Assisted Design Workflows'],
@@ -17,9 +17,9 @@ export const localizedPortfolio = {
       { value: '+19%', label: 'Client acquisition', detail: 'Vista Portfolio Management' }
     ],
     experience: [
-      { dates: '2024 — Present', engagement: 'Current role', role: 'Lead UI/UX & Product Designer', company: 'Toranj Capital', industry: 'Investment & Asset Management', summary: 'Sole designer across the corporate website, mobile app, pension fund and Toranj Crowd, owning work from brand visuals to interaction flows and a unified multi-platform design system.' },
-      { dates: '2025', engagement: 'Freelance', role: 'Product Designer', company: 'Ramzinex', industry: 'Cryptocurrency Exchange', summary: 'Led the strategic redesign of analysis, blog and trading pages; reworked financial dashboards and trading charts; and mapped end-to-end user journeys to surface retention bottlenecks.' },
-      { dates: '2024', engagement: 'Freelance', role: 'Product Designer', company: 'Vista Portfolio Management', industry: 'Asset Management', summary: 'Designed conversion-focused information architecture and user flows, with visual design intended to reinforce trust in a regulated financial market.' },
+      { dates: '2024 — Present', engagement: 'Current role', role: 'Lead UI/UX & Product Designer', company: 'Toranj Capital', industry: 'Investment & Asset Management', summary: 'I am the sole designer across the corporate website, mobile app, pension fund and Toranj Crowd. My work ranges from brand visuals and user flows to a shared design system across the four products.' },
+      { dates: '2025', engagement: 'Freelance', role: 'Product Designer', company: 'Ramzinex', industry: 'Cryptocurrency Exchange', summary: 'I redesigned key analysis, magazine and trading pages, including financial dashboards and charts. I also mapped the main user journeys to find points where users were dropping off.' },
+      { dates: '2024', engagement: 'Freelance', role: 'Product Designer', company: 'Vista Portfolio Management', industry: 'Asset Management', summary: 'I redesigned the information architecture and main user flows to make the services easier to find and the contact journey easier to complete.' },
       { dates: '2024', engagement: 'Product', role: 'Product Designer', company: 'Finogram', industry: 'Financial Market Analysis', summary: 'Designed a unified platform for stocks, crypto, gold and forex analysis, including interactive analysis tools, live portfolio performance tracking and structured community spaces.' },
       { dates: '2022 — 2023', engagement: 'Freelance', role: 'UI/UX Designer', company: 'Independent Projects', industry: 'Multi-industry', summary: 'Worked on Barqi Store, Nobito, Hamyar Ashna and a podcast streaming app, owning research and information architecture through high-fidelity UI and prototyping.' },
       { dates: '2018 — 2022', engagement: 'Full-time', role: 'UI/UX Designer · previously Sales Specialist', company: 'Shigvar Company', industry: 'E-commerce', summary: 'Designed and iterated the company’s e-commerce platform from 2021 to 2022, improving discovery and checkout. Earlier sales experience informed later customer-pain and product decisions.' }
@@ -36,8 +36,8 @@ export const localizedPortfolio = {
   fa: {
     profile: {
       name: 'امیر زارع', initials: 'AZ', title: 'طراح ارشد محصول',
-      positioning: 'طراح ارشد محصول، متخصص در پلتفرم‌های فین‌تک، سرمایه‌گذاری و بازارهای مالی.',
-      summary: 'برای سیستم‌های مالی پیچیده، تجربه‌های محصول روشن و متمرکز بر تبدیل طراحی می‌کنم. طراحی سرتاسری محصولات فین‌تک، سرمایه‌گذاری و رمزارز را هدایت می‌کنم و با جریان کاری مبتنی بر هوش مصنوعی، پژوهش و نمونه‌سازی را سریع‌تر پیش می‌برم.',
+      positioning: 'طراح ارشد محصول با تمرکز بر فین‌تک، سرمایه‌گذاری و بازارهای مالی.',
+      summary: 'محصولات مالی را طوری طراحی می‌کنم که فهمیدن و استفاده از آن‌ها ساده‌تر باشد. از پژوهش و ساختار محصول تا طراحی تعامل، نمونه‌سازی و تحویل به تیم توسعه را پیش می‌برم.',
       availability: 'آماده بررسی فرصت‌های شغلی ارشد', location: 'تهران، ایران', email: 'Amir.figma@gmail.com', behance: 'https://behance.net/azuiux', cv: '/Amir_Zare_CV_2026.pdf'
     },
     expertise: ['طراحی سرتاسری محصول', 'طراحی تعامل', 'پژوهش کاربر و استراتژی', 'دیزاین سیستم', 'تحلیل داده و آزمایش', 'فرایند طراحی با کمک هوش مصنوعی'],
@@ -51,11 +51,11 @@ export const localizedPortfolio = {
       { value: '+۱۹٪', label: 'جذب مشتری', detail: 'Vista Portfolio Management' }
     ],
     experience: [
-      { dates: '۲۰۲۴ — اکنون', engagement: 'سمت فعلی', role: 'طراح ارشد UI/UX و محصول', company: 'Toranj Capital', industry: 'سرمایه‌گذاری و مدیریت دارایی', summary: 'تنها طراح وب‌سایت شرکتی، اپلیکیشن موبایل، صندوق بازنشستگی و Toranj Crowd؛ با مسئولیت طراحی از هویت بصری برند تا جریان‌های تعاملی و دیزاین سیستم یکپارچه چندپلتفرمی.' },
-      { dates: '۲۰۲۵', engagement: 'فریلنس', role: 'طراح محصول', company: 'Ramzinex', industry: 'صرافی رمزارز', summary: 'هدایت بازطراحی راهبردی صفحات تحلیل، وبلاگ و معامله؛ بازطراحی داشبوردهای مالی و نمودارهای معامله و ترسیم سفر کامل کاربر برای شناسایی موانع حفظ کاربر.' },
-      { dates: '۲۰۲۴', engagement: 'فریلنس', role: 'طراح محصول', company: 'Vista Portfolio Management', industry: 'مدیریت دارایی', summary: 'طراحی معماری اطلاعات و جریان‌های کاربر با تمرکز بر تبدیل؛ همراه با طراحی بصری برای تقویت اعتماد در بازار مالی قانون‌گذاری‌شده.' },
-      { dates: '۲۰۲۴', engagement: 'محصول', role: 'طراح محصول', company: 'Finogram', industry: 'تحلیل بازارهای مالی', summary: 'طراحی پلتفرمی یکپارچه برای تحلیل سهام، رمزارز، طلا و فارکس؛ شامل ابزارهای تعاملی تحلیل، رصد زنده عملکرد سبد و فضاهای ساختاریافته اجتماعی.' },
-      { dates: '۲۰۲۲ — ۲۰۲۳', engagement: 'فریلنس', role: 'طراح UI/UX', company: 'پروژه‌های مستقل', industry: 'چندصنعتی', summary: 'فعالیت روی Barqi Store، Nobito، Hamyar Ashna و یک اپلیکیشن پادکست؛ از پژوهش و معماری اطلاعات تا رابط کاربری با جزئیات بالا و نمونه‌سازی.' },
+      { dates: '۲۰۲۴ — اکنون', engagement: 'سمت فعلی', role: 'طراح ارشد UI/UX و محصول', company: 'Toranj Capital', industry: 'سرمایه‌گذاری و مدیریت دارایی', summary: 'تنها طراح وب‌سایت شرکتی، اپلیکیشن موبایل، صندوق بازنشستگی و Toranj Crowd هستم. کار من از طراحی هویت بصری و جریان‌های کاربر تا ساخت یک دیزاین سیستم مشترک برای این چهار محصول را پوشش می‌دهد.' },
+      { dates: '۲۰۲۵', engagement: 'فریلنس', role: 'طراح محصول', company: 'Ramzinex', industry: 'صرافی رمزارز', summary: 'صفحات اصلی تحلیل، مجله و معامله را بازطراحی کردم؛ از داشبورد و نمودارهای مالی تا مسیرهای کاربر و نقاطی که باعث ریزش می‌شدند.' },
+      { dates: '۲۰۲۴', engagement: 'فریلنس', role: 'طراح محصول', company: 'Vista Portfolio Management', industry: 'مدیریت دارایی', summary: 'معماری اطلاعات و مسیرهای اصلی را بازطراحی کردم تا کاربران خدمات را راحت‌تر پیدا کنند و مسیر تماس کوتاه‌تر شود.' },
+      { dates: '۲۰۲۴', engagement: 'محصول', role: 'طراح محصول', company: 'Finogram', industry: 'تحلیل بازارهای مالی', summary: 'پلتفرمی برای تحلیل سهام، رمزارز، طلا و فارکس طراحی کردم؛ شامل ابزارهای تحلیل، نمایش زنده عملکرد سبد و فضاهای گفت‌وگو.' },
+      { dates: '۲۰۲۲ — ۲۰۲۳', engagement: 'فریلنس', role: 'طراح UI/UX', company: 'پروژه‌های مستقل', industry: 'چندصنعتی', summary: 'روی Barqi Store، Nobito، Hamyar Ashna و یک اپلیکیشن پادکست کار کردم؛ از پژوهش و معماری اطلاعات تا طراحی رابط و پروتوتایپ.' },
       { dates: '۲۰۱۸ — ۲۰۲۲', engagement: 'تمام‌وقت', role: 'طراح UI/UX · پیش‌تر کارشناس فروش', company: 'Shigvar Company', industry: 'تجارت الکترونیک', summary: 'طراحی و بهبود مستمر پلتفرم تجارت الکترونیک شرکت از ۲۰۲۱ تا ۲۰۲۲ با تمرکز بر یافتن محصول و پرداخت. تجربه پیشین فروش به درک مسائل مشتری و تصمیم‌های محصول کمک کرد.' }
     ],
     capabilityGroups: [

@@ -1,13 +1,13 @@
 ---
 title: Toranj App — Insurance
-description: A mobile-first product for purchasing and managing investment-linked insurance across Rose Toranj and Afran.
+description: Designing the mobile purchase and management journey for Rose Toranj and Afran insurance-investment plans.
 year: "3 months"
 role: Product Designer
 category: Fintech · Insurtech
 order: 1
 featured: true
 cover: /images/case-studies/toranj-insurance/hero-ui/hero-cinematic-poster-v4.png
-coverAlt: Cinematic poster for the Rose Toranj and Afran identities
+coverAlt: Rose Toranj and Afran plan marks shown together
 coverTone: graphite
 timeline: 3 months
 team: Product Designer, Product Manager, Front-end Developer, Back-end Developer

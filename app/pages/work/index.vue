@@ -88,14 +88,16 @@ useSeoMeta({
   }
   [lang='fa'] .work-hero__title { line-height: 1.3; }
   .work-hero__title > span { display: block; width: 100%; }
-  .project-list { gap: 1.25rem; padding-top: 1.5rem; }
-  .project-list :deep(.project-card) { padding: .4rem .4rem 1rem; border-radius: 1.25rem; }
+  .project-list { gap: 1.75rem; padding-top: 1.25rem; }
+  .project-list :deep(.project-card) { padding: 0; overflow: visible; border: 0; border-radius: 0; background: transparent; box-shadow: none; backdrop-filter: none; }
+  .project-list :deep(.project-card:hover), .project-list :deep(.project-card:focus-within) { border-color: transparent; box-shadow: none; transform: none; }
   .project-list :deep(.project-link), .project-list :deep(.project-card:nth-child(even) .project-link) { display: block; height: auto; min-height: 0; }
-  .project-list :deep(.project-media), .project-list :deep(.project-card[data-layout] .project-media) { height: auto; aspect-ratio: 16 / 10 !important; border-radius: .95rem; }
-  .project-list :deep(.project-copy) { padding: 1.15rem .85rem .2rem; }
-  .project-list :deep(.project-title) { font-size: clamp(1.25rem, 6vw, 1.65rem); }
-  .project-list :deep(.project-description) { margin-top: .55rem; font-size: .82rem; -webkit-line-clamp: 2; }
-  .project-list :deep(.project-role) { display: block; margin-top: .8rem; padding-top: .65rem; font-size: .66rem; }
+  .project-list :deep(.project-media), .project-list :deep(.project-card[data-layout] .project-media) { height: auto; aspect-ratio: 16 / 9 !important; border-radius: .75rem; }
+  .project-list :deep(.project-label) { inset-block-start: .65rem; inset-inline-start: .65rem; min-height: 1.8rem; padding: .3rem .6rem; border: 0; font-size: .6rem; }
+  .project-list :deep(.project-copy) { align-items: start; padding: .75rem .15rem 0; }
+  .project-list :deep(.project-title) { font-size: clamp(1.08rem, 5.5vw, 1.35rem); line-height: 1.4; }
+  .project-list :deep(.project-description) { display: -webkit-box; margin-top: .3rem; overflow: hidden; font-size: .75rem; line-height: 1.7; -webkit-box-orient: vertical; -webkit-line-clamp: 1; }
+  .project-list :deep(.project-role) { display: block; margin-top: .45rem; padding-top: 0; border-top: 0; font-size: .61rem; }
   .project-list :deep(.project-reveal) { display: none; }
 }
 </style>

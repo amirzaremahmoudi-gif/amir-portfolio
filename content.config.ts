@@ -28,7 +28,8 @@ export default defineContentConfig({
       type: 'page',
       source: [
         { cwd: join(contentRoot, 'en/work'), include: 'toranj-insurance.md', prefix: '/work' },
-        { cwd: join(contentRoot, 'en/work'), include: 'toranj-capital.md', prefix: '/work' }
+        { cwd: join(contentRoot, 'en/work'), include: 'toranj-capital.md', prefix: '/work' },
+        { cwd: join(contentRoot, 'en/work'), include: 'ramzinex.md', prefix: '/work' }
       ],
       schema: workSchema
     }),
@@ -36,7 +37,8 @@ export default defineContentConfig({
       type: 'page',
       source: [
         { cwd: join(contentRoot, 'fa/work'), include: 'toranj-insurance.md', prefix: '/work' },
-        { cwd: join(contentRoot, 'fa/work'), include: 'toranj-capital.md', prefix: '/work' }
+        { cwd: join(contentRoot, 'fa/work'), include: 'toranj-capital.md', prefix: '/work' },
+        { cwd: join(contentRoot, 'fa/work'), include: 'ramzinex.md', prefix: '/work' }
       ],
       schema: workSchema
     })

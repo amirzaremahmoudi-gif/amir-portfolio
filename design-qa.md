@@ -1,59 +1,96 @@
-# About Hero Design QA
+# Ramzinex Case Study Design QA
 
 ## Evidence
 
-- Source visual truth: `C:\Users\a.zare\.codex\generated_images\01a084bb-001e-7fc2-8e6e-8421dbc7c089\exec-a13489c2-df36-4c95-8183-4a7d56fdafb6.png`
-- Combined comparison: `D:\Projects\amir-portfolio\design-qa-about-comparison.png`
-- Desktop dark implementation: `D:\Projects\amir-portfolio\design-qa-about-dark.png`
-- Mobile Persian dark implementation: `D:\Projects\amir-portfolio\design-qa-about-mobile-fa-dark.png`
-- Mobile Persian light implementation: `D:\Projects\amir-portfolio\design-qa-about-mobile-fa-light.png`
-- Mobile English light implementation: `D:\Projects\amir-portfolio\design-qa-about-mobile-en-light-final.png`
-- Route: `http://localhost:3000/{fa|en}/about`
-- Desktop CSS viewport: 1961 × 1150 at browser density 1.25; screenshot pixels: 2428 × 1438.
-- Mobile CSS viewport: 398 × 1150 at browser density 1.25; screenshot pixels: 475 × 1438.
-- Source sheet pixels: 1536 × 1024. The generated source is a multi-state presentation sheet, so comparisons use its individual hero compositions as visual truth rather than treating the sheet canvas as a pixel-identical viewport.
+- Route: `http://127.0.0.1:4173/{fa|en}/work/ramzinex-product-experience`
+- Source desktop screens: `public/images/case-studies/ramzinex/desktop-*.png` at 1920 px wide.
+- Source mobile screens: `public/images/case-studies/ramzinex/mobile-*.png` at 440 px wide.
+- Typography source: `public/images/case-studies/ramzinex/dana-type-specimen.png` at 2000 × 1753 px.
+- Palette source: user-supplied Primary and Secondary token boards; their exact hex values are recorded in `app/data/ramzinexCaseStudy.ts`.
+- Desktop light implementation: `design-qa-ramzinex-desktop.png` at 1425 × 891 px.
+- Desktop dark implementation: `design-qa-ramzinex-dark.png` at 1425 × 891 px.
+- Mobile Persian implementation: `design-qa-ramzinex-mobile.png` at 375 × 812 px.
+- Focused evidence section: `design-qa-ramzinex-evidence.png` at 1425 × 891 px.
+- Focused design-system section: `design-qa-ramzinex-system.png` at 1425 × 891 px.
+- Shared hierarchy hero: `design-qa-ramzinex-hierarchy-top.png`.
+- Shared hierarchy section: `design-qa-ramzinex-hierarchy-section.png`.
+- Mobile hierarchy hero and section: `design-qa-ramzinex-hierarchy-mobile.png` and `design-qa-ramzinex-hierarchy-mobile-section.png`.
+- Homepage project listing: `design-qa-ramzinex-home-card.png`.
+- Final cover: `public/images/case-studies/ramzinex/cover-market-ecosystem.png`; shared by the case-study poster, homepage card, Work card, and social preview.
+- Latest overview validation: live Codex in-app Browser at 1569 × 920 CSS px in light and dark themes, plus a 390 × 844 CSS px responsive pass at device scale factor 1.
 
 ## Full-view comparison
 
-The implementation preserves the selected Topographic Finance direction: centered editorial hierarchy, orange contour/data-node artwork, warm light theme, graphite dark theme, and a quiet central readability zone. User-directed deviations from the source are intentional: the hero is edge-to-edge, has no radius, fills the first viewport, places the fixed header over the artwork, and moves the copy higher into the quiet area.
+The case study is intentionally an editorial portfolio narrative rather than a literal reconstruction of the Ramzinex product UI. The supplied product screens remain the visual truth inside framed evidence views. The surrounding page uses the portfolio system, with Ramzinex yellow and graphite used as project-specific accents. The implementation was checked in Persian RTL and English LTR, light and dark themes, and desktop and mobile widths.
+
+The final structural pass reuses the same case-study skeleton as the existing Toranj studies: shared hero component, 16:9 poster, sticky chapter outline, constrained narrative column, centered section numbering, wide evidence sections, and consistent project navigation. Ramzinex keeps its distinct light-mode palette through warm yellow, cream, white, and cool-gray surfaces.
 
 ## Focused region comparison
 
-The hero copy region was checked directly because typography, centered alignment, wrapping, and pattern contrast are the fidelity-critical details. Desktop Persian renders in two lines. Mobile Persian and English render in three lines. Label, identity, headline, and accent line share the same horizontal center. The background swaps to a separately generated light or dark asset rather than using a color inversion.
+- Evidence tabs preserve the relationship between trading, analysis, magazine, and campaign work while allowing each desktop/mobile pair to be inspected without an excessively long initial page.
+- The system section reproduces all 16 Primary and 16 Secondary colors from the supplied token boards.
+- The Dana section uses the supplied specimen and lists the complete weight range without claiming that unavailable font files are embedded.
+- Source imagery retains its native aspect ratio and opens in a larger dialog for detailed inspection.
 
-## Required fidelity surfaces
+## UX narrative coverage
 
-- Fonts and typography: existing portfolio display/interface fonts are preserved. Weight, line height, and optical size match the selected direction. Desktop Persian is two lines; both mobile locales are three lines without truncation.
-- Spacing and layout rhythm: hero measures exactly 100svh, spans the full content width, begins at y=0, and keeps the fixed header over the hero. Copy is raised into the low-detail zone and remains centered.
-- Colors and visual tokens: light uses the existing deep-ink text on warm ivory artwork; dark uses warm white text on graphite artwork. Accent continues to use the portfolio orange token.
-- Image quality and asset fidelity: dedicated 1536 × 768 generated raster assets are used for light and dark themes. They preserve contour lines, nodes, glow, and central negative space without CSS-drawn substitutes.
-- Copy and content: existing localized label, profile name/location, and headline remain unchanged in Persian and English. RTL/LTR direction remains native to each locale while text alignment is centered.
+- User needs and design tensions.
+- Discover → Evaluate → Decide → Continue journey model.
+- Cross-product content architecture and continuity between information and action.
+- Responsive prioritization rather than simple desktop scaling.
+- Accessibility and validation plan.
+- Explicit separation between evidence-backed observations and editable assumptions; no invented performance metrics.
 
 ## Comparison history
 
-1. P1 — Dark theme initially rendered the light artwork because the scoped global selector compiled too broadly. Fixed by scoping the full `.dark .about-hero__surface` selector; post-fix evidence uses `about-topographic-dark.png` and warm-white text.
-2. P2 — Desktop Persian initially wrapped into excessive lines. Increased the readable text width and tuned display size; post-fix evidence shows exactly two centered lines.
-3. P2 — Copy initially sat too low over the active contour area. Increased logical bottom padding to move the complete text group into the calm upper-middle zone.
-4. P2 — Mobile Persian and English initially exceeded the requested height. Rebalanced locale-specific widths and sizes; post-fix browser measurement reports three lines in each locale.
+1. P1 — The first content outline was too UI-focused. Added a dedicated UX framework, journey model, design tensions, validation plan, and accessibility considerations.
+2. P2 — The first system section used an approximate accent. Replaced it with the exact 32 supplied Primary and Secondary tokens, including `Primary 1000+ #FFC117` and `Secondary 1500 #090A0B`.
+3. P2 — Typography documentation was incomplete. Added the actual Dana specimen and the full Hairline-to-Fat weight range.
+4. P2 — Long source screens made the narrative difficult to scan. Added tabbed evidence and an image-detail dialog while keeping core project screens visible in the page flow.
+5. P1 — The first Ramzinex layout used an independent full-width editorial skeleton. Rebuilt it on the shared Toranj hierarchy while preserving the approved multicolor light-mode treatment.
+6. P1 — Ramzinex content existed but was not included in the Nuxt Content collection. Added the localized content files to both collections, making the project card available on the homepage and Work page.
+7. P1 — Scoped dark-theme overrides were omitted from the generated stylesheet, leaving several project surfaces too light in dark mode. Moved the route-specific theme rules to an explicit global `html.dark .ramzinex-case` scope and visually rechecked the interface-system and outcome sections.
+8. P2 — Section kickers drifted from the nine-item chapter outline. Normalized Persian and English numbering so every visible chapter label, counter, and outline item now agrees from 01 through 09.
+9. P1 — The original product screenshot did not function as a distinctive project cover. Replaced it with the user-selected market composition showing the responsive Ramzinex experience on desktop and mobile.
+10. P1 — Refined the hero to the requested hierarchy: orange two-line title, single-line Persian summary, removal of the provisional hero note, and natural wrapping for the longer English summary.
+11. P2 — The first overview treatment was too tall and visually card-heavy. Converted it into a full-viewport-width, compact editorial band with a constrained padded inner container.
+12. P2 — The overview heading split its title and supporting copy into competing columns. Centered and stacked the kicker, one-line desktop title, rule, and shorter UX copy to restore a clear reading order.
+13. P2 — Scope descriptions were small and constrained to a narrow grid track. Reworked every item into a consistent number-and-title row with a larger full-width description, subtle internal dividers, and responsive 4/2/1-column behavior.
+14. P1 — Later chapters still read as centered cards inside a narrow shell. Expanded every numbered case-study section to a full-viewport band while retaining a padded 76rem content frame for readable alignment.
+15. P1 — The UX framework was too tall and text-heavy. Removed the provisional note, shortened the supporting copy, and rebuilt the content as two icon-led visual clusters plus a compact four-step journey strip.
+16. P2 — The UX framework heading wrapped at desktop width and overview support copy wrapped unnecessarily. Locked both to one line at desktop breakpoints while preserving natural wrapping on mobile.
+17. P2 — Overview card descriptions were not using the available inner frame. Expanded every description to the full padded card width while preserving consistent internal spacing.
+18. P1 — Case-study chapters retained an artificial inter-section gap. Removed the external chapter margin so full-width bands connect directly while keeping their own content padding.
+19. P1 — UX journey icons and numeric markers shared an overly broad span selector and could overlap. Added dedicated icon and number selectors and verified their separation in desktop and mobile layouts.
+
+## Interaction and responsive checks
+
+- [x] Persian route uses `lang="fa"` and `dir="rtl"`.
+- [x] English route uses `lang="en"` and `dir="ltr"`.
+- [x] Light and dark themes render correctly.
+- [x] Evidence tabs switch the copy and paired desktop/mobile imagery.
+- [x] Image-detail dialog opens and closes.
+- [x] No horizontal overflow at the tested desktop and mobile viewports.
+- [x] Overview title stays on one line at desktop width and wraps naturally on mobile.
+- [x] Overview scope cards preserve readable type and aligned content at 1569 × 920 and 390 × 844.
+- [x] All nine numbered sections fill the viewport width with aligned, padded inner content.
+- [x] UX framework renders as a compact visual system in Persian light and dark themes.
+- [x] UX framework remains readable at 390 × 844 and introduces no horizontal overflow (`scrollWidth === clientWidth`).
+- [x] UX journey icons and numeric markers remain visually separated at desktop and mobile widths.
+- [x] Adjacent full-width chapters connect without external whitespace between their section bands.
+- [x] All nine rendered images load after native lazy loading completes; zero broken images.
+- [x] Navigation and footer remain usable.
+- [x] Homepage lists three selected projects and includes Ramzinex.
+- [x] Work page lists three projects and includes Ramzinex in Persian and English.
+- [x] Ramzinex cards link to the localized case-study route.
+- [x] ESLint passes.
+- [x] Nuxt typecheck passes.
+- [x] Production build passes.
 
 ## Findings
 
-- No actionable P0, P1, or P2 differences remain.
-- P3: the source board includes tiny decorative numeric labels that were intentionally omitted from the production artwork to avoid non-semantic noise and preserve bilingual clarity.
-- Existing below-the-fold icon-loader warnings remain for profile-fact icons; they predate and are outside this hero redesign. No browser runtime errors were observed.
-
-## Implementation checklist
-
-- [x] Edge-to-edge, radius-free hero.
-- [x] First viewport height with header overlay.
-- [x] Centered copy group placed in the quiet pattern zone.
-- [x] Independent light and dark artwork.
-- [x] Persian and English responsive wrapping.
-- [x] No horizontal overflow at tested desktop or mobile widths.
-- [x] Seven numeric outcome labels align above the seven visible desktop data nodes.
-- [x] Labels reuse the existing outcome values, contain numbers only, and remain decorative to assistive technology.
-- [x] The responsive overlay uses the same 2:1 cover geometry and crop alignment as the source artwork.
-- [x] Dark/light artwork selection and Persian/English hero wrapping remain intact.
-- [x] ESLint, Nuxt typecheck, and diff whitespace checks pass.
+- No remaining P0, P1, or P2 issues were found in the tested states.
+- P3 follow-up: actual Dana webfont files are not present in the repository. The case study documents Dana faithfully through the supplied specimen; embedding Dana into live text requires licensed `.woff2` files.
+- Nuxt emits non-blocking dependency/build warnings from third-party packages; the production build completes successfully.
 
 final result: passed

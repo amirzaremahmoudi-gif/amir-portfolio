@@ -105,6 +105,8 @@ export default defineNuxtConfig({
       '/fa/about',
       '/en/work/toranj-capital-redesign',
       '/fa/work/toranj-capital-redesign',
+      '/en/work/ramzinex-product-experience',
+      '/fa/work/ramzinex-product-experience',
       '/en/work/toranj-insurance',
       '/fa/work/toranj-insurance'
     ]

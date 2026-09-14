@@ -377,6 +377,7 @@ onBeforeUnmount(() => {
   inset: 0;
   z-index: 0;
   overflow: hidden;
+  opacity: .82;
   pointer-events: none;
   user-select: none;
 }
