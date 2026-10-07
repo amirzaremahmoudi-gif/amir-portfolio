@@ -29,7 +29,7 @@ const identityStructuredData = computed(() => ({
       'jobTitle': locale.value === 'fa' ? 'طراح ارشد محصول و تجربه کاربری' : 'Senior Product and UX Designer',
       'description': t('home.seoDescription'),
       'knowsAbout': ['Product Design', 'User Experience Design', 'Fintech', 'Investment Platforms', 'Design Systems'],
-      'sameAs': ['https://behance.net/azuiux']
+      'sameAs': ['https://behance.net/azuiux', 'https://www.linkedin.com/in/azuiux']
     }
   ]
 }))

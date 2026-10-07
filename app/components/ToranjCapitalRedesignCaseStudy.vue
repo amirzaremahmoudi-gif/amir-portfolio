@@ -97,22 +97,26 @@ onBeforeUnmount(() => observer?.disconnect())
     <CaseStudyHero
       v-bind="copy.hero"
       :media="{
-        src: '/images/case-studies/toranj-capital-redesign/hero-cinematic-desktop-v1.png',
+        src: '/images/case-studies/toranj-capital-redesign/hero-cinematic-desktop-v1.webp',
         alt: locale === 'fa' ? 'موکاپ سینمایی دسکتاپ از صفحه اصلی بازطراحی‌شده ترنج کپیتال' : 'Cinematic desktop mockup of the redesigned Toranj Capital homepage',
-        width: 1672,
-        height: 941
+        width: 1280,
+        height: 720
       }"
     />
     <div class="portfolio-container">
       <figure class="hero-poster">
-        <img
-          class="hero-poster__image"
-          src="/images/case-studies/toranj-capital-redesign/hero-cinematic-desktop-v1.png"
+        <NuxtPicture
+          src="/images/case-studies/toranj-capital-redesign/hero-cinematic-desktop-v1.webp"
           :alt="locale === 'fa' ? 'موکاپ سینمایی دسکتاپ از صفحه اصلی بازطراحی‌شده ترنج کپیتال' : 'Cinematic desktop mockup of the redesigned Toranj Capital homepage'"
-          width="1672"
-          height="941"
-          fetchpriority="high"
-        >
+          width="1280"
+          height="720"
+          sizes="xs:360px sm:640px md:768px lg:1216px"
+          format="avif,webp"
+          :quality="78"
+          loading="lazy"
+          decoding="async"
+          :img-attrs="{ class: 'hero-poster__image' }"
+        />
       </figure>
     </div>
 
@@ -208,13 +212,17 @@ onBeforeUnmount(() => observer?.disconnect())
                   class="comparison-image"
                   v-bind="mediaMeta(item[3]!, 'Before', item[0]!, 'Desktop', 'Matched opening composition')"
                 >
-                  <img
+                  <NuxtImg
                     :src="comparisonImages[item[3]!]!.src"
                     :alt="locale === 'fa' ? `${item[0]} در وب‌سایت پیشین ترنج کپیتال` : `${item[0]} page on the previous Toranj Capital website`"
                     :width="comparisonImages[item[3]!]!.width"
                     :height="comparisonImages[item[3]!]!.height"
+                    sizes="100vw md:50vw lg:520px"
+                    format="webp"
+                    :quality="86"
                     loading="lazy"
-                  >
+                    decoding="async"
+                  />
                 </figure>
                 <CaseStudyMediaPlaceholder
                   v-else
@@ -236,13 +244,17 @@ onBeforeUnmount(() => observer?.disconnect())
                   class="comparison-image"
                   v-bind="mediaMeta(item[4]!, 'After', item[0]!, 'Desktop', 'Matched opening composition')"
                 >
-                  <img
+                  <NuxtImg
                     :src="comparisonImages[item[4]!]!.src"
                     :alt="locale === 'fa' ? `${item[0]} در بازطراحی فعلی ترنج کپیتال` : `${item[0]} page in the current Toranj Capital redesign`"
                     :width="comparisonImages[item[4]!]!.width"
                     :height="comparisonImages[item[4]!]!.height"
+                    sizes="100vw md:50vw lg:520px"
+                    format="webp"
+                    :quality="86"
                     loading="lazy"
-                  >
+                    decoding="async"
+                  />
                 </figure>
                 <CaseStudyMediaPlaceholder
                   v-else
@@ -454,7 +466,7 @@ onBeforeUnmount(() => observer?.disconnect())
                 <video
                   ref="homeVideo"
                   src="/videos/toranj-capital-redesign/home-interactions.mp4"
-                  poster="/images/case-studies/toranj-capital-redesign/comparisons/current-home-desktop.png"
+                  poster="/images/case-studies/toranj-capital-redesign/comparisons/current-home-desktop-preview.webp"
                   controls
                   preload="metadata"
                   playsinline
@@ -539,13 +551,17 @@ onBeforeUnmount(() => observer?.disconnect())
           </p><div class="system-showcase">
             <figure class="type-specimen">
               <div class="type-specimen__visual">
-                <img
+                <NuxtImg
                   src="/images/case-studies/toranj-insurance/peyda-weight-specimen.png"
                   :alt="locale === 'fa' ? 'نمونه وزن‌های مختلف تایپ‌فیس Peyda از Thin تا ExtraBlack' : 'Peyda typeface weights from Thin through ExtraBlack'"
                   width="1640"
                   height="960"
+                  sizes="100vw md:800px"
+                  format="webp"
+                  :quality="86"
                   loading="lazy"
-                >
+                  decoding="async"
+                />
               </div>
               <figcaption>
                 <span>{{ locale === 'fa' ? 'تایپوگرافی محصول' : 'Product typography' }}</span>
@@ -673,7 +689,7 @@ onBeforeUnmount(() => observer?.disconnect())
 <style scoped>
 .selected-flow-label{display:none}
 .capital-case{overflow-x:clip}.capital-case :deep(.case-hero__surface){border-block:0}.capital-case :deep(.case-hero__title){max-width:none;font-size:clamp(2.75rem,4.4vw,4.6rem);white-space:nowrap;text-align:center}
-.hero-poster{position:relative;overflow:hidden;margin-top:clamp(1rem,2vw,2rem);border:1px solid color-mix(in srgb,var(--portfolio-accent) 18%,transparent);border-radius:1.15rem;background:#030807;box-shadow:0 2.25rem 7rem rgb(0 0 0/28%)}.hero-poster::after{position:absolute;inset:0;border-radius:inherit;box-shadow:inset 0 0 5rem rgb(0 0 0/22%);content:'';pointer-events:none}.hero-poster__image{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}
+.hero-poster{position:relative;overflow:hidden;margin-top:clamp(1rem,2vw,2rem);border:1px solid color-mix(in srgb,var(--portfolio-accent) 18%,transparent);border-radius:1.15rem;background:#030807;box-shadow:0 2.25rem 7rem rgb(0 0 0/28%)}.hero-poster picture{display:block;width:100%}.hero-poster::after{position:absolute;inset:0;border-radius:inherit;box-shadow:inset 0 0 5rem rgb(0 0 0/22%);content:'';pointer-events:none}.hero-poster__image{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}
 .case-shell{display:block;width:100%;max-width:none;padding-inline:0}.case-outline{position:sticky;top:4.75rem;z-index:20;display:flex;width:100%;align-items:stretch;overflow:hidden;margin-bottom:clamp(4rem,7vw,7rem);border-block:1px solid var(--portfolio-line);background:color-mix(in srgb,var(--portfolio-bg) 94%,transparent);box-shadow:0 .75rem 2rem rgb(0 0 0/5%);backdrop-filter:blur(18px)}.case-outline>p{display:flex;min-height:4.75rem;flex:none;align-items:center;padding-inline:.75rem 1.25rem;border-inline-end:1px solid var(--portfolio-line);color:var(--portfolio-text);font-size:.92rem;white-space:nowrap}.case-outline ol{display:flex;min-width:0;flex:1;gap:.25rem;overflow-x:auto;scrollbar-width:none}.case-outline ol::-webkit-scrollbar{display:none}.case-outline li{flex:1 0 auto}.case-outline a{position:relative;display:flex;min-height:4.75rem;align-items:center;justify-content:center;gap:.4rem;padding-inline:.75rem;border-inline-end:1px solid color-mix(in srgb,var(--portfolio-line) 65%,transparent);color:var(--portfolio-muted);font-size:clamp(.72rem,.78vw,.9rem);font-weight:650;white-space:nowrap;transition:color var(--motion-control),background-color var(--motion-control)}.case-outline a::after{position:absolute;inset-inline:1rem;bottom:0;height:2px;background:var(--portfolio-accent);content:'';opacity:0;transform:scaleX(.35);transition:opacity var(--motion-control),transform var(--motion-control)}.case-outline a.is-active{color:var(--portfolio-text)}.case-outline a.is-active::after{opacity:1;transform:scaleX(1)}.case-outline a span{color:var(--portfolio-accent);font-size:.8rem;font-weight:800}
 .case-main{min-width:0;max-width:76rem;margin-inline:auto;counter-reset:case-section}.case-section{position:relative;isolation:isolate;max-width:66rem;margin-top:clamp(8rem,13vw,13rem);text-align:center;counter-increment:case-section}.case-section::before{position:absolute;inset-block-start:-4.75rem;left:50%;color:var(--portfolio-accent);font-size:1.75rem;font-weight:850;content:counter(case-section,decimal-leading-zero);transform:translateX(-50%)}.case-section:first-child{margin-top:0}.case-section--wide{max-width:76rem}.case-section :deep(.section-heading){align-items:center;text-align:center}.case-section :deep(.section-heading__kicker){display:flex;align-items:center;gap:.8rem}.case-section :deep(.section-heading__kicker::before),.case-section :deep(.section-heading__kicker::after){width:2rem;height:1px;background:var(--portfolio-line);content:''}.case-section :deep(.section-heading h2){max-width:34ch;margin-inline:auto;font-size:clamp(2rem,2.4vw,2.8rem);line-height:1.25}.case-section :deep(.section-heading h2::after){display:none}.case-lead{max-width:54rem;margin:2rem auto 0;color:color-mix(in srgb,var(--portfolio-accent) 58%,var(--portfolio-text));font-size:clamp(1.15rem,1.45vw,1.5rem);font-weight:650;line-height:1.75;text-align:center;text-wrap:balance}.case-copy{max-width:48rem;margin:1.2rem auto 0;color:var(--portfolio-muted);font-size:clamp(.95rem,1vw,1.05rem);line-height:1.9;text-align:center;text-wrap:pretty}.case-copy p+p{margin-top:1rem}.challenge-copy{margin-top:2.5rem;padding-top:2rem;border-top:1px solid var(--portfolio-line)}
 .overview-section{position:relative;overflow:hidden;padding:clamp(2rem,4vw,4rem);border:1px solid color-mix(in srgb,var(--portfolio-line) 86%,transparent);border-radius:1.5rem;background:linear-gradient(145deg,color-mix(in srgb,var(--portfolio-surface) 78%,transparent),color-mix(in srgb,var(--portfolio-accent) 5%,var(--portfolio-bg)));box-shadow:0 2rem 6rem rgb(0 0 0/8%);text-align:start}.overview-section::after{position:absolute;inset-block-start:-8rem;inset-inline-end:-8rem;width:20rem;aspect-ratio:1;border:1px solid color-mix(in srgb,var(--portfolio-accent) 18%,transparent);border-radius:50%;box-shadow:0 0 0 3rem color-mix(in srgb,var(--portfolio-accent) 3%,transparent),0 0 0 7rem color-mix(in srgb,var(--portfolio-accent) 2%,transparent);content:'';pointer-events:none}.overview-section :deep(.section-heading){position:relative;z-index:1;align-items:flex-start;text-align:start}.overview-section :deep(.section-heading h2){width:100%;max-width:22ch;margin-inline:0;font-size:clamp(2.25rem,3vw,3.4rem)}.overview-stage{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(18rem,.85fr);align-items:end;gap:clamp(2rem,5vw,5rem);margin-top:clamp(2rem,3.5vw,3.5rem);padding-block:clamp(1.5rem,2.5vw,2.5rem);border-block:1px solid var(--portfolio-line)}.overview-lead{max-width:28ch;color:var(--portfolio-text);font-size:clamp(1.25rem,1.7vw,1.7rem);font-weight:720;line-height:1.8;text-wrap:balance}.overview-scope{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.55rem}.overview-scope li{display:flex;min-width:0;align-items:center;gap:.65rem;padding:.7rem .8rem;border:1px solid var(--portfolio-line);border-radius:.7rem;background:color-mix(in srgb,var(--portfolio-bg) 55%,transparent);color:var(--portfolio-muted);font-size:.78rem;font-weight:650;line-height:1.45}.overview-scope span{color:var(--portfolio-accent);font-size:.66rem;font-weight:850}.overview-details{position:relative;z-index:1;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin-top:1rem}.overview-details article{min-height:12rem;padding:1.5rem;border-radius:1rem;background:color-mix(in srgb,var(--portfolio-bg) 60%,transparent);box-shadow:inset 0 1px color-mix(in srgb,var(--portfolio-text) 4%,transparent)}.overview-details article>span,.challenge-copy span{display:inline-flex;align-items:center;gap:.55rem;color:var(--portfolio-accent);font-size:.7rem;font-weight:850}.overview-details article>span::after,.challenge-copy span::after{width:1.75rem;height:1px;background:var(--portfolio-accent);content:'';opacity:.6}.overview-details article p{margin-top:1.25rem;color:var(--portfolio-muted);font-size:clamp(.9rem,1vw,1rem);line-height:1.9}.overview-note{display:flex;grid-column:1/-1;align-items:flex-start;gap:.85rem;padding:1rem 1.15rem;border-inline-start:2px solid var(--portfolio-accent);border-radius:.35rem;background:color-mix(in srgb,var(--portfolio-accent) 7%,transparent);color:var(--portfolio-text);font-size:.9rem;font-weight:600;line-height:1.8}.overview-note svg{width:1.1rem;height:1.1rem;flex:none;margin-top:.35rem;color:var(--portfolio-accent)}.challenge-copy{position:relative;z-index:1;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin-top:1rem}.challenge-copy article{padding:1.25rem 1.5rem;border-top:1px solid var(--portfolio-line);color:var(--portfolio-muted)}.challenge-copy p{margin-top:.75rem;font-size:.88rem;line-height:1.8}.architecture-intro{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);margin-top:clamp(2.5rem,4vw,4rem);text-align:start}.architecture-intro__lead{padding-inline-end:clamp(2rem,4vw,4rem);color:var(--portfolio-text);font-size:clamp(1.18rem,1.5vw,1.5rem);font-weight:650;line-height:1.85}.architecture-intro p+p{padding-inline-start:clamp(2rem,4vw,4rem);border-inline-start:1px solid var(--portfolio-line);color:var(--portfolio-muted);font-size:clamp(.98rem,1.08vw,1.08rem);line-height:2}.architecture-intro p{color:var(--portfolio-muted);font-size:1.05rem;line-height:1.95}.before-after-list{margin-top:clamp(3rem,5vw,5rem)}

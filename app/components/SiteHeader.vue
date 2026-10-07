@@ -59,7 +59,6 @@ function isActive(to: string) {
               width="96"
               height="96"
               loading="eager"
-              fetchpriority="high"
               class="brand-mark__image"
             />
           </span>

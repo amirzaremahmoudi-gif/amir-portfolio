@@ -37,7 +37,7 @@ useHead(() => ({
         'image': profileImage.value,
         'jobTitle': locale.value === 'fa' ? 'طراح ارشد محصول و تجربه کاربری' : 'Senior Product and UX Designer',
         'description': t('about.seoDescription'),
-        'sameAs': [profile.value.behance]
+        'sameAs': [profile.value.behance, profile.value.linkedin]
       }
     })
   }]
@@ -74,10 +74,14 @@ useHead(() => ({
         <div class="about-profile-visual">
           <NuxtImg
             src="/images/amir-zare.png"
-            :alt="profile.name"
-            width="600"
-            height="600"
-            loading="eager"
+            :alt="locale === 'fa' ? 'پرتره امیر زارع، طراح محصول' : 'Portrait of Amir Zare, product designer'"
+            width="592"
+            height="592"
+            sizes="xs:320px sm:384px md:480px"
+            format="webp"
+            :quality="82"
+            loading="lazy"
+            decoding="async"
             class="about-profile-portrait"
           />
         </div>
@@ -128,6 +132,22 @@ useHead(() => ({
                 <span class="eyebrow">{{ t('common.email') }}</span>
               </dt>
               <dd><a :href="`mailto:${profile.email}`"><span dir="ltr">{{ profile.email }}</span></a></dd>
+            </div>
+            <div>
+              <dt class="profile-facts__label">
+                <span class="profile-facts__icon"><UIcon
+                  name="i-simple-icons-linkedin"
+                  aria-hidden="true"
+                /></span>
+                <span class="eyebrow">{{ t('common.linkedin') }}</span>
+              </dt>
+              <dd>
+                <a
+                  :href="profile.linkedin"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                ><span dir="ltr">linkedin.com/in/azuiux ↗</span></a>
+              </dd>
             </div>
           </dl>
         </div>
@@ -187,8 +207,8 @@ useHead(() => ({
 
 <style scoped>
 .about-hero { width: 100%; max-width: none; margin-inline: 0; padding: 0; }
-.about-hero__surface { position: relative; display: flex; min-height: 100vh; min-height: 100svh; align-items: center; justify-content: center; flex-direction: column; gap: clamp(1.1rem, 1.8vw, 1.65rem); padding: clamp(7.5rem, 10vw, 9rem) max(var(--portfolio-gutter), calc((100vw - var(--portfolio-container)) / 2 + var(--portfolio-gutter))) clamp(12rem, 26vh, 20rem); overflow: hidden; border-radius: 0; background-color: #fdf8f3; background-image: url('/images/about-topographic-light.png'); background-position: center; background-size: cover; box-shadow: 0 1.75rem 5rem rgb(49 34 20 / 8%); isolation: isolate; text-align: center; }
-:global(.dark .about-hero__surface) { background-color: #0b0d10; background-image: url('/images/about-topographic-dark.png'); box-shadow: 0 2rem 5.5rem rgb(0 0 0 / 24%); }
+.about-hero__surface { position: relative; display: flex; min-height: 100vh; min-height: 100svh; align-items: center; justify-content: center; flex-direction: column; gap: clamp(1.1rem, 1.8vw, 1.65rem); padding: clamp(7.5rem, 10vw, 9rem) max(var(--portfolio-gutter), calc((100vw - var(--portfolio-container)) / 2 + var(--portfolio-gutter))) clamp(12rem, 26vh, 20rem); overflow: hidden; border-radius: 0; background-color: #fdf8f3; background-image: image-set(url('/images/about-topographic-light.avif') type('image/avif'), url('/images/about-topographic-light.webp') type('image/webp'), url('/images/about-topographic-light.png') type('image/png')); background-position: center; background-size: cover; box-shadow: 0 1.75rem 5rem rgb(49 34 20 / 8%); isolation: isolate; text-align: center; }
+:global(.dark .about-hero__surface) { background-color: #0b0d10; background-image: image-set(url('/images/about-topographic-dark.avif') type('image/avif'), url('/images/about-topographic-dark.webp') type('image/webp'), url('/images/about-topographic-dark.png') type('image/png')); box-shadow: 0 2rem 5.5rem rgb(0 0 0 / 24%); }
 .about-hero__surface::after { position: relative; z-index: 1; width: clamp(2.75rem, 4vw, 4rem); height: .2rem; margin-top: clamp(.25rem, .7vw, .65rem); border-radius: 999px; background: var(--portfolio-accent); content: ''; box-shadow: 0 0 1.75rem color-mix(in srgb, var(--portfolio-accent) 44%, transparent); }
 .about-hero__meta { position: relative; z-index: 1; display: flex; width: 100%; align-items: center; justify-content: center; flex-direction: column; gap: .7rem; margin: 0; text-align: center; }
 .about-hero__label { display: inline-flex; min-height: 2.3rem; align-items: center; justify-content: center; padding: .45rem .95rem; border-radius: 999px; background: color-mix(in srgb, var(--portfolio-accent) 14%, transparent); color: var(--portfolio-accent); font-size: clamp(.78rem, .9vw, .92rem); font-weight: 800; text-align: center; }
@@ -211,7 +231,7 @@ useHead(() => ({
 [lang='fa'] .about-intro__lead { font-weight: 900; letter-spacing: -.01em; }
 .profile-facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .8rem; }
 .profile-facts > div { min-width: 0; min-height: 8.75rem; padding: 1.25rem; border-radius: 1.25rem; background: color-mix(in srgb, var(--portfolio-surface) 82%, transparent); box-shadow: 0 1rem 2.75rem rgb(0 0 0 / 8%); transition: background-color var(--motion-control), transform var(--motion-control) var(--ease-enter); }
-.profile-facts > div:last-child { grid-column: 1 / -1; min-height: 6.5rem; }
+.profile-facts > div:nth-last-child(-n + 2) { min-height: 6.5rem; }
 .profile-facts > div:hover { background: color-mix(in srgb, var(--portfolio-accent) 8%, var(--portfolio-surface)); transform: translateY(-.2rem); }
 .profile-facts__label { display: flex; align-items: center; gap: .7rem; }
 .profile-facts__icon { display: grid; width: 2.35rem; flex: 0 0 auto; aspect-ratio: 1; place-items: center; border-radius: .8rem; background: color-mix(in srgb, var(--portfolio-accent) 12%, transparent); color: var(--portfolio-accent); }

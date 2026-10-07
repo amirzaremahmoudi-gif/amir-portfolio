@@ -7,7 +7,7 @@ category: Fintech · Crypto · Web
 order: 2
 featured: true
 caseStudyPath: /work/ramzinex-product-experience
-cover: /images/case-studies/ramzinex/cover-market-ecosystem.png
+cover: /images/case-studies/ramzinex/cover-market-ecosystem.webp
 coverAlt: Desktop and mobile views of the Ramzinex trading experience in a digital-asset market setting
 coverTone: sand
 timeline: 2025

@@ -17,6 +17,12 @@ const { profile } = usePortfolioContent()
         class="footer-link"
       ><span>{{ t('common.behance') }}</span><span dir="ltr">azuiux ↗</span></a>
       <a
+        :href="profile.linkedin"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="footer-link"
+      ><span>{{ t('common.linkedin') }}</span><span dir="ltr">azuiux ↗</span></a>
+      <a
         :href="profile.cv"
         download="Amir_Zare_CV_2026.pdf"
         class="footer-link"
@@ -27,7 +33,7 @@ const { profile } = usePortfolioContent()
 
 <style scoped>
 .footer-shell { color: var(--portfolio-muted); background: var(--portfolio-bg); }
-.footer-links { display: grid; grid-template-columns: 2fr 1fr 1fr; border-top: 1px solid var(--portfolio-line); }
+.footer-links { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; border-top: 1px solid var(--portfolio-line); }
 .footer-link { display: flex; min-width: 0; min-height: 4.5rem; align-items: center; justify-content: space-between; gap: 1rem; padding-inline: clamp(.75rem, 1.5vw, 1.5rem); border-inline-start: 1px solid var(--portfolio-line); font-size: clamp(.78rem, .85vw, .9rem); transition: color var(--motion-control) var(--ease-standard), background-color var(--motion-control) var(--ease-standard); }
 .footer-link:first-child { border-inline-start: 0; }
 .footer-link span:last-child { overflow: hidden; color: var(--portfolio-fg); text-overflow: ellipsis; white-space: nowrap; }

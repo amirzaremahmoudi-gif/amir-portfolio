@@ -65,6 +65,12 @@ useSeoMeta({ title: () => t('home.seoTitle'), description: () => t('home.seoDesc
               alt=""
               width="640"
               height="640"
+              sizes="xs:320px sm:384px md:1px"
+              format="webp"
+              :quality="80"
+              loading="eager"
+              fetchpriority="high"
+              decoding="async"
               class="hero-name-stage__art"
               aria-hidden="true"
             />
@@ -144,7 +150,6 @@ useSeoMeta({ title: () => t('home.seoTitle'), description: () => t('home.seoDesc
             :key="project.path"
             :project="project"
             :index="index"
-            :eager="index === 0"
             layout="cinematic"
             hierarchy="secondary"
             :label="t('project.caseStudySuffix')"
@@ -227,10 +232,14 @@ useSeoMeta({ title: () => t('home.seoTitle'), description: () => t('home.seoDesc
         <div class="about-preview__visual">
           <NuxtImg
             src="/images/amir-zare.png"
-            :alt="profile.name"
-            width="600"
-            height="600"
+            :alt="locale === 'fa' ? 'پرتره امیر زارع، طراح محصول' : 'Portrait of Amir Zare, product designer'"
+            width="592"
+            height="592"
+            sizes="xs:320px sm:384px md:480px"
+            format="webp"
+            :quality="82"
             loading="lazy"
+            decoding="async"
             class="about-preview__portrait"
           />
         </div>

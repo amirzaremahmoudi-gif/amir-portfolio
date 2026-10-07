@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { ProjectSummary } from '~/types/project'
 
-withDefaults(defineProps<{
+const props = withDefaults(defineProps<{
   project: ProjectSummary
   index: number
   eager?: boolean
@@ -26,6 +26,12 @@ withDefaults(defineProps<{
 const { t } = useI18n()
 const localePath = useLocalePath()
 const directionIcon = computed(() => 'i-lucide-arrow-up-right')
+const coverDimensions = computed(() => ({
+  landscape: { width: 1280, height: 960 },
+  portrait: { width: 1280, height: 1600 },
+  square: { width: 1280, height: 1280 },
+  cinematic: { width: 1280, height: 720 }
+})[props.layout])
 
 function updatePointer(event: PointerEvent) {
   if (event.pointerType === 'touch') return
@@ -72,15 +78,19 @@ function resetPointer(event: PointerEvent) {
           <span>{{ String(index + 1).padStart(2, '0') }}</span>
           {{ label }}
         </div>
-        <NuxtImg
+        <NuxtPicture
           v-if="project.cover"
           :src="project.cover"
           :alt="project.coverAlt || ''"
-          width="1600"
-          height="1200"
+          :width="coverDimensions.width"
+          :height="coverDimensions.height"
+          sizes="100vw md:50vw lg:640px"
+          format="avif,webp"
+          :quality="76"
           :loading="eager ? 'eager' : 'lazy'"
-          :fetchpriority="eager ? 'high' : 'auto'"
-          class="size-full object-cover"
+          decoding="async"
+          class="project-picture"
+          :img-attrs="{ class: 'size-full object-cover', fetchpriority: eager ? 'high' : 'auto' }"
         />
         <div
           v-else
@@ -142,6 +152,7 @@ function resetPointer(event: PointerEvent) {
 <style scoped>
 .project-card { --pointer-x: 50%; --pointer-y: 50%; --tilt-x: 0deg; --tilt-y: 0deg; }
 .project-media { aspect-ratio: 4 / 3; isolation: isolate; box-shadow: var(--shadow-soft); transform: perspective(1100px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y)); transition: transform var(--motion-content) var(--ease-enter), box-shadow var(--motion-content) var(--ease-standard); }
+.project-picture { display: block; width: 100%; height: 100%; }
 .project-card[data-layout='portrait'] .project-media { aspect-ratio: 4 / 5; }
 .project-card[data-layout='square'] .project-media { aspect-ratio: 1; }
 .project-card[data-layout='cinematic'] .project-media { aspect-ratio: 16 / 9; }

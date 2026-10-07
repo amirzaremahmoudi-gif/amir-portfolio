@@ -7,7 +7,7 @@ category: فین‌تک · وب
 order: 0
 featured: true
 caseStudyPath: /work/toranj-capital-redesign
-cover: /images/case-studies/toranj-capital-redesign/hero-cinematic-desktop-v1.png
+cover: /images/case-studies/toranj-capital-redesign/hero-cinematic-desktop-v1.webp
 coverAlt: نمای صفحه اصلی بازطراحی‌شده وب‌سایت ترنج کپیتال
 coverTone: clay
 timeline: ۲۰۲۴ — اکنون

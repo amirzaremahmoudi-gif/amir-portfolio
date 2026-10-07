@@ -10,11 +10,29 @@ const tensionIcons = ['lucide:layers', 'lucide:mouse-pointer-click', 'lucide:blo
 const flowIcons = ['lucide:search', 'lucide:gauge', 'lucide:circle-check', 'lucide:route']
 const outlineList = useTemplateRef<HTMLOListElement>('outlineList')
 const dialog = ref<HTMLDialogElement | null>(null)
-const expandedMedia = ref<{ src: string, alt: string, format: 'desktop' | 'mobile' } | null>(null)
+const mediaDimensions: Record<string, { width: number, height: number }> = {
+  '/images/case-studies/ramzinex/desktop-trade.png': { width: 1920, height: 7868 },
+  '/images/case-studies/ramzinex/mobile-trade.png': { width: 440, height: 9072 },
+  '/images/case-studies/ramzinex/desktop-analysis.png': { width: 1920, height: 5427 },
+  '/images/case-studies/ramzinex/mobile-analysis.png': { width: 440, height: 5151 },
+  '/images/case-studies/ramzinex/desktop-blog-home.png': { width: 1920, height: 4807 },
+  '/images/case-studies/ramzinex/mobile-blog-home.png': { width: 440, height: 4365 },
+  '/images/case-studies/ramzinex/desktop-campaign.png': { width: 1920, height: 4733 },
+  '/images/case-studies/ramzinex/mobile-campaign.png': { width: 440, height: 4531 },
+  '/images/case-studies/ramzinex/desktop-blog-category.png': { width: 1920, height: 2263 },
+  '/images/case-studies/ramzinex/desktop-article.png': { width: 1920, height: 5198 },
+  '/images/case-studies/ramzinex/mobile-article.png': { width: 440, height: 5766 },
+  '/images/case-studies/ramzinex/dana-type-specimen.png': { width: 2000, height: 1753 }
+}
+const expandedMedia = ref<{ src: string, alt: string, format: 'desktop' | 'mobile', width: number, height: number } | null>(null)
 let sectionObserver: IntersectionObserver | undefined
 
+function mediaSize(src: string) {
+  return mediaDimensions[src] || { width: 1920, height: 1080 }
+}
+
 function openMedia(src: string, alt: string, format: 'desktop' | 'mobile' = 'desktop') {
-  expandedMedia.value = { src, alt, format }
+  expandedMedia.value = { src, alt, format, ...mediaSize(src) }
   dialog.value?.showModal()
 }
 
@@ -54,20 +72,24 @@ onBeforeUnmount(() => sectionObserver?.disconnect())
       :media="{
         src: copy.hero.cover,
         alt: copy.hero.coverAlt,
-        width: 1536,
-        height: 1024
+        width: 1280,
+        height: 853
       }"
     />
 
     <div class="portfolio-container">
       <figure class="ramzinex-hero-poster">
-        <img
+        <NuxtPicture
           :src="copy.hero.cover"
           :alt="copy.hero.coverAlt"
-          width="1536"
-          height="1024"
-          fetchpriority="high"
-        >
+          width="1280"
+          height="853"
+          sizes="xs:360px sm:640px md:768px lg:1216px"
+          format="avif,webp"
+          :quality="78"
+          loading="lazy"
+          decoding="async"
+        />
       </figure>
     </div>
 
@@ -232,13 +254,17 @@ onBeforeUnmount(() => sectionObserver?.disconnect())
               @click="openMedia(copy.chapters[activeChapter]!.desktop, copy.chapters[activeChapter]!.desktopAlt)"
             >
               <span class="ramzinex-shot__bar"><b>{{ copy.labels.desktop }}</b><i>1920</i></span>
-              <img
+              <NuxtImg
                 :src="copy.chapters[activeChapter]!.desktop"
                 :alt="copy.chapters[activeChapter]!.desktopAlt"
-                width="1920"
-                height="5200"
+                :width="mediaSize(copy.chapters[activeChapter]!.desktop).width"
+                :height="mediaSize(copy.chapters[activeChapter]!.desktop).height"
+                sizes="100vw md:70vw lg:800px"
+                format="webp"
+                :quality="86"
                 loading="lazy"
-              >
+                decoding="async"
+              />
               <span class="ramzinex-shot__fade">{{ copy.labels.open }} ↗</span>
             </button>
             <button
@@ -248,13 +274,17 @@ onBeforeUnmount(() => sectionObserver?.disconnect())
               @click="openMedia(copy.chapters[activeChapter]!.mobile, copy.chapters[activeChapter]!.mobileAlt, 'mobile')"
             >
               <span class="ramzinex-shot__bar"><b>{{ copy.labels.mobile }}</b><i>440</i></span>
-              <img
+              <NuxtImg
                 :src="copy.chapters[activeChapter]!.mobile"
                 :alt="copy.chapters[activeChapter]!.mobileAlt"
-                width="440"
-                height="5200"
+                :width="mediaSize(copy.chapters[activeChapter]!.mobile).width"
+                :height="mediaSize(copy.chapters[activeChapter]!.mobile).height"
+                sizes="50vw md:280px"
+                format="webp"
+                :quality="86"
                 loading="lazy"
-              >
+                decoding="async"
+              />
               <span class="ramzinex-shot__fade">{{ copy.labels.open }} ↗</span>
             </button>
           </div>
@@ -294,26 +324,34 @@ onBeforeUnmount(() => sectionObserver?.disconnect())
                 type="button"
                 @click="openMedia('/images/case-studies/ramzinex/desktop-blog-category.png', locale === 'fa' ? 'صفحه دسته‌بندی مجله رمزینکس در دسکتاپ' : 'Ramzinex Magazine category page on desktop')"
               >
-                <img
+                <NuxtImg
                   src="/images/case-studies/ramzinex/desktop-blog-category.png"
                   :alt="locale === 'fa' ? 'صفحه دسته‌بندی مجله رمزینکس در دسکتاپ' : 'Ramzinex Magazine category page on desktop'"
                   width="1920"
                   height="2263"
+                  sizes="100vw md:50vw lg:520px"
+                  format="webp"
+                  :quality="86"
                   loading="lazy"
-                >
+                  decoding="async"
+                />
                 <span class="ramzinex-gallery__action">{{ copy.labels.open }} ↗</span>
               </button>
               <button
                 type="button"
                 @click="openMedia('/images/case-studies/ramzinex/desktop-article.png', locale === 'fa' ? 'صفحه جزئیات مقاله رمزینکس در دسکتاپ' : 'Ramzinex article detail page on desktop')"
               >
-                <img
+                <NuxtImg
                   src="/images/case-studies/ramzinex/desktop-article.png"
                   :alt="locale === 'fa' ? 'صفحه جزئیات مقاله رمزینکس در دسکتاپ' : 'Ramzinex article detail page on desktop'"
                   width="1920"
                   height="5198"
+                  sizes="100vw md:50vw lg:520px"
+                  format="webp"
+                  :quality="86"
                   loading="lazy"
-                >
+                  decoding="async"
+                />
                 <span class="ramzinex-gallery__action">{{ copy.labels.open }} ↗</span>
               </button>
               <button
@@ -321,13 +359,17 @@ onBeforeUnmount(() => sectionObserver?.disconnect())
                 class="ramzinex-gallery__mobile"
                 @click="openMedia('/images/case-studies/ramzinex/mobile-article.png', locale === 'fa' ? 'صفحه جزئیات مقاله رمزینکس در موبایل' : 'Ramzinex article detail page on mobile', 'mobile')"
               >
-                <img
+                <NuxtImg
                   src="/images/case-studies/ramzinex/mobile-article.png"
                   :alt="locale === 'fa' ? 'صفحه جزئیات مقاله رمزینکس در موبایل' : 'Ramzinex article detail page on mobile'"
                   width="440"
                   height="5766"
+                  sizes="40vw md:280px"
+                  format="webp"
+                  :quality="86"
                   loading="lazy"
-                >
+                  decoding="async"
+                />
                 <span class="ramzinex-gallery__action">{{ copy.labels.open }} ↗</span>
               </button>
             </div>
@@ -351,13 +393,17 @@ onBeforeUnmount(() => sectionObserver?.disconnect())
               :aria-label="copy.chapters[3]!.desktopAlt"
               @click="openMedia(copy.chapters[3]!.desktop, copy.chapters[3]!.desktopAlt)"
             >
-              <img
+              <NuxtImg
                 :src="copy.chapters[3]!.desktop"
                 :alt="copy.chapters[3]!.desktopAlt"
                 width="1920"
                 height="4733"
+                sizes="100vw md:70vw lg:800px"
+                format="webp"
+                :quality="86"
                 loading="lazy"
-              >
+                decoding="async"
+              />
               <span>
                 <b>{{ copy.labels.open }}</b>
                 <small aria-hidden="true">↗</small>
@@ -369,13 +415,17 @@ onBeforeUnmount(() => sectionObserver?.disconnect())
               :aria-label="copy.chapters[3]!.mobileAlt"
               @click="openMedia(copy.chapters[3]!.mobile, copy.chapters[3]!.mobileAlt, 'mobile')"
             >
-              <img
+              <NuxtImg
                 :src="copy.chapters[3]!.mobile"
                 :alt="copy.chapters[3]!.mobileAlt"
                 width="440"
                 height="4531"
+                sizes="40vw md:280px"
+                format="webp"
+                :quality="86"
                 loading="lazy"
-              >
+                decoding="async"
+              />
               <span>
                 <Icon
                   name="lucide:maximize-2"
@@ -462,13 +512,17 @@ onBeforeUnmount(() => sectionObserver?.disconnect())
               :aria-label="copy.labels.open"
               @click="openMedia('/images/case-studies/ramzinex/dana-type-specimen.png', locale === 'fa' ? 'نمونه وزن‌های فونت دانا' : 'Dana font weight specimen')"
             >
-              <img
+              <NuxtImg
                 src="/images/case-studies/ramzinex/dana-type-specimen.png"
                 :alt="locale === 'fa' ? 'نمونه وزن‌های فونت دانا از Hairline تا Fat' : 'Dana typeface weights from Hairline to Fat'"
                 width="2000"
                 height="1753"
+                sizes="100vw md:800px"
+                format="webp"
+                :quality="86"
                 loading="lazy"
-              >
+                decoding="async"
+              />
               <span>{{ copy.labels.open }} ↗</span>
             </button>
           </div>
@@ -523,11 +577,18 @@ onBeforeUnmount(() => sectionObserver?.disconnect())
           {{ copy.labels.close }} ×
         </button>
       </div>
-      <img
+      <NuxtImg
         v-if="expandedMedia"
         :src="expandedMedia.src"
         :alt="expandedMedia.alt"
-      >
+        :width="expandedMedia.width"
+        :height="expandedMedia.height"
+        sizes="xs:360px sm:640px md:768px lg:1472px"
+        format="webp"
+        :quality="90"
+        loading="eager"
+        decoding="async"
+      />
     </dialog>
   </article>
 </template>
@@ -675,7 +736,7 @@ onBeforeUnmount(() => sectionObserver?.disconnect())
 [lang='en'] .ramzinex-case :deep(.case-hero__summary) { max-width: 76rem; white-space: normal; }
 .ramzinex-case :deep(.case-hero__surface) { border-block-color: color-mix(in srgb, var(--ramzinex-yellow) 22%, var(--portfolio-line)); }
 .ramzinex-hero-poster { position: relative; display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; overflow: hidden; margin-top: clamp(1rem, 2vw, 2rem); border-radius: 1.15rem; background: #fff; box-shadow: 0 2.25rem 7rem rgb(0 0 0 / 14%); }
-.ramzinex-hero-poster img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center; }
+.ramzinex-hero-poster picture { display: block; width: 100%; height: 100%; }.ramzinex-hero-poster img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center; }
 .case-shell { display: block; width: 100%; max-width: none; padding-inline: 0; }
 .case-outline { position: sticky; top: 4.75rem; z-index: 20; display: flex; width: 100%; align-items: stretch; overflow: hidden; margin-bottom: clamp(4rem, 7vw, 7rem); border-block: 1px solid var(--portfolio-line); background: color-mix(in srgb, var(--portfolio-bg) 94%, transparent); box-shadow: 0 .75rem 2rem rgb(0 0 0 / 5%); backdrop-filter: blur(18px); }
 .case-outline > p { display: flex; min-height: 4.75rem; flex: none; align-items: center; padding-inline: .75rem 1.25rem; border-inline-end: 1px solid var(--portfolio-line); color: var(--portfolio-text); font-size: .92rem; white-space: nowrap; }

@@ -34,7 +34,6 @@ useSeoMeta({
           :key="project.path"
           :project="project"
           :index="index"
-          :eager="index === 0"
           layout="cinematic"
           hierarchy="secondary"
           heading-tag="h2"

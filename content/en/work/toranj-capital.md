@@ -7,7 +7,7 @@ category: Fintech · Web
 order: 0
 featured: true
 caseStudyPath: /work/toranj-capital-redesign
-cover: /images/case-studies/toranj-capital-redesign/hero-cinematic-desktop-v1.png
+cover: /images/case-studies/toranj-capital-redesign/hero-cinematic-desktop-v1.webp
 coverAlt: Redesigned Toranj Capital homepage
 coverTone: clay
 timeline: 2024 — Present

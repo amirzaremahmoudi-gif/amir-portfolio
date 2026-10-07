@@ -6,7 +6,7 @@ role: طراح محصول
 category: اپلیکیشن سرمایه‌گذاری
 order: 1
 featured: true
-cover: /images/case-studies/toranj-insurance/hero-ui/hero-cinematic-poster-v4.png
+cover: /images/case-studies/toranj-insurance/hero-ui/hero-cinematic-poster-v4.webp
 coverAlt: نشان‌های رز ترنج و افران در کنار هم
 coverTone: graphite
 timeline: ۳ ماه

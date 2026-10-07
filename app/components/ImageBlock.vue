@@ -11,7 +11,11 @@ defineProps<{ src?: string, alt: string, caption?: string }>()
         :alt="alt"
         width="1600"
         height="1000"
+        sizes="xs:360px sm:640px md:768px lg:1024px"
+        format="webp"
+        :quality="84"
         loading="lazy"
+        decoding="async"
         class="size-full object-cover"
       /><div
         v-else

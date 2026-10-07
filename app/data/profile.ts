@@ -4,7 +4,7 @@ export const localizedPortfolio = {
       name: 'Amir Zare', initials: 'AZ', title: 'Senior Product Designer',
       positioning: 'Senior Product Designer focused on fintech, investment and crypto products.',
       summary: 'I design financial products that are easier to understand and use. My work covers the full process, from research and product structure to interaction design, prototyping and handoff.',
-      availability: 'Open to senior roles', location: 'Tehran, Iran', email: 'Amir.figma@gmail.com', behance: 'https://behance.net/azuiux', cv: '/Amir_Zare_CV_2026.pdf'
+      availability: 'Open to senior roles', location: 'Tehran, Iran', email: 'Amir.figma@gmail.com', behance: 'https://behance.net/azuiux', linkedin: 'https://www.linkedin.com/in/azuiux', cv: '/Amir_Zare_CV_2026.pdf'
     },
     expertise: ['End-to-End Product Design', 'Interaction Design', 'User Research & Strategy', 'Design Systems', 'Analytics & Experimentation', 'AI-Assisted Design Workflows'],
     outcomes: [
@@ -38,7 +38,7 @@ export const localizedPortfolio = {
       name: 'امیر زارع', initials: 'AZ', title: 'طراح ارشد محصول',
       positioning: 'طراح ارشد محصول با تمرکز بر فین‌تک، سرمایه‌گذاری و بازارهای مالی.',
       summary: 'محصولات مالی را طوری طراحی می‌کنم که فهمیدن و استفاده از آن‌ها ساده‌تر باشد. از پژوهش و ساختار محصول تا طراحی تعامل، نمونه‌سازی و تحویل به تیم توسعه را پیش می‌برم.',
-      availability: 'آماده بررسی فرصت‌های شغلی ارشد', location: 'تهران، ایران', email: 'Amir.figma@gmail.com', behance: 'https://behance.net/azuiux', cv: '/Amir_Zare_CV_2026.pdf'
+      availability: 'آماده بررسی فرصت‌های شغلی ارشد', location: 'تهران، ایران', email: 'Amir.figma@gmail.com', behance: 'https://behance.net/azuiux', linkedin: 'https://www.linkedin.com/in/azuiux', cv: '/Amir_Zare_CV_2026.pdf'
     },
     expertise: ['طراحی سرتاسری محصول', 'طراحی تعامل', 'پژوهش کاربر و استراتژی', 'دیزاین سیستم', 'تحلیل داده و آزمایش', 'فرایند طراحی با کمک هوش مصنوعی'],
     outcomes: [

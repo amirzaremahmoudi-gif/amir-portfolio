@@ -1,5 +1,6 @@
 <script setup lang="ts">
 defineProps<{
+  eyebrow?: string
   title: string
   summary: string
   description?: string
@@ -23,15 +24,26 @@ defineProps<{
         v-if="media"
         class="case-hero__media"
       >
-        <img
+        <NuxtPicture
           :src="media.src"
           :alt="media.alt"
           :width="media.width"
           :height="media.height"
-          fetchpriority="high"
-        >
+          sizes="xs:360px sm:640px md:768px lg:1216px"
+          format="avif,webp"
+          :quality="78"
+          loading="eager"
+          decoding="async"
+          :img-attrs="{ fetchpriority: 'high' }"
+        />
       </figure>
       <div class="case-hero__copy">
+        <p
+          v-if="eyebrow"
+          class="case-hero__eyebrow"
+        >
+          {{ eyebrow }}
+        </p>
         <h1 class="case-hero__title">
           {{ title }}
         </h1>
@@ -65,6 +77,7 @@ defineProps<{
 .case-hero__surface { padding-block: clamp(2.5rem, 5vw, 5rem); border-block: 1px solid var(--portfolio-line); }
 .case-hero__media { display: none; }
 .case-hero__copy { display: flex; flex-direction: column; align-items: center; text-align: center; }
+.case-hero__eyebrow { margin-bottom: 1rem; color: var(--portfolio-accent); font-size: .74rem; font-weight: 800; letter-spacing: .08em; }
 .case-hero__title { max-width: 100%; color: var(--portfolio-accent); font-family: var(--font-display); font-size: clamp(3.5rem, 7vw, 7rem); font-weight: 850; letter-spacing: -.06em; line-height: 1; white-space: nowrap; }
 .case-hero__summary { width: 100%; max-width: 56rem; margin-top: clamp(1.25rem, 2.5vw, 2.25rem); color: var(--portfolio-muted); font-size: clamp(1.05rem, 1.25vw, 1.3rem); line-height: 1.85; }
 .case-hero__description { max-width: 48rem; margin-top: 1rem; color: var(--portfolio-muted); font-size: 1rem; line-height: 1.8; }

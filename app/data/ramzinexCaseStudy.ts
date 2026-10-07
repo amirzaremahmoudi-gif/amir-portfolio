@@ -18,7 +18,7 @@ const fa = {
     title: 'بازطراحی معامله، تحلیل بازار\nو مجله رمزینکس',
     summary: 'بازطراحی چند بخش اصلی رمزینکس؛ از صفحه معامله و تحلیل بازار تا مجله و یک کمپین جذب کاربر.',
     note: 'این روایت براساس خروجی‌های موجود نوشته شده و با اضافه‌شدن داده‌های تأییدشده کامل‌تر می‌شود.',
-    cover: '/images/case-studies/ramzinex/cover-market-ecosystem.png',
+    cover: '/images/case-studies/ramzinex/cover-market-ecosystem.webp',
     coverAlt: 'نمای دسکتاپ و موبایل تجربه معامله رمزینکس در فضای بازار دارایی دیجیتال'
   },
   meta: [
@@ -162,7 +162,7 @@ const en: typeof fa = {
     title: 'Redesigning trading, market analysis\nand Ramzinex Magazine',
     summary: 'Redesigning key parts of Ramzinex, from trading and market analysis to the magazine and an acquisition campaign.',
     note: 'This story is based on the work currently available and will be updated when more verified results are added.',
-    cover: '/images/case-studies/ramzinex/cover-market-ecosystem.png',
+    cover: '/images/case-studies/ramzinex/cover-market-ecosystem.webp',
     coverAlt: 'Desktop and mobile views of the Ramzinex trading experience in a digital-asset market setting'
   },
   meta: [['Role', 'UI/UX & Product Designer'], ['Platform', 'Responsive web'], ['Industry', 'Fintech · Crypto'], ['Scope', 'Trading, analysis, editorial and campaign']],

@@ -20,7 +20,7 @@ const outlineList = useTemplateRef<HTMLOListElement>('outlineList')
 let sectionObserver: IntersectionObserver | undefined
 let bodyOverflow = ''
 const heroScreens: GalleryImage[] = [
-  { src: '/images/case-studies/toranj-insurance/hero-ui/hero-cinematic-poster-v4.png', width: 1672, height: 941 }
+  { src: '/images/case-studies/toranj-insurance/hero-ui/hero-cinematic-poster-v4.webp', width: 1280, height: 720 }
 ]
 const finalUiScreens: GalleryImage[] = [
   { src: '/images/case-studies/toranj-insurance/purchase-ui/otp-original-hq.png', width: 2560, height: 1380 },
@@ -135,13 +135,18 @@ onBeforeUnmount(() => {
           :aria-label="locale === 'fa' ? 'نمایش پوستر سینمایی رز و افران در اندازه کامل' : 'Open the Rose and Afran cinematic poster fullscreen'"
           @click="openGallery('hero', 0)"
         >
-          <img
+          <NuxtPicture
             :src="heroScreens[0]!.src"
             :alt="locale === 'fa' ? 'پوستر سینمایی هویت‌های رز و افران' : 'Cinematic Rose and Afran identity poster'"
             :width="heroScreens[0]!.width"
             :height="heroScreens[0]!.height"
-            fetchpriority="high"
-          >
+            sizes="xs:360px sm:640px md:768px lg:1216px"
+            format="avif,webp"
+            :quality="78"
+            loading="eager"
+            decoding="async"
+            :img-attrs="{ fetchpriority: 'high' }"
+          />
           <span
             class="final-ui-screen__action"
             aria-hidden="true"
@@ -508,13 +513,17 @@ onBeforeUnmount(() => {
                 :aria-label="locale === 'fa' ? `نمایش تمام‌صفحه تصویر ${index + 1}` : `Open interface preview ${index + 1} fullscreen`"
                 @click="openGallery('final-ui', index)"
               >
-                <img
+                <NuxtImg
                   :src="screen.src"
                   :alt="locale === 'fa' ? `نمایی از رابط کاربری ترنج، تصویر ${index + 1}` : `Toranj interface preview ${index + 1}`"
                   :width="screen.width"
                   :height="screen.height"
+                  sizes="100vw md:50vw lg:520px"
+                  format="webp"
+                  :quality="86"
                   loading="lazy"
-                >
+                  decoding="async"
+                />
                 <span
                   class="final-ui-screen__action"
                   aria-hidden="true"
@@ -551,12 +560,17 @@ onBeforeUnmount(() => {
                   <UIcon :name="locale === 'fa' ? 'i-lucide-chevron-right' : 'i-lucide-chevron-left'" />
                 </button>
                 <div class="final-ui-lightbox__image">
-                  <img
+                  <NuxtImg
                     :src="activeGalleryImage.src"
                     :alt="locale === 'fa' ? `نمای تمام‌صفحه تصویر ${activeGalleryIndex + 1}` : `Fullscreen interface preview ${activeGalleryIndex + 1}`"
                     :width="activeGalleryImage.width"
                     :height="activeGalleryImage.height"
-                  >
+                    sizes="xs:360px sm:640px md:768px lg:1472px"
+                    format="webp"
+                    :quality="90"
+                    loading="eager"
+                    decoding="async"
+                  />
                 </div>
                 <button
                   v-if="activeGalleryScreens.length > 1"
@@ -606,13 +620,17 @@ onBeforeUnmount(() => {
           <div class="system-showcase">
             <figure class="type-specimen">
               <div class="type-specimen__visual">
-                <img
+                <NuxtImg
                   src="/images/case-studies/toranj-insurance/peyda-weight-specimen.png"
                   :alt="locale === 'fa' ? 'نمونه وزن‌های مختلف تایپ‌فیس Peyda از Thin تا ExtraBlack' : 'Peyda typeface weights from Thin through ExtraBlack'"
                   width="1640"
                   height="960"
+                  sizes="100vw md:800px"
+                  format="webp"
+                  :quality="86"
                   loading="lazy"
-                >
+                  decoding="async"
+                />
               </div>
               <figcaption>
                 <span>{{ locale === 'fa' ? 'تایپوگرافی محصول' : 'Product typography' }}</span>
@@ -690,13 +708,17 @@ onBeforeUnmount(() => {
                   :aria-label="locale === 'fa' ? `نمایش تمام‌صفحه حالت ${content.states.items[index]?.[0]}` : `Open ${content.states.items[index]?.[0]} state fullscreen`"
                   @click="openGallery('states', index)"
                 >
-                  <img
+                  <NuxtImg
                     :src="screen.src"
                     :alt="locale === 'fa' ? `نمونه رابط برای حالت ${content.states.items[index]?.[0]}` : `Interface example for ${content.states.items[index]?.[0]}`"
                     :width="screen.width"
                     :height="screen.height"
+                    sizes="100vw md:33vw lg:360px"
+                    format="webp"
+                    :quality="84"
                     loading="lazy"
-                  >
+                    decoding="async"
+                  />
                   <span class="state-gallery__label">{{ content.states.items[index]?.[0] }}</span>
                   <span
                     class="final-ui-screen__action"
@@ -1338,7 +1360,7 @@ onBeforeUnmount(() => {
 /* Hero visual — selected cinematic campaign poster */
 .hero-poster { overflow:hidden; margin-top:clamp(1rem,2vw,2rem); border-radius:1.15rem; background:#030507; box-shadow:0 2.25rem 7rem rgb(0 0 0 / 30%); }
 .hero-poster__frame { position:relative; display:block; width:100%; overflow:hidden; padding:0; border:0; background:#030507; cursor:zoom-in; }
-.hero-poster__frame img { display:block; width:100%; height:auto; aspect-ratio:1637/960; object-fit:cover; transition:transform var(--motion-control) var(--ease-standard),filter var(--motion-control) var(--ease-standard); }
+.hero-poster__frame picture { display:block; width:100%; }.hero-poster__frame img { display:block; width:100%; height:auto; aspect-ratio:16/9; object-fit:cover; transition:transform var(--motion-control) var(--ease-standard),filter var(--motion-control) var(--ease-standard); }
 .hero-poster__frame:hover img,.hero-poster__frame:focus-visible img { transform:scale(1.012); filter:saturate(1.06) contrast(1.02); }
 .hero-poster__frame .final-ui-screen__action { inset-block-end:clamp(.75rem,1.5vw,1.25rem); inset-inline-end:clamp(.75rem,1.5vw,1.25rem); }
 @media (max-width:767px) { .hero-poster { border-radius:.7rem; }.hero-poster__frame .final-ui-screen__action { width:2.15rem; height:2.15rem; } }

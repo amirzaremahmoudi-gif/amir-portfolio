@@ -108,7 +108,9 @@ export default defineNuxtConfig({
       '/en/work/ramzinex-product-experience',
       '/fa/work/ramzinex-product-experience',
       '/en/work/toranj-insurance',
-      '/fa/work/toranj-insurance'
+      '/fa/work/toranj-insurance',
+      '/en/work/vista',
+      '/fa/work/vista'
     ]
   }
 })
